@@ -7,4 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityFramework\" />
+    <Folder Include="Connection\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="ADONET\" />
+  </ItemGroup>
+
 </Project>
