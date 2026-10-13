@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="ManagementSystem.DataAccess/ManagementSystem.DataAccess.csproj" />
+  <Project Path="ManagementSystem.Entities/ManagementSystem.Entities.csproj" Id="bd968f9a-59aa-44fe-8b80-78c755d1d8b6" />
   <Project Path="ManagementSystem.UI/ManagementSystem.UI.csproj" />
 </Solution>
