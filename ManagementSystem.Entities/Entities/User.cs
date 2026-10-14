@@ -16,7 +16,7 @@ namespace ManagementSystem.Entities.Entities
 
         public bool IsActive { get; set; } = true;
 
-        // Navigation properties
+        // Navegación de propiedades
         public virtual Employee? Employee { get; set; }
 
         public virtual Role? Role { get; set; }
