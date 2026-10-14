@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ManagementSystem.Entities.Entities
 {
@@ -16,5 +15,9 @@ namespace ManagementSystem.Entities.Entities
 
         public bool IsActive { get; set; } = true;
 
+        // Navigation properties
+        public virtual Person? Person { get; set; }
+
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
     }
 }

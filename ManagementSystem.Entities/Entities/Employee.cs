@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ManagementSystem.Entities.Entities
 {
@@ -10,7 +9,7 @@ namespace ManagementSystem.Entities.Entities
 
         public int PersonId { get; set; }
 
-        public string Position { get; set; }    
+        public string Position { get; set; } = string.Empty;
 
         public decimal Salary { get; set; }
 
@@ -18,5 +17,13 @@ namespace ManagementSystem.Entities.Entities
 
         public bool IsActive { get; set; } = true;
 
+        // Navigation properties
+        public virtual Person? Person { get; set; }
+
+        public virtual ICollection<Sale> Sales { get; set; } = new List<Sale>();
+
+        public virtual ICollection<User> Users { get; set; } = new List<User>();
+
+        public virtual ICollection<InventoryMovementHistory> InventoryMovements { get; set; } = new List<InventoryMovementHistory>();
     }
 }
