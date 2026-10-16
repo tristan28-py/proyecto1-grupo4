@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ManagementSystem.DataAccess.Connection
+namespace ManagementSystem.DataAccess.ADONET
 {
-    internal class Class1
+    internal class RoleAdoRepository
     {
     }
 }
