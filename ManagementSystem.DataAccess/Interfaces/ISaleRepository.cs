@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ManagementSystem.DataAccess.Interfaces
 {
-    internal class ISaleRepository
+    public class ISaleRepository
     {
     }
 }
