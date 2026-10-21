@@ -167,10 +167,6 @@ namespace ManagementSystem.UI.Forms
             btnExit.UseVisualStyleBackColor = false;
             btnExit.Click += btnExit_Click;
             // 
-            // label1
-            // 
-            
-            // 
             // LoginForms
             // 
             AcceptButton = btnLogin;

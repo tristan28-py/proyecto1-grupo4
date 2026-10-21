@@ -76,9 +76,7 @@ namespace ManagementSystem.UI.Forms
 
         private void btnCategories_Click(object? sender, EventArgs e)
         {
-            HighlightButton(btnCategories);
-            lblSectionTitle.Text = "Categorías";
-            ShowPlaceholder("Mantenimiento de Categorías", "Gestión de familias de productos y estados activos/inactivos.");
+            OpenChildForm(new CategoriasForm(), "Mantenimiento de Categorías", btnCategories);
         }
 
         private void btnClients_Click(object? sender, EventArgs e)
