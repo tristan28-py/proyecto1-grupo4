@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using Microsoft.Data.SqlClient;
 
@@ -10,7 +10,7 @@ namespace ManagementSystem.DataAccess.Connection
     /// </summary>
     public class DatabaseConfig
     {
-        private static string _connectionString = "Server=.;Database=ManagementSystemDB;Integrated Security=True;TrustServerCertificate=True;";
+        private static string _connectionString = "Server=.;Database=SistemaGestionDB;Integrated Security=True;TrustServerCertificate=True;";
 
         public static string ConnectionString
         {
@@ -48,5 +48,12 @@ namespace ManagementSystem.DataAccess.Connection
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// Alias de compatibilidad para repositorios que usen DatabaseConnection.
+    /// </summary>
+    public class DatabaseConnection : DatabaseConfig
+    {
     }
 }

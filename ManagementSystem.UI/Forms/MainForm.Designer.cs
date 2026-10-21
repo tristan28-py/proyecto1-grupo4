@@ -46,8 +46,8 @@ namespace ManagementSystem.UI.Forms
             lblSectionTitle = new Label();
             pnlContent = new Panel();
             pnlWelcome = new Panel();
-            lblWelcomeTitle = new Label();
             lblWelcomeDesc = new Label();
+            lblWelcomeTitle = new Label();
             pnlSidebar.SuspendLayout();
             pnlLogo.SuspendLayout();
             pnlHeader.SuspendLayout();
@@ -82,7 +82,7 @@ namespace ManagementSystem.UI.Forms
             btnLogout.Dock = DockStyle.Bottom;
             btnLogout.FlatAppearance.BorderSize = 0;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnLogout.Font = new Font("Segoe UI", 9.5F);
             btnLogout.ForeColor = Color.White;
             btnLogout.Location = new Point(0, 650);
             btnLogout.Margin = new Padding(0);
@@ -101,7 +101,7 @@ namespace ManagementSystem.UI.Forms
             btnHistory.Dock = DockStyle.Top;
             btnHistory.FlatAppearance.BorderSize = 0;
             btnHistory.FlatStyle = FlatStyle.Flat;
-            btnHistory.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnHistory.Font = new Font("Segoe UI", 9.5F);
             btnHistory.ForeColor = Color.White;
             btnHistory.Location = new Point(0, 395);
             btnHistory.Margin = new Padding(0);
@@ -109,7 +109,7 @@ namespace ManagementSystem.UI.Forms
             btnHistory.Padding = new Padding(20, 0, 0, 0);
             btnHistory.Size = new Size(230, 45);
             btnHistory.TabIndex = 8;
-            btnHistory.Text = "↩️  Historial (Deshacer)";
+            btnHistory.Text = "↩️  Historial ";
             btnHistory.TextAlign = ContentAlignment.MiddleLeft;
             btnHistory.UseVisualStyleBackColor = true;
             btnHistory.Click += btnHistory_Click;
@@ -120,7 +120,7 @@ namespace ManagementSystem.UI.Forms
             btnReports.Dock = DockStyle.Top;
             btnReports.FlatAppearance.BorderSize = 0;
             btnReports.FlatStyle = FlatStyle.Flat;
-            btnReports.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnReports.Font = new Font("Segoe UI", 9.5F);
             btnReports.ForeColor = Color.White;
             btnReports.Location = new Point(0, 350);
             btnReports.Margin = new Padding(0);
@@ -128,7 +128,7 @@ namespace ManagementSystem.UI.Forms
             btnReports.Padding = new Padding(20, 0, 0, 0);
             btnReports.Size = new Size(230, 45);
             btnReports.TabIndex = 7;
-            btnReports.Text = "📈  Reportes (LINQ)";
+            btnReports.Text = "📈  Reportes ";
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Click += btnReports_Click;
@@ -139,7 +139,7 @@ namespace ManagementSystem.UI.Forms
             btnOrders.Dock = DockStyle.Top;
             btnOrders.FlatAppearance.BorderSize = 0;
             btnOrders.FlatStyle = FlatStyle.Flat;
-            btnOrders.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnOrders.Font = new Font("Segoe UI", 9.5F);
             btnOrders.ForeColor = Color.White;
             btnOrders.Location = new Point(0, 305);
             btnOrders.Margin = new Padding(0);
@@ -147,7 +147,7 @@ namespace ManagementSystem.UI.Forms
             btnOrders.Padding = new Padding(20, 0, 0, 0);
             btnOrders.Size = new Size(230, 45);
             btnOrders.TabIndex = 6;
-            btnOrders.Text = "⏳  Pedidos (Cola)";
+            btnOrders.Text = "⏳  Pedidos ";
             btnOrders.TextAlign = ContentAlignment.MiddleLeft;
             btnOrders.UseVisualStyleBackColor = true;
             btnOrders.Click += btnOrders_Click;
@@ -158,7 +158,7 @@ namespace ManagementSystem.UI.Forms
             btnSales.Dock = DockStyle.Top;
             btnSales.FlatAppearance.BorderSize = 0;
             btnSales.FlatStyle = FlatStyle.Flat;
-            btnSales.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnSales.Font = new Font("Segoe UI", 9.5F);
             btnSales.ForeColor = Color.White;
             btnSales.Location = new Point(0, 260);
             btnSales.Margin = new Padding(0);
@@ -166,7 +166,7 @@ namespace ManagementSystem.UI.Forms
             btnSales.Padding = new Padding(20, 0, 0, 0);
             btnSales.Size = new Size(230, 45);
             btnSales.TabIndex = 5;
-            btnSales.Text = "🛒  Registrar Venta";
+            btnSales.Text = "\U0001f6d2  Registrar Venta";
             btnSales.TextAlign = ContentAlignment.MiddleLeft;
             btnSales.UseVisualStyleBackColor = true;
             btnSales.Click += btnSales_Click;
@@ -177,7 +177,7 @@ namespace ManagementSystem.UI.Forms
             btnClients.Dock = DockStyle.Top;
             btnClients.FlatAppearance.BorderSize = 0;
             btnClients.FlatStyle = FlatStyle.Flat;
-            btnClients.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnClients.Font = new Font("Segoe UI", 9.5F);
             btnClients.ForeColor = Color.White;
             btnClients.Location = new Point(0, 215);
             btnClients.Margin = new Padding(0);
@@ -196,7 +196,7 @@ namespace ManagementSystem.UI.Forms
             btnCategories.Dock = DockStyle.Top;
             btnCategories.FlatAppearance.BorderSize = 0;
             btnCategories.FlatStyle = FlatStyle.Flat;
-            btnCategories.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCategories.Font = new Font("Segoe UI", 9.5F);
             btnCategories.ForeColor = Color.White;
             btnCategories.Location = new Point(0, 170);
             btnCategories.Margin = new Padding(0);
@@ -215,7 +215,7 @@ namespace ManagementSystem.UI.Forms
             btnProducts.Dock = DockStyle.Top;
             btnProducts.FlatAppearance.BorderSize = 0;
             btnProducts.FlatStyle = FlatStyle.Flat;
-            btnProducts.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            btnProducts.Font = new Font("Segoe UI", 9.5F);
             btnProducts.ForeColor = Color.White;
             btnProducts.Location = new Point(0, 125);
             btnProducts.Margin = new Padding(0);
@@ -235,7 +235,7 @@ namespace ManagementSystem.UI.Forms
             btnDashboard.Dock = DockStyle.Top;
             btnDashboard.FlatAppearance.BorderSize = 0;
             btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold, GraphicsUnit.Point);
+            btnDashboard.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             btnDashboard.ForeColor = Color.White;
             btnDashboard.Location = new Point(0, 80);
             btnDashboard.Margin = new Padding(0);
@@ -243,7 +243,7 @@ namespace ManagementSystem.UI.Forms
             btnDashboard.Padding = new Padding(20, 0, 0, 0);
             btnDashboard.Size = new Size(230, 45);
             btnDashboard.TabIndex = 1;
-            btnDashboard.Text = "📊  Inicio / Dashboard";
+            btnDashboard.Text = "📊  Inicio";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
@@ -263,22 +263,22 @@ namespace ManagementSystem.UI.Forms
             // lblLogoSubtitle
             // 
             lblLogoSubtitle.AutoSize = true;
-            lblLogoSubtitle.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            lblLogoSubtitle.Font = new Font("Segoe UI", 8F);
             lblLogoSubtitle.ForeColor = Color.FromArgb(209, 213, 219);
             lblLogoSubtitle.Location = new Point(20, 45);
             lblLogoSubtitle.Name = "lblLogoSubtitle";
-            lblLogoSubtitle.Size = new Size(119, 19);
+            lblLogoSubtitle.Size = new Size(127, 19);
             lblLogoSubtitle.TabIndex = 1;
             lblLogoSubtitle.Text = "Inventario y Ventas";
             // 
             // lblLogoTitle
             // 
             lblLogoTitle.AutoSize = true;
-            lblLogoTitle.Font = new Font("Segoe UI", 11.5F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLogoTitle.Font = new Font("Segoe UI", 11.5F, FontStyle.Bold);
             lblLogoTitle.ForeColor = Color.White;
             lblLogoTitle.Location = new Point(18, 18);
             lblLogoTitle.Name = "lblLogoTitle";
-            lblLogoTitle.Size = new Size(198, 28);
+            lblLogoTitle.Size = new Size(187, 28);
             lblLogoTitle.TabIndex = 0;
             lblLogoTitle.Text = "SISTEMA GESTIÓN";
             // 
@@ -298,11 +298,11 @@ namespace ManagementSystem.UI.Forms
             // 
             lblUserInfo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             lblUserInfo.AutoSize = true;
-            lblUserInfo.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            lblUserInfo.Font = new Font("Segoe UI", 9F);
             lblUserInfo.ForeColor = Color.FromArgb(75, 85, 99);
             lblUserInfo.Location = new Point(600, 26);
             lblUserInfo.Name = "lblUserInfo";
-            lblUserInfo.Size = new Size(244, 20);
+            lblUserInfo.Size = new Size(269, 20);
             lblUserInfo.TabIndex = 1;
             lblUserInfo.Text = "👤 Usuario: admin | Rol: Administrador";
             lblUserInfo.TextAlign = ContentAlignment.MiddleRight;
@@ -310,13 +310,13 @@ namespace ManagementSystem.UI.Forms
             // lblSectionTitle
             // 
             lblSectionTitle.AutoSize = true;
-            lblSectionTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSectionTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblSectionTitle.ForeColor = Color.FromArgb(30, 58, 138);
             lblSectionTitle.Location = new Point(25, 18);
             lblSectionTitle.Name = "lblSectionTitle";
-            lblSectionTitle.Size = new Size(211, 32);
+            lblSectionTitle.Size = new Size(227, 32);
             lblSectionTitle.TabIndex = 0;
-            lblSectionTitle.Text = "Inicio / Dashboard";
+            lblSectionTitle.Text = "Inicio";
             // 
             // pnlContent
             // 
@@ -343,27 +343,27 @@ namespace ManagementSystem.UI.Forms
             pnlWelcome.Size = new Size(820, 160);
             pnlWelcome.TabIndex = 0;
             // 
-            // lblWelcomeTitle
-            // 
-            lblWelcomeTitle.AutoSize = true;
-            lblWelcomeTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            lblWelcomeTitle.ForeColor = Color.FromArgb(30, 58, 138);
-            lblWelcomeTitle.Location = new Point(25, 25);
-            lblWelcomeTitle.Name = "lblWelcomeTitle";
-            lblWelcomeTitle.Size = new Size(412, 32);
-            lblWelcomeTitle.TabIndex = 0;
-            lblWelcomeTitle.Text = "¡Bienvenido al Sistema de Gestión!";
-            // 
             // lblWelcomeDesc
             // 
             lblWelcomeDesc.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblWelcomeDesc.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            lblWelcomeDesc.Font = new Font("Segoe UI", 9.5F);
             lblWelcomeDesc.ForeColor = Color.FromArgb(75, 85, 99);
             lblWelcomeDesc.Location = new Point(25, 70);
             lblWelcomeDesc.Name = "lblWelcomeDesc";
             lblWelcomeDesc.Size = new Size(770, 65);
             lblWelcomeDesc.TabIndex = 1;
             lblWelcomeDesc.Text = "Seleccione una opción del menú lateral para comenzar a administrar el inventario, registrar ventas, atender la cola de pedidos pendientes o consultar reportes analíticos con LINQ.";
+            // 
+            // lblWelcomeTitle
+            // 
+            lblWelcomeTitle.AutoSize = true;
+            lblWelcomeTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblWelcomeTitle.ForeColor = Color.FromArgb(30, 58, 138);
+            lblWelcomeTitle.Location = new Point(25, 25);
+            lblWelcomeTitle.Name = "lblWelcomeTitle";
+            lblWelcomeTitle.Size = new Size(409, 32);
+            lblWelcomeTitle.TabIndex = 0;
+            lblWelcomeTitle.Text = "¡Bienvenido al Sistema de Gestión!";
             // 
             // MainForm
             // 
@@ -373,7 +373,7 @@ namespace ManagementSystem.UI.Forms
             Controls.Add(pnlContent);
             Controls.Add(pnlHeader);
             Controls.Add(pnlSidebar);
-            Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            Font = new Font("Segoe UI", 9F);
             Margin = new Padding(3, 4, 3, 4);
             MinimumSize = new Size(1000, 600);
             Name = "MainForm";

@@ -63,7 +63,7 @@ namespace ManagementSystem.UI.Forms
             _activeForm = null;
 
             HighlightButton(btnDashboard);
-            lblSectionTitle.Text = "Inicio / Dashboard";
+            lblSectionTitle.Text = "Inicio";
 
             pnlContent.Controls.Clear();
             pnlContent.Controls.Add(pnlWelcome);
@@ -71,10 +71,7 @@ namespace ManagementSystem.UI.Forms
 
         private void btnProducts_Click(object? sender, EventArgs e)
         {
-            HighlightButton(btnProducts);
-            lblSectionTitle.Text = "Mantenimiento de Productos";
-            // Próximo paso: OpenChildForm(new ProductsForm(), "Mantenimiento de Productos", btnProducts);
-            ShowPlaceholder("Mantenimiento de Productos", "Aquí se gestionará el catálogo: altas, bajas, modificaciones, búsqueda con LINQ y stock mínimo.");
+            OpenChildForm(new ProductosForm(), "Mantenimiento de Productos", btnProducts);
         }
 
         private void btnCategories_Click(object? sender, EventArgs e)

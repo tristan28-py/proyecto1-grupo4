@@ -1,10 +1,11 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using ManagementSystem.Entities.Entities;
 
 namespace ManagementSystem.DataAccess.Interfaces
 {
-    internal class IRoleRepository
+    public interface IRoleRepository
     {
+        IEnumerable<Role> GetAllRoles();
+        Role? GetById(int roleId);
     }
 }

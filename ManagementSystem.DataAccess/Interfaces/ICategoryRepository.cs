@@ -1,10 +1,15 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using ManagementSystem.Entities.Entities;
 
 namespace ManagementSystem.DataAccess.Interfaces
 {
-    public class ICategoryRepository
+    public interface ICategoryRepository
     {
+        IEnumerable<Category> GetAll();
+        IEnumerable<Category> GetActiveCategories();
+        Category? GetById(int id);
+        int Add(Category entity);
+        bool Update(Category entity);
+        bool Delete(int id);
     }
 }

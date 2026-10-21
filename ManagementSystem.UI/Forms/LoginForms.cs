@@ -7,7 +7,7 @@ namespace ManagementSystem.UI.Forms
     {
         public LoginForms()
         {
-            InitializeComponent();
+            InitializeComponent(); 
         }
 
         private void chkShowPassword_CheckedChanged(object? sender, EventArgs e)
