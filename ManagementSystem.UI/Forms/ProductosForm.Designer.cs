@@ -104,7 +104,7 @@ namespace ManagementSystem.UI.Forms
             btnResetFilter.Name = "btnResetFilter";
             btnResetFilter.Size = new Size(110, 32);
             btnResetFilter.TabIndex = 3;
-            btnResetFilter.Text = "🔄 Todos";
+            btnResetFilter.Text = "Todos";
             btnResetFilter.UseVisualStyleBackColor = false;
             btnResetFilter.Click += btnResetFilter_Click;
             // 
@@ -120,7 +120,7 @@ namespace ManagementSystem.UI.Forms
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(110, 32);
             btnSearch.TabIndex = 2;
-            btnSearch.Text = "🔍 Buscar";
+            btnSearch.Text = "Buscar";
             btnSearch.UseVisualStyleBackColor = false;
             btnSearch.Click += btnSearch_Click;
             // 
@@ -203,7 +203,7 @@ namespace ManagementSystem.UI.Forms
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(100, 38);
             btnDelete.TabIndex = 20;
-            btnDelete.Text = "🗑️ Inactivar";
+            btnDelete.Text = "Inactivar";
             btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 
@@ -219,7 +219,7 @@ namespace ManagementSystem.UI.Forms
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(100, 38);
             btnSave.TabIndex = 19;
-            btnSave.Text = "💾 Guardar";
+            btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
@@ -235,7 +235,7 @@ namespace ManagementSystem.UI.Forms
             btnNew.Name = "btnNew";
             btnNew.Size = new Size(95, 38);
             btnNew.TabIndex = 18;
-            btnNew.Text = "📄 Nuevo";
+            btnNew.Text = "Nuevo";
             btnNew.UseVisualStyleBackColor = false;
             btnNew.Click += btnNew_Click;
             // 

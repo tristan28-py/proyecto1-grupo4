@@ -7,13 +7,11 @@ namespace ManagementSystem.UI.Forms
     {
         public LoginForms()
         {
-            InitializeComponent(); 
-
+            InitializeComponent();
         }
 
         private void chkShowPassword_CheckedChanged(object? sender, EventArgs e)
         {
-            // Muestra u oculta la contraseña
             txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
 
@@ -22,7 +20,6 @@ namespace ManagementSystem.UI.Forms
             string username = txtUsername.Text.Trim();
             string password = txtPassword.Text.Trim();
 
-            // Validación básica de campos vacíos
             if (string.IsNullOrWhiteSpace(username))
             {
                 MessageBox.Show("Por favor, ingrese su nombre de usuario.", "Campo Requerido",
@@ -39,7 +36,6 @@ namespace ManagementSystem.UI.Forms
                 return;
             }
 
-            // Asignación de rol por usuario (temporal hasta conectar con AuthService / SQL Server)
             string rol = username.ToLower() switch
             {
                 "admin" => "Administrador",
@@ -48,7 +44,6 @@ namespace ManagementSystem.UI.Forms
                 _ => "Administrador"
             };
 
-            // Abrir el formulario principal
             var mainForm = new MainForm(username, rol);
             this.Hide();
 

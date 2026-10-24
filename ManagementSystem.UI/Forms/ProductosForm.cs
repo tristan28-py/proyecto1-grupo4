@@ -8,7 +8,6 @@ namespace ManagementSystem.UI.Forms
 {
     public partial class ProductosForm : Form
     {
-        // Modelo interno temporal para pruebas visuales hasta enlazar con la capa de Negocio
         private class ProductoViewModel
         {
             public int Id { get; set; }
@@ -49,7 +48,6 @@ namespace ManagementSystem.UI.Forms
 
         private void CargarDatosDePrueba()
         {
-            // Carga inicial coincidente con los datos semilla del script SQL
             _productos.Clear();
             _productos.AddRange(new[]
             {
@@ -81,14 +79,12 @@ namespace ManagementSystem.UI.Forms
                     p.Activo ? "Activo" : "Inactivo"
                 );
 
-                // Alerta visual de stock bajo
                 if (p.StockActual <= p.StockMinimo)
                 {
                     dgvProducts.Rows[rowIndex].Cells["colStock"].Style.ForeColor = Color.Red;
                     dgvProducts.Rows[rowIndex].Cells["colStock"].Style.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
                 }
 
-                // Inactivo en color tenue
                 if (!p.Activo)
                 {
                     dgvProducts.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
@@ -148,7 +144,6 @@ namespace ManagementSystem.UI.Forms
 
         private void btnSave_Click(object? sender, EventArgs e)
         {
-            // Validaciones del PDF
             string nombre = txtProductName.Text.Trim();
             if (string.IsNullOrWhiteSpace(nombre))
             {
@@ -178,7 +173,6 @@ namespace ManagementSystem.UI.Forms
 
             if (id == 0)
             {
-                // Nuevo producto
                 int nuevoId = _productos.Any() ? _productos.Max(p => p.Id) + 1 : 1;
                 _productos.Add(new ProductoViewModel
                 {
@@ -198,7 +192,6 @@ namespace ManagementSystem.UI.Forms
             }
             else
             {
-                // Editar existente
                 var actual = _productos.FirstOrDefault(p => p.Id == id);
                 if (actual != null)
                 {
@@ -240,7 +233,7 @@ namespace ManagementSystem.UI.Forms
 
             if (result == DialogResult.Yes)
             {
-                prod.Activo = !prod.Activo; // Alterna estado
+                prod.Activo = !prod.Activo;
                 ActualizarGrid();
             }
         }
@@ -268,7 +261,6 @@ namespace ManagementSystem.UI.Forms
                 return;
             }
 
-            // Consulta LINQ exigida por el PDF: Búsqueda por coincidencia de texto
             var filtrados = _productos
                 .Where(p => p.Nombre.ToLower().Contains(query) ||
                             p.Descripcion.ToLower().Contains(query) ||

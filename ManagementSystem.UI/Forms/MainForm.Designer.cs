@@ -90,7 +90,7 @@ namespace ManagementSystem.UI.Forms
             btnLogout.Padding = new Padding(20, 0, 0, 0);
             btnLogout.Size = new Size(230, 50);
             btnLogout.TabIndex = 9;
-            btnLogout.Text = "🚪  Cerrar Sesión";
+            btnLogout.Text = "Cerrar Sesión";
             btnLogout.TextAlign = ContentAlignment.MiddleLeft;
             btnLogout.UseVisualStyleBackColor = false;
             btnLogout.Click += btnLogout_Click;
@@ -109,7 +109,7 @@ namespace ManagementSystem.UI.Forms
             btnHistory.Padding = new Padding(20, 0, 0, 0);
             btnHistory.Size = new Size(230, 45);
             btnHistory.TabIndex = 8;
-            btnHistory.Text = "↩️  Historial ";
+            btnHistory.Text = "Historial";
             btnHistory.TextAlign = ContentAlignment.MiddleLeft;
             btnHistory.UseVisualStyleBackColor = true;
             btnHistory.Click += btnHistory_Click;
@@ -128,7 +128,7 @@ namespace ManagementSystem.UI.Forms
             btnReports.Padding = new Padding(20, 0, 0, 0);
             btnReports.Size = new Size(230, 45);
             btnReports.TabIndex = 7;
-            btnReports.Text = "📈  Reportes ";
+            btnReports.Text = "Reportes";
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
             btnReports.UseVisualStyleBackColor = true;
             btnReports.Click += btnReports_Click;
@@ -147,7 +147,7 @@ namespace ManagementSystem.UI.Forms
             btnOrders.Padding = new Padding(20, 0, 0, 0);
             btnOrders.Size = new Size(230, 45);
             btnOrders.TabIndex = 6;
-            btnOrders.Text = "⏳  Pedidos ";
+            btnOrders.Text = "Pedidos";
             btnOrders.TextAlign = ContentAlignment.MiddleLeft;
             btnOrders.UseVisualStyleBackColor = true;
             btnOrders.Click += btnOrders_Click;
@@ -166,7 +166,7 @@ namespace ManagementSystem.UI.Forms
             btnSales.Padding = new Padding(20, 0, 0, 0);
             btnSales.Size = new Size(230, 45);
             btnSales.TabIndex = 5;
-            btnSales.Text = "\U0001f6d2  Registrar Venta";
+            btnSales.Text = "Registrar Venta";
             btnSales.TextAlign = ContentAlignment.MiddleLeft;
             btnSales.UseVisualStyleBackColor = true;
             btnSales.Click += btnSales_Click;
@@ -185,7 +185,7 @@ namespace ManagementSystem.UI.Forms
             btnClients.Padding = new Padding(20, 0, 0, 0);
             btnClients.Size = new Size(230, 45);
             btnClients.TabIndex = 4;
-            btnClients.Text = "👥  Clientes y Personas";
+            btnClients.Text = "Clientes y Personas";
             btnClients.TextAlign = ContentAlignment.MiddleLeft;
             btnClients.UseVisualStyleBackColor = true;
             btnClients.Click += btnClients_Click;
@@ -204,7 +204,7 @@ namespace ManagementSystem.UI.Forms
             btnCategories.Padding = new Padding(20, 0, 0, 0);
             btnCategories.Size = new Size(230, 45);
             btnCategories.TabIndex = 3;
-            btnCategories.Text = "🏷️  Categorías";
+            btnCategories.Text = "Categorías";
             btnCategories.TextAlign = ContentAlignment.MiddleLeft;
             btnCategories.UseVisualStyleBackColor = true;
             btnCategories.Click += btnCategories_Click;
@@ -223,7 +223,7 @@ namespace ManagementSystem.UI.Forms
             btnProducts.Padding = new Padding(20, 0, 0, 0);
             btnProducts.Size = new Size(230, 45);
             btnProducts.TabIndex = 2;
-            btnProducts.Text = "📦  Productos";
+            btnProducts.Text = "Productos";
             btnProducts.TextAlign = ContentAlignment.MiddleLeft;
             btnProducts.UseVisualStyleBackColor = true;
             btnProducts.Click += btnProducts_Click;
@@ -243,7 +243,7 @@ namespace ManagementSystem.UI.Forms
             btnDashboard.Padding = new Padding(20, 0, 0, 0);
             btnDashboard.Size = new Size(230, 45);
             btnDashboard.TabIndex = 1;
-            btnDashboard.Text = "📊  Inicio";
+            btnDashboard.Text = "Inicio";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
             btnDashboard.UseVisualStyleBackColor = false;
             btnDashboard.Click += btnDashboard_Click;
@@ -304,7 +304,7 @@ namespace ManagementSystem.UI.Forms
             lblUserInfo.Name = "lblUserInfo";
             lblUserInfo.Size = new Size(269, 20);
             lblUserInfo.TabIndex = 1;
-            lblUserInfo.Text = "👤 Usuario: admin | Rol: Administrador";
+            lblUserInfo.Text = "Usuario: admin | Rol: Administrador";
             lblUserInfo.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblSectionTitle
@@ -352,7 +352,7 @@ namespace ManagementSystem.UI.Forms
             lblWelcomeDesc.Name = "lblWelcomeDesc";
             lblWelcomeDesc.Size = new Size(770, 65);
             lblWelcomeDesc.TabIndex = 1;
-            lblWelcomeDesc.Text = "Seleccione una opción del menú lateral para comenzar a administrar el inventario, registrar ventas, atender la cola de pedidos pendientes o consultar reportes analíticos con LINQ.";
+            lblWelcomeDesc.Text = "Seleccione una opción del menú lateral para administrar el inventario, clientes, ventas, pedidos y reportes.";
             // 
             // lblWelcomeTitle
             // 
@@ -363,7 +363,7 @@ namespace ManagementSystem.UI.Forms
             lblWelcomeTitle.Name = "lblWelcomeTitle";
             lblWelcomeTitle.Size = new Size(409, 32);
             lblWelcomeTitle.TabIndex = 0;
-            lblWelcomeTitle.Text = "¡Bienvenido al Sistema de Gestión!";
+            lblWelcomeTitle.Text = "Bienvenido al Sistema de Gestión";
             // 
             // MainForm
             // 
@@ -378,7 +378,7 @@ namespace ManagementSystem.UI.Forms
             MinimumSize = new Size(1000, 600);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Sistema de Gestión de Inventario y Ventas - Programación III";
+            Text = "Sistema de Gestión de Inventario y Ventas";
             pnlSidebar.ResumeLayout(false);
             pnlLogo.ResumeLayout(false);
             pnlLogo.PerformLayout();

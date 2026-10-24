@@ -26,7 +26,7 @@ namespace ManagementSystem.UI.Forms
 
         private void CategoriasForm_Load(object? sender, EventArgs e)
         {
-            cmbStatusFilter.SelectedIndex = 0; // Todos
+            cmbStatusFilter.SelectedIndex = 0;
             CargarDatosDePrueba();
             ActualizarGrid();
         }
@@ -51,7 +51,6 @@ namespace ManagementSystem.UI.Forms
             string query = txtSearch.Text.Trim().ToLower();
             int statusIndex = cmbStatusFilter.SelectedIndex;
 
-            // Filtro LINQ (Páginas 2 y 4 del PDF: Consulta por estado y búsqueda por texto)
             var filtrados = _categorias.AsEnumerable();
 
             if (!string.IsNullOrWhiteSpace(query))
@@ -60,11 +59,11 @@ namespace ManagementSystem.UI.Forms
                                                  c.Descripcion.ToLower().Contains(query));
             }
 
-            if (statusIndex == 1) // Solo Activos
+            if (statusIndex == 1)
             {
                 filtrados = filtrados.Where(c => c.Activo);
             }
-            else if (statusIndex == 2) // Solo Inactivos
+            else if (statusIndex == 2)
             {
                 filtrados = filtrados.Where(c => !c.Activo);
             }
@@ -143,7 +142,6 @@ namespace ManagementSystem.UI.Forms
 
             if (id == 0)
             {
-                // Nueva categoría
                 int nuevoId = _categorias.Any() ? _categorias.Max(c => c.Id) + 1 : 1;
                 _categorias.Add(new CategoriaViewModel
                 {
@@ -159,7 +157,6 @@ namespace ManagementSystem.UI.Forms
             }
             else
             {
-                // Editar existente
                 var cat = _categorias.FirstOrDefault(c => c.Id == id);
                 if (cat != null)
                 {
