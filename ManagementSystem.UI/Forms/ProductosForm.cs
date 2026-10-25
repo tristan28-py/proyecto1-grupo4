@@ -3,47 +3,82 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ManagementSystem.Entities.Entities;
+using SistemaGestion.Logica.Interfaces;
+using SistemaGestion.Logica.Servicios;
 
 namespace ManagementSystem.UI.Forms
 {
     public partial class ProductosForm : Form
     {
-        private class ProductoViewModel
-        {
-            public int Id { get; set; }
-            public string Nombre { get; set; } = string.Empty;
-            public string Categoria { get; set; } = string.Empty;
-            public decimal PrecioCompra { get; set; }
-            public decimal PrecioVenta { get; set; }
-            public int StockActual { get; set; }
-            public int StockMinimo { get; set; }
-            public string Descripcion { get; set; } = string.Empty;
-            public bool Activo { get; set; } = true;
-        }
-
-        private readonly List<ProductoViewModel> _productos = new();
+        private readonly IServicioProductos _servicioProductos;
+        private readonly IServicioCategorias _servicioCategorias;
+        private List<Producto> _productos = new();
+        private List<Categoria> _categorias = new();
+        private bool _modoMemoriaLocal;
 
         public ProductosForm()
         {
             InitializeComponent();
+            _servicioProductos = new ServicioProductos();
+            _servicioCategorias = new ServicioCategorias();
         }
 
         private void ProductosForm_Load(object? sender, EventArgs e)
         {
             CargarCategorias();
-            CargarDatosDePrueba();
+            CargarProductos();
             ActualizarGrid();
         }
 
         private void CargarCategorias()
         {
             cmbCategory.Items.Clear();
-            cmbCategory.Items.Add("Electrónica y Cómputo");
-            cmbCategory.Items.Add("Bebidas y Alimentos");
-            cmbCategory.Items.Add("Papelería y Oficina");
-            cmbCategory.Items.Add("Limpieza y Hogar");
+            try
+            {
+                _categorias = _servicioCategorias.ObtenerActivas();
+                if (_categorias.Count == 0)
+                {
+                    _categorias = _servicioCategorias.ObtenerTodas();
+                }
+            }
+            catch
+            {
+                _categorias = new List<Categoria>
+                {
+                    new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" },
+                    new Categoria { CategoriaId = 2, Nombre = "Bebidas y Alimentos" },
+                    new Categoria { CategoriaId = 3, Nombre = "Papelería y Oficina" },
+                    new Categoria { CategoriaId = 4, Nombre = "Limpieza y Hogar" }
+                };
+            }
+
+            foreach (var categoria in _categorias)
+            {
+                cmbCategory.Items.Add(categoria);
+            }
+
             if (cmbCategory.Items.Count > 0)
+            {
                 cmbCategory.SelectedIndex = 0;
+            }
+        }
+
+        private void CargarProductos()
+        {
+            try
+            {
+                _productos = _servicioProductos.ObtenerTodos();
+                _modoMemoriaLocal = false;
+            }
+            catch
+            {
+                _modoMemoriaLocal = true;
+                if (_productos.Count == 0)
+                {
+                    CargarDatosDePrueba();
+                }
+            }
         }
 
         private void CargarDatosDePrueba()
@@ -51,43 +86,47 @@ namespace ManagementSystem.UI.Forms
             _productos.Clear();
             _productos.AddRange(new[]
             {
-                new ProductoViewModel { Id = 1, Nombre = "Laptop Dell Inspiron 15", Categoria = "Electrónica y Cómputo", PrecioCompra = 550.00m, PrecioVenta = 750.00m, StockActual = 15, StockMinimo = 3, Descripcion = "Intel Core i5, 16GB RAM, SSD 512GB", Activo = true },
-                new ProductoViewModel { Id = 2, Nombre = "Mouse Inalámbrico Logitech M185", Categoria = "Electrónica y Cómputo", PrecioCompra = 8.50m, PrecioVenta = 15.00m, StockActual = 40, StockMinimo = 5, Descripcion = "Sensor óptico 2.4GHz", Activo = true },
-                new ProductoViewModel { Id = 3, Nombre = "Teclado Mecánico RGB", Categoria = "Electrónica y Cómputo", PrecioCompra = 25.00m, PrecioVenta = 45.00m, StockActual = 20, StockMinimo = 4, Descripcion = "Switches Red", Activo = true },
-                new ProductoViewModel { Id = 4, Nombre = "Monitor Samsung 24 pulg FHD", Categoria = "Electrónica y Cómputo", PrecioCompra = 95.00m, PrecioVenta = 140.00m, StockActual = 10, StockMinimo = 2, Descripcion = "Panel IPS 75Hz", Activo = true },
-                new ProductoViewModel { Id = 5, Nombre = "Café Molido Premium 500g", Categoria = "Bebidas y Alimentos", PrecioCompra = 4.00m, PrecioVenta = 7.50m, StockActual = 50, StockMinimo = 10, Descripcion = "Tueste medio artesanal", Activo = true },
-                new ProductoViewModel { Id = 6, Nombre = "Resma Papel Bond A4 75g", Categoria = "Papelería y Oficina", PrecioCompra = 3.50m, PrecioVenta = 6.00m, StockActual = 100, StockMinimo = 20, Descripcion = "500 hojas blancas", Activo = true },
-                new ProductoViewModel { Id = 7, Nombre = "Alcohol en Gel 1 Litro", Categoria = "Limpieza y Hogar", PrecioCompra = 2.50m, PrecioVenta = 4.75m, StockActual = 30, StockMinimo = 5, Descripcion = "Antiséptico 70%", Activo = true }
+                new Producto { ProductoId = 1, Nombre = "Laptop Dell Inspiron 15", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 550.00m, PrecioVenta = 750.00m, StockActual = 15, StockMinimo = 3, Descripcion = "Intel Core i5, 16GB RAM, SSD 512GB", Activo = true },
+                new Producto { ProductoId = 2, Nombre = "Mouse Inalámbrico Logitech M185", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 8.50m, PrecioVenta = 15.00m, StockActual = 40, StockMinimo = 5, Descripcion = "Sensor óptico 2.4GHz", Activo = true },
+                new Producto { ProductoId = 3, Nombre = "Teclado Mecánico RGB", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 25.00m, PrecioVenta = 45.00m, StockActual = 20, StockMinimo = 4, Descripcion = "Switches Red", Activo = true },
+                new Producto { ProductoId = 4, Nombre = "Monitor Samsung 24 pulg FHD", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 95.00m, PrecioVenta = 140.00m, StockActual = 10, StockMinimo = 2, Descripcion = "Panel IPS 75Hz", Activo = true },
+                new Producto { ProductoId = 5, Nombre = "Café Molido Premium 500g", CategoriaId = 2, Categoria = new Categoria { CategoriaId = 2, Nombre = "Bebidas y Alimentos" }, PrecioCompra = 4.00m, PrecioVenta = 7.50m, StockActual = 50, StockMinimo = 10, Descripcion = "Tueste medio artesanal", Activo = true },
+                new Producto { ProductoId = 6, Nombre = "Resma Papel Bond A4 75g", CategoriaId = 3, Categoria = new Categoria { CategoriaId = 3, Nombre = "Papelería y Oficina" }, PrecioCompra = 3.50m, PrecioVenta = 6.00m, StockActual = 100, StockMinimo = 20, Descripcion = "500 hojas blancas", Activo = true },
+                new Producto { ProductoId = 7, Nombre = "Alcohol en Gel 1 Litro", CategoriaId = 4, Categoria = new Categoria { CategoriaId = 4, Nombre = "Limpieza y Hogar" }, PrecioCompra = 2.50m, PrecioVenta = 4.75m, StockActual = 30, StockMinimo = 5, Descripcion = "Antiséptico 70%", Activo = true }
             });
         }
 
-        private void ActualizarGrid(List<ProductoViewModel>? lista = null)
+        private void ActualizarGrid(List<Producto>? lista = null)
         {
             dgvProducts.Rows.Clear();
             var datos = lista ?? _productos;
 
-            foreach (var p in datos)
+            foreach (var producto in datos)
             {
-                int rowIndex = dgvProducts.Rows.Add(
-                    p.Id,
-                    p.Nombre,
-                    p.Categoria,
-                    p.PrecioCompra.ToString("C2"),
-                    p.PrecioVenta.ToString("C2"),
-                    p.StockActual,
-                    p.StockMinimo,
-                    p.Activo ? "Activo" : "Inactivo"
+                string nombreCategoria = producto.Categoria?.Nombre
+                    ?? _categorias.FirstOrDefault(c => c.CategoriaId == producto.CategoriaId)?.Nombre
+                    ?? "General";
+
+                int indiceFila = dgvProducts.Rows.Add(
+                    producto.ProductoId,
+                    producto.Nombre,
+                    nombreCategoria,
+                    producto.PrecioCompra.ToString("C2"),
+                    producto.PrecioVenta.ToString("C2"),
+                    producto.StockActual,
+                    producto.StockMinimo,
+                    producto.Activo ? "Activo" : "Inactivo"
                 );
 
-                if (p.StockActual <= p.StockMinimo)
+                if (producto.TieneStockBajo())
                 {
-                    dgvProducts.Rows[rowIndex].Cells["colStock"].Style.ForeColor = Color.Red;
-                    dgvProducts.Rows[rowIndex].Cells["colStock"].Style.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+                    dgvProducts.Rows[indiceFila].Cells["colStock"].Style.ForeColor = Color.Red;
+                    dgvProducts.Rows[indiceFila].Cells["colStock"].Style.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
                 }
 
-                if (!p.Activo)
+                if (!producto.Activo)
                 {
-                    dgvProducts.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
+                    dgvProducts.Rows[indiceFila].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
                 }
             }
 
@@ -105,22 +144,28 @@ namespace ManagementSystem.UI.Forms
         {
             if (dgvProducts.SelectedRows.Count == 0) return;
 
-            var row = dgvProducts.SelectedRows[0];
-            if (row.Cells["colId"].Value == null) return;
+            var fila = dgvProducts.SelectedRows[0];
+            if (fila.Cells["colId"].Value == null) return;
 
-            int id = Convert.ToInt32(row.Cells["colId"].Value);
-            var prod = _productos.FirstOrDefault(p => p.Id == id);
-            if (prod == null) return;
+            int id = Convert.ToInt32(fila.Cells["colId"].Value);
+            var producto = _productos.FirstOrDefault(p => p.ProductoId == id);
+            if (producto == null) return;
 
-            txtProductId.Text = prod.Id.ToString();
-            txtProductName.Text = prod.Nombre;
-            cmbCategory.SelectedItem = prod.Categoria;
-            nudPurchasePrice.Value = prod.PrecioCompra;
-            nudSalePrice.Value = prod.PrecioVenta;
-            nudCurrentStock.Value = prod.StockActual;
-            nudMinimumStock.Value = prod.StockMinimo;
-            txtDescription.Text = prod.Descripcion;
-            chkActive.Checked = prod.Activo;
+            txtProductId.Text = producto.ProductoId.ToString();
+            txtProductName.Text = producto.Nombre;
+
+            var categoriaItem = _categorias.FirstOrDefault(c => c.CategoriaId == producto.CategoriaId);
+            if (categoriaItem != null)
+            {
+                cmbCategory.SelectedItem = categoriaItem;
+            }
+
+            nudPurchasePrice.Value = producto.PrecioCompra;
+            nudSalePrice.Value = producto.PrecioVenta;
+            nudCurrentStock.Value = producto.StockActual;
+            nudMinimumStock.Value = producto.StockMinimo;
+            txtDescription.Text = producto.Descripcion ?? string.Empty;
+            chkActive.Checked = producto.Activo;
         }
 
         private void btnNew_Click(object? sender, EventArgs e)
@@ -144,97 +189,129 @@ namespace ManagementSystem.UI.Forms
 
         private void btnSave_Click(object? sender, EventArgs e)
         {
-            string nombre = txtProductName.Text.Trim();
-            if (string.IsNullOrWhiteSpace(nombre))
+            try
             {
-                MessageBox.Show("El nombre del producto es obligatorio.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtProductName.Focus();
-                return;
-            }
+                int id = int.Parse(txtProductId.Text);
+                var categoriaSeleccionada = cmbCategory.SelectedItem as Categoria;
+                int categoriaId = categoriaSeleccionada?.CategoriaId ?? 1;
 
-            if (nudSalePrice.Value <= 0)
-            {
-                MessageBox.Show("No se puede registrar un producto con precio menor o igual a cero.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                nudSalePrice.Focus();
-                return;
-            }
-
-            if (nudCurrentStock.Value < 0)
-            {
-                MessageBox.Show("No se puede registrar una cantidad negativa de inventario.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                nudCurrentStock.Focus();
-                return;
-            }
-
-            int id = int.Parse(txtProductId.Text);
-
-            if (id == 0)
-            {
-                int nuevoId = _productos.Any() ? _productos.Max(p => p.Id) + 1 : 1;
-                _productos.Add(new ProductoViewModel
+                var entidadProducto = new Producto
                 {
-                    Id = nuevoId,
-                    Nombre = nombre,
-                    Categoria = cmbCategory.SelectedItem?.ToString() ?? "General",
+                    ProductoId = id,
+                    Nombre = txtProductName.Text.Trim(),
+                    CategoriaId = categoriaId,
+                    Categoria = categoriaSeleccionada,
                     PrecioCompra = nudPurchasePrice.Value,
                     PrecioVenta = nudSalePrice.Value,
                     StockActual = (int)nudCurrentStock.Value,
                     StockMinimo = (int)nudMinimumStock.Value,
                     Descripcion = txtDescription.Text.Trim(),
                     Activo = chkActive.Checked
-                });
+                };
 
-                MessageBox.Show("Producto registrado correctamente.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                var actual = _productos.FirstOrDefault(p => p.Id == id);
-                if (actual != null)
+                if (!_servicioProductos.ValidarProducto(entidadProducto, out List<string> errores))
                 {
-                    actual.Nombre = nombre;
-                    actual.Categoria = cmbCategory.SelectedItem?.ToString() ?? "General";
-                    actual.PrecioCompra = nudPurchasePrice.Value;
-                    actual.PrecioVenta = nudSalePrice.Value;
-                    actual.StockActual = (int)nudCurrentStock.Value;
-                    actual.StockMinimo = (int)nudMinimumStock.Value;
-                    actual.Descripcion = txtDescription.Text.Trim();
-                    actual.Activo = chkActive.Checked;
-
-                    MessageBox.Show("Producto actualizado correctamente.", "Éxito",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(string.Join(Environment.NewLine, errores), "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-            }
 
-            ActualizarGrid();
+                if (!_modoMemoriaLocal)
+                {
+                    if (id == 0)
+                    {
+                        _servicioProductos.AgregarProducto(entidadProducto);
+                        MessageBox.Show("Producto registrado correctamente en la base de datos.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        _servicioProductos.ActualizarProducto(entidadProducto);
+                        MessageBox.Show("Producto actualizado correctamente en la base de datos.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    CargarProductos();
+                }
+                else
+                {
+                    if (id == 0)
+                    {
+                        entidadProducto.ProductoId = _productos.Any() ? _productos.Max(p => p.ProductoId) + 1 : 1;
+                        _productos.Add(entidadProducto);
+                        MessageBox.Show("Producto registrado correctamente.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        var actual = _productos.FirstOrDefault(p => p.ProductoId == id);
+                        if (actual != null)
+                        {
+                            actual.Nombre = entidadProducto.Nombre;
+                            actual.CategoriaId = entidadProducto.CategoriaId;
+                            actual.Categoria = entidadProducto.Categoria;
+                            actual.PrecioCompra = entidadProducto.PrecioCompra;
+                            actual.PrecioVenta = entidadProducto.PrecioVenta;
+                            actual.StockActual = entidadProducto.StockActual;
+                            actual.StockMinimo = entidadProducto.StockMinimo;
+                            actual.Descripcion = entidadProducto.Descripcion;
+                            actual.Activo = entidadProducto.Activo;
+
+                            MessageBox.Show("Producto actualizado correctamente.", "Éxito",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+
+                ActualizarGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el producto: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object? sender, EventArgs e)
         {
-            int id = int.Parse(txtProductId.Text);
-            if (id == 0)
+            try
             {
-                MessageBox.Show("Seleccione un producto para inactivar o eliminar.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                int id = int.Parse(txtProductId.Text);
+                if (id == 0)
+                {
+                    MessageBox.Show("Seleccione un producto para inactivar o activar.", "Aviso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var producto = _productos.FirstOrDefault(p => p.ProductoId == id);
+                if (producto == null) return;
+
+                string accion = producto.Activo ? "Inactivo" : "Activo";
+                var confirmacion = MessageBox.Show(
+                    $"¿Desea cambiar el estado de '{producto.Nombre}' a {accion}?",
+                    "Eliminación Lógica",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmacion == DialogResult.Yes)
+                {
+                    bool nuevoEstado = !producto.Activo;
+                    if (!_modoMemoriaLocal)
+                    {
+                        _servicioProductos.CambiarEstadoProducto(id, nuevoEstado);
+                        CargarProductos();
+                    }
+                    else
+                    {
+                        producto.Activo = nuevoEstado;
+                    }
+                    ActualizarGrid();
+                }
             }
-
-            var prod = _productos.FirstOrDefault(p => p.Id == id);
-            if (prod == null) return;
-
-            var result = MessageBox.Show(
-                $"¿Desea cambiar el estado de '{prod.Nombre}' a Inactivo?",
-                "Eliminación Lógica",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            catch (Exception ex)
             {
-                prod.Activo = !prod.Activo;
-                ActualizarGrid();
+                MessageBox.Show($"Error al cambiar el estado del producto: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -254,25 +331,35 @@ namespace ManagementSystem.UI.Forms
 
         private void EjecutarBusqueda()
         {
-            string query = txtSearch.Text.Trim().ToLower();
-            if (string.IsNullOrWhiteSpace(query))
+            string consulta = txtSearch.Text.Trim();
+            if (string.IsNullOrWhiteSpace(consulta))
             {
+                CargarProductos();
                 ActualizarGrid();
                 return;
             }
 
-            var filtrados = _productos
-                .Where(p => p.Nombre.ToLower().Contains(query) ||
-                            p.Descripcion.ToLower().Contains(query) ||
-                            p.Categoria.ToLower().Contains(query))
-                .ToList();
+            if (!_modoMemoriaLocal)
+            {
+                var filtradosServicio = _servicioProductos.BuscarProductos(consulta);
+                ActualizarGrid(filtradosServicio);
+            }
+            else
+            {
+                var filtrados = _productos
+                    .Where(p => p.Nombre.Contains(consulta, StringComparison.OrdinalIgnoreCase) ||
+                                (p.Descripcion != null && p.Descripcion.Contains(consulta, StringComparison.OrdinalIgnoreCase)) ||
+                                (p.Categoria != null && p.Categoria.Nombre.Contains(consulta, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
 
-            ActualizarGrid(filtrados);
+                ActualizarGrid(filtrados);
+            }
         }
 
         private void btnResetFilter_Click(object? sender, EventArgs e)
         {
             txtSearch.Clear();
+            CargarProductos();
             ActualizarGrid();
         }
     }

@@ -3,19 +3,57 @@ using System.Collections.Generic;
 
 namespace ManagementSystem.Entities.Entities
 {
-    public class Categoria
+    /// <summary>
+    /// Entidad de dominio que representa una categoría de productos.
+    /// Aplica encapsulamiento mediante campos privados y métodos públicos de negocio.
+    /// </summary>
+    public class Categoria : IEntidadActivable
     {
-        public int CategoriaId { get; set; }
+        private int _categoriaId;
+        private string _nombre = string.Empty;
+        private string? _descripcion;
+        private DateTime _fechaCreacion = DateTime.Now;
+        private bool _activo = true;
 
-        public string Nombre { get; set; } = string.Empty;
+        public int CategoriaId
+        {
+            get => _categoriaId;
+            set => _categoriaId = value;
+        }
 
-        public string? Descripcion { get; set; }
+        public string Nombre
+        {
+            get => _nombre;
+            set => _nombre = value?.Trim() ?? string.Empty;
+        }
 
-        public DateTime FechaCreacion { get; set; } = DateTime.Now;
+        public string? Descripcion
+        {
+            get => _descripcion;
+            set => _descripcion = value?.Trim();
+        }
 
-        public bool Activo { get; set; } = true;
+        public DateTime FechaCreacion
+        {
+            get => _fechaCreacion;
+            set => _fechaCreacion = value;
+        }
 
-        // Propiedades de navegación (relación 1:N con Producto)
+        public bool Activo
+        {
+            get => _activo;
+            set => _activo = value;
+        }
+
+        // Propiedad de navegación (relación 1:N con Producto)
         public virtual ICollection<Producto> Productos { get; set; } = new List<Producto>();
+
+        public int ObtenerIdentificador() => _categoriaId;
+
+        public void Activar() => _activo = true;
+
+        public void Desactivar() => _activo = false;
+
+        public override string ToString() => _nombre;
     }
 }

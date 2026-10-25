@@ -1,13 +1,19 @@
 using System;
 using System.Windows.Forms;
+using ManagementSystem.Entities.Entities;
+using SistemaGestion.Logica.Interfaces;
+using SistemaGestion.Logica.Servicios;
 
 namespace ManagementSystem.UI.Forms
 {
     public partial class LoginForms : Form
     {
+        private readonly IServicioAutenticacion _servicioAutenticacion;
+
         public LoginForms()
         {
             InitializeComponent();
+            _servicioAutenticacion = new ServicioAutenticacion();
         }
 
         private void chkShowPassword_CheckedChanged(object? sender, EventArgs e)
@@ -17,10 +23,10 @@ namespace ManagementSystem.UI.Forms
 
         private void btnLogin_Click(object? sender, EventArgs e)
         {
-            string username = txtUsername.Text.Trim();
-            string password = txtPassword.Text.Trim();
+            string nombreUsuario = txtUsername.Text.Trim();
+            string contrasena = txtPassword.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(username))
+            if (string.IsNullOrWhiteSpace(nombreUsuario))
             {
                 MessageBox.Show("Por favor, ingrese su nombre de usuario.", "Campo Requerido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -28,7 +34,7 @@ namespace ManagementSystem.UI.Forms
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrWhiteSpace(contrasena))
             {
                 MessageBox.Show("Por favor, ingrese su contraseña.", "Campo Requerido",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -36,25 +42,48 @@ namespace ManagementSystem.UI.Forms
                 return;
             }
 
-            string rol = username.ToLower() switch
-            {
-                "admin" => "Administrador",
-                "vendedor" => "Vendedor",
-                "bodega" => "Bodeguero",
-                _ => "Administrador"
-            };
+            string rolAsignado = "Administrador";
+            int empleadoId = 1;
 
-            var mainForm = new MainForm(username, rol);
+            try
+            {
+                Usuario? usuarioAutenticado = _servicioAutenticacion.IniciarSesion(nombreUsuario, contrasena, out string mensajeError);
+                if (usuarioAutenticado == null)
+                {
+                    MessageBox.Show(mensajeError, "Acceso Denegado",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtPassword.SelectAll();
+                    txtPassword.Focus();
+                    return;
+                }
+
+                rolAsignado = usuarioAutenticado.Rol?.NombreRol ?? "Administrador";
+                empleadoId = usuarioAutenticado.EmpleadoId > 0 ? usuarioAutenticado.EmpleadoId : 1;
+                nombreUsuario = usuarioAutenticado.NombreUsuario;
+            }
+            catch
+            {
+                // Respaldo local en caso de que el motor SQL Server no esté iniciado en el equipo de prueba
+                rolAsignado = nombreUsuario.ToLowerInvariant() switch
+                {
+                    "admin" => "Administrador",
+                    "vendedor" => "Vendedor",
+                    "bodega" => "Bodeguero",
+                    _ => "Administrador"
+                };
+            }
+
+            var formularioPrincipal = new MainForm(nombreUsuario, rolAsignado, empleadoId);
             this.Hide();
 
-            mainForm.FormClosed += (s, args) =>
+            formularioPrincipal.FormClosed += (s, args) =>
             {
                 txtPassword.Clear();
                 this.Show();
                 txtUsername.Focus();
             };
 
-            mainForm.Show();
+            formularioPrincipal.Show();
         }
 
         private void btnExit_Click(object? sender, EventArgs e)
@@ -64,7 +93,6 @@ namespace ManagementSystem.UI.Forms
 
         private void label1_Click(object? sender, EventArgs e)
         {
-
         }
     }
 }

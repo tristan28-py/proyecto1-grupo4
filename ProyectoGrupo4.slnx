@@ -2,4 +2,6 @@
   <Project Path="ManagementSystem.DataAccess/ManagementSystem.DataAccess.csproj" />
   <Project Path="ManagementSystem.Entities/ManagementSystem.Entities.csproj" Id="bd968f9a-59aa-44fe-8b80-78c755d1d8b6" />
   <Project Path="ManagementSystem.UI/ManagementSystem.UI.csproj" />
+  <Project Path="SistemaGestion.Logica/SistemaGestion.Logica.csproj" Id="072a3900-23e1-40a7-860a-c4035fc0c289" />
+  <Project Path="SistemaGestion.Pruebas/SistemaGestion.Pruebas.csproj" />
 </Solution>

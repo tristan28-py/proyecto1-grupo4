@@ -2,25 +2,74 @@ using System;
 
 namespace ManagementSystem.Entities.Entities
 {
+    /// <summary>
+    /// Entidad que representa una línea de detalle de una Venta.
+    /// Cumple la regla de negocio: "El subtotal debe ser Cantidad * Precio".
+    /// </summary>
     public class DetalleVenta
     {
-        public int DetalleVentaId { get; set; }
+        private int _detalleVentaId;
+        private int _ventaId;
+        private int _productoId;
+        private int _cantidad;
+        private decimal _precioUnitario;
+        private decimal _descuento;
+        private decimal _subTotal;
 
-        public int VentaId { get; set; }
+        public int DetalleVentaId
+        {
+            get => _detalleVentaId;
+            set => _detalleVentaId = value;
+        }
 
-        public int ProductoId { get; set; }
+        public int VentaId
+        {
+            get => _ventaId;
+            set => _ventaId = value;
+        }
 
-        public int Cantidad { get; set; }
+        public int ProductoId
+        {
+            get => _productoId;
+            set => _productoId = value;
+        }
 
-        public decimal PrecioUnitario { get; set; }
+        public int Cantidad
+        {
+            get => _cantidad;
+            set => _cantidad = value;
+        }
 
-        public decimal Descuento { get; set; }
+        public decimal PrecioUnitario
+        {
+            get => _precioUnitario;
+            set => _precioUnitario = value;
+        }
 
-        public decimal SubTotal { get; set; }
+        public decimal Descuento
+        {
+            get => _descuento;
+            set => _descuento = value;
+        }
+
+        public decimal SubTotal
+        {
+            get => _subTotal;
+            set => _subTotal = value;
+        }
 
         // Propiedades de navegación
         public virtual Venta? Venta { get; set; }
 
         public virtual Producto? Producto { get; set; }
+
+        /// <summary>
+        /// Calcula y actualiza el subtotal de la línea como (Cantidad * PrecioUnitario) - Descuento.
+        /// </summary>
+        public decimal CalcularSubTotal()
+        {
+            _subTotal = (_cantidad * _precioUnitario) - _descuento;
+            return _subTotal;
+        }
     }
 }

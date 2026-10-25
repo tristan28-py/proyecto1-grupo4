@@ -3,17 +3,50 @@ using System.Collections.Generic;
 
 namespace ManagementSystem.Entities.Entities
 {
-    public class Rol
+    /// <summary>
+    /// Entidad que representa un Rol de seguridad dentro del sistema.
+    /// Ejemplos: Administrador, Vendedor, Bodeguero, Consulta.
+    /// </summary>
+    public class Rol : IEntidadActivable
     {
-        public int RolId { get; set; }
+        private int _rolId;
+        private string _nombreRol = string.Empty;
+        private string? _descripcion;
+        private bool _activo = true;
 
-        public string NombreRol { get; set; } = string.Empty;
+        public int RolId
+        {
+            get => _rolId;
+            set => _rolId = value;
+        }
 
-        public string? Descripcion { get; set; }
+        public string NombreRol
+        {
+            get => _nombreRol;
+            set => _nombreRol = value?.Trim() ?? string.Empty;
+        }
 
-        public bool Activo { get; set; } = true;
+        public string? Descripcion
+        {
+            get => _descripcion;
+            set => _descripcion = value?.Trim();
+        }
 
-        // Propiedades de navegación
+        public bool Activo
+        {
+            get => _activo;
+            set => _activo = value;
+        }
+
+        // Propiedad de navegación
         public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
+
+        public int ObtenerIdentificador() => _rolId;
+
+        public void Activar() => _activo = true;
+
+        public void Desactivar() => _activo = false;
+
+        public override string ToString() => _nombreRol;
     }
 }

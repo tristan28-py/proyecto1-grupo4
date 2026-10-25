@@ -1,89 +1,72 @@
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
+using SistemaGestion.Logica.Interfaces;
+using SistemaGestion.Logica.Servicios;
 
 namespace ManagementSystem.UI.Forms
 {
     public partial class PedidosForm : Form
     {
-        private class PedidoViewModel
-        {
-            public int Id { get; set; }
-            public string Cliente { get; set; } = string.Empty;
-            public string Producto { get; set; } = string.Empty;
-            public int Cantidad { get; set; }
-            public DateTime HoraRegistro { get; set; } = DateTime.Now;
-            public string Observaciones { get; set; } = string.Empty;
-        }
-
-        private static readonly Queue<PedidoViewModel> _colaPedidos = new();
-        private static int _consecutivo = 101;
-        private static bool _datosInicialesCargados;
+        private readonly IServicioPedidos _servicioPedidos;
+        private readonly IServicioProductos _servicioProductos;
 
         public PedidosForm()
         {
             InitializeComponent();
+            _servicioPedidos = ServicioPedidos.InstanciaCompartida;
+            _servicioProductos = new ServicioProductos();
         }
 
         private void PedidosForm_Load(object? sender, EventArgs e)
         {
             CargarProductos();
-            if (!_datosInicialesCargados)
-            {
-                CargarDatosDePrueba();
-                _datosInicialesCargados = true;
-            }
             ActualizarGrid();
         }
 
         private void CargarProductos()
         {
             cmbProduct.Items.Clear();
-            cmbProduct.Items.AddRange(new object[]
+            try
             {
-                "Laptop Dell Inspiron 15",
-                "Mouse Inalámbrico Logitech M185",
-                "Teclado Mecánico RGB",
-                "Monitor Samsung 24 pulg FHD",
-                "Resma Papel Bond A4 75g"
-            });
+                var productos = _servicioProductos.ObtenerActivos();
+                foreach (var producto in productos)
+                {
+                    cmbProduct.Items.Add(producto.Nombre);
+                }
+            }
+            catch
+            {
+                // Respaldo si no hay conexión a base de datos
+            }
+
+            if (cmbProduct.Items.Count == 0)
+            {
+                cmbProduct.Items.AddRange(new object[]
+                {
+                    "Laptop Dell Inspiron 15",
+                    "Mouse Inalámbrico Logitech M185",
+                    "Teclado Mecánico RGB",
+                    "Monitor Samsung 24 pulg FHD",
+                    "Resma Papel Bond A4 75g"
+                });
+            }
+
             if (cmbProduct.Items.Count > 0)
+            {
                 cmbProduct.SelectedIndex = 0;
-        }
-
-        private void CargarDatosDePrueba()
-        {
-            _colaPedidos.Enqueue(new PedidoViewModel
-            {
-                Id = _consecutivo++,
-                Cliente = "María Fernández López",
-                Producto = "Laptop Dell Inspiron 15",
-                Cantidad = 2,
-                HoraRegistro = DateTime.Now.AddMinutes(-20),
-                Observaciones = "Entrega en sucursal central"
-            });
-
-            _colaPedidos.Enqueue(new PedidoViewModel
-            {
-                Id = _consecutivo++,
-                Cliente = "Comercial El Sol S.A.",
-                Producto = "Monitor Samsung 24 pulg FHD",
-                Cantidad = 5,
-                HoraRegistro = DateTime.Now.AddMinutes(-10),
-                Observaciones = "Facturar a crédito"
-            });
+            }
         }
 
         private void ActualizarGrid()
         {
             dgvOrders.Rows.Clear();
 
-            lblQueueCount.Text = $"Pedidos en cola: {_colaPedidos.Count}";
+            lblQueueCount.Text = $"Pedidos en cola: {_servicioPedidos.CantidadPendientes}";
 
-            if (_colaPedidos.Count > 0)
+            var siguiente = _servicioPedidos.VerSiguientePedido();
+            if (siguiente != null)
             {
-                var siguiente = _colaPedidos.Peek();
-                lblPeekOrder.Text = $"Siguiente en turno: Pedido #{siguiente.Id} - {siguiente.Cliente} ({siguiente.Producto} x{siguiente.Cantidad})";
+                lblPeekOrder.Text = $"Siguiente en turno: Pedido #{siguiente.PedidoId} - {siguiente.NombreCliente} ({siguiente.NombreProducto} x{siguiente.Cantidad})";
             }
             else
             {
@@ -91,66 +74,85 @@ namespace ManagementSystem.UI.Forms
             }
 
             int turno = 1;
-            foreach (var p in _colaPedidos)
+            foreach (var pedido in _servicioPedidos.ObtenerPedidosPendientes())
             {
                 dgvOrders.Rows.Add(
                     turno++,
-                    $"#{p.Id}",
-                    p.Cliente,
-                    p.Producto,
-                    p.Cantidad,
-                    p.HoraRegistro.ToString("HH:mm:ss"),
-                    p.Observaciones
+                    $"#{pedido.PedidoId}",
+                    pedido.NombreCliente,
+                    pedido.NombreProducto,
+                    pedido.Cantidad,
+                    pedido.HoraRegistro.ToString("HH:mm:ss"),
+                    pedido.Observaciones
                 );
             }
         }
 
         private void btnEnqueue_Click(object? sender, EventArgs e)
         {
-            string cliente = txtClientName.Text.Trim();
-            if (string.IsNullOrWhiteSpace(cliente))
+            try
             {
-                MessageBox.Show("El nombre del cliente es obligatorio.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtClientName.Focus();
-                return;
+                string cliente = txtClientName.Text.Trim();
+                if (string.IsNullOrWhiteSpace(cliente))
+                {
+                    MessageBox.Show("El nombre del cliente es obligatorio.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtClientName.Focus();
+                    return;
+                }
+
+                string producto = cmbProduct.SelectedItem?.ToString() ?? "Producto General";
+                int cantidad = (int)nudQuantity.Value;
+
+                var pedidoCreado = _servicioPedidos.EncolarPedido(cliente, producto, cantidad, txtNotes.Text.Trim());
+                ServicioHistorial.InstanciaCompartida.RegistrarAccion(
+                    modulo: "Pedidos",
+                    descripcion: $"Se agregó a la cola el Pedido #{pedidoCreado.PedidoId} de '{cliente}'",
+                    tipoAccion: "Enqueue",
+                    entidadId: pedidoCreado.PedidoId);
+
+                MessageBox.Show("Pedido agregado a la cola correctamente.", "Pedido Registrado",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                LimpiarFormulario();
+                ActualizarGrid();
             }
-
-            _colaPedidos.Enqueue(new PedidoViewModel
+            catch (Exception ex)
             {
-                Id = _consecutivo++,
-                Cliente = cliente,
-                Producto = cmbProduct.SelectedItem?.ToString() ?? "Producto General",
-                Cantidad = (int)nudQuantity.Value,
-                HoraRegistro = DateTime.Now,
-                Observaciones = txtNotes.Text.Trim()
-            });
-
-            MessageBox.Show("Pedido agregado a la cola correctamente.", "Pedido Registrado",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            LimpiarFormulario();
-            ActualizarGrid();
+                MessageBox.Show(ex.Message, "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnDequeue_Click(object? sender, EventArgs e)
         {
-            if (_colaPedidos.Count == 0)
+            try
             {
-                MessageBox.Show("No hay pedidos pendientes en la cola para atender.", "Cola Vacía",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (_servicioPedidos.CantidadPendientes == 0)
+                {
+                    MessageBox.Show("No hay pedidos pendientes en la cola para atender.", "Cola Vacía",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var atendido = _servicioPedidos.AtenderSiguientePedido();
+                ServicioHistorial.InstanciaCompartida.RegistrarAccion(
+                    modulo: "Pedidos",
+                    descripcion: $"Se atendió el Pedido #{atendido.PedidoId} de '{atendido.NombreCliente}'",
+                    tipoAccion: "Dequeue",
+                    entidadId: atendido.PedidoId);
+
+                MessageBox.Show(
+                    $"Se atendió el Pedido #{atendido.PedidoId} (Orden FIFO):\n\nCliente: {atendido.NombreCliente}\nProducto: {atendido.NombreProducto} (x{atendido.Cantidad})",
+                    "Pedido Atendido",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                ActualizarGrid();
             }
-
-            var atendido = _colaPedidos.Dequeue();
-
-            MessageBox.Show(
-                $"Se atendió el Pedido #{atendido.Id}:\n\nCliente: {atendido.Cliente}\nProducto: {atendido.Producto} (x{atendido.Cantidad})",
-                "Pedido Atendido",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-
-            ActualizarGrid();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnClear_Click(object? sender, EventArgs e)

@@ -3,32 +3,46 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ManagementSystem.Entities.Entities;
+using SistemaGestion.Logica.Interfaces;
+using SistemaGestion.Logica.Servicios;
 
 namespace ManagementSystem.UI.Forms
 {
     public partial class CategoriasForm : Form
     {
-        private class CategoriaViewModel
-        {
-            public int Id { get; set; }
-            public string Nombre { get; set; } = string.Empty;
-            public string Descripcion { get; set; } = string.Empty;
-            public DateTime FechaCreacion { get; set; } = DateTime.Now;
-            public bool Activo { get; set; } = true;
-        }
-
-        private readonly List<CategoriaViewModel> _categorias = new();
+        private readonly IServicioCategorias _servicioCategorias;
+        private List<Categoria> _categorias = new();
+        private bool _modoMemoriaLocal;
 
         public CategoriasForm()
         {
             InitializeComponent();
+            _servicioCategorias = new ServicioCategorias();
         }
 
         private void CategoriasForm_Load(object? sender, EventArgs e)
         {
             cmbStatusFilter.SelectedIndex = 0;
-            CargarDatosDePrueba();
+            CargarCategoriasDesdeServicio();
             ActualizarGrid();
+        }
+
+        private void CargarCategoriasDesdeServicio()
+        {
+            try
+            {
+                _categorias = _servicioCategorias.ObtenerTodas();
+                _modoMemoriaLocal = false;
+            }
+            catch
+            {
+                _modoMemoriaLocal = true;
+                if (_categorias.Count == 0)
+                {
+                    CargarDatosDePrueba();
+                }
+            }
         }
 
         private void CargarDatosDePrueba()
@@ -36,11 +50,10 @@ namespace ManagementSystem.UI.Forms
             _categorias.Clear();
             _categorias.AddRange(new[]
             {
-                new CategoriaViewModel { Id = 1, Nombre = "Electrónica y Cómputo", Descripcion = "Laptops, accesorios, periféricos y monitores", FechaCreacion = DateTime.Now.AddDays(-30), Activo = true },
-                new CategoriaViewModel { Id = 2, Nombre = "Bebidas y Alimentos", Descripcion = "Snacks, confitería, café y refrescos", FechaCreacion = DateTime.Now.AddDays(-25), Activo = true },
-                new CategoriaViewModel { Id = 3, Nombre = "Papelería y Oficina", Descripcion = "Cuadernos, bolígrafos, resmas y papelería general", FechaCreacion = DateTime.Now.AddDays(-20), Activo = true },
-                new CategoriaViewModel { Id = 4, Nombre = "Limpieza y Hogar", Descripcion = "Artículos de higiene, alcohol en gel y detergentes", FechaCreacion = DateTime.Now.AddDays(-15), Activo = true },
-                new CategoriaViewModel { Id = 5, Nombre = "Mobiliario Descontinuado", Descripcion = "Línea de escritorios antigua", FechaCreacion = DateTime.Now.AddDays(-60), Activo = false }
+                new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo", Descripcion = "Laptops, accesorios, periféricos y monitores", FechaCreacion = DateTime.Now.AddDays(-30), Activo = true },
+                new Categoria { CategoriaId = 2, Nombre = "Bebidas y Alimentos", Descripcion = "Snacks, confitería, café y refrescos", FechaCreacion = DateTime.Now.AddDays(-25), Activo = true },
+                new Categoria { CategoriaId = 3, Nombre = "Papelería y Oficina", Descripcion = "Cuadernos, bolígrafos, resmas y papelería general", FechaCreacion = DateTime.Now.AddDays(-20), Activo = true },
+                new Categoria { CategoriaId = 4, Nombre = "Limpieza y Hogar", Descripcion = "Artículos de higiene, alcohol en gel y detergentes", FechaCreacion = DateTime.Now.AddDays(-15), Activo = true }
             });
         }
 
@@ -48,41 +61,41 @@ namespace ManagementSystem.UI.Forms
         {
             dgvCategories.Rows.Clear();
 
-            string query = txtSearch.Text.Trim().ToLower();
-            int statusIndex = cmbStatusFilter.SelectedIndex;
+            string textoBusqueda = txtSearch.Text.Trim();
+            int indiceEstado = cmbStatusFilter.SelectedIndex;
 
-            var filtrados = _categorias.AsEnumerable();
-
-            if (!string.IsNullOrWhiteSpace(query))
+            List<Categoria> listaFiltrada;
+            if (!_modoMemoriaLocal)
             {
-                filtrados = filtrados.Where(c => c.Nombre.ToLower().Contains(query) ||
-                                                 c.Descripcion.ToLower().Contains(query));
+                try
+                {
+                    listaFiltrada = _servicioCategorias.FiltrarCategorias(textoBusqueda, indiceEstado);
+                    _categorias = _servicioCategorias.ObtenerTodas();
+                }
+                catch
+                {
+                    _modoMemoriaLocal = true;
+                    listaFiltrada = FiltrarEnMemoria(textoBusqueda, indiceEstado);
+                }
+            }
+            else
+            {
+                listaFiltrada = FiltrarEnMemoria(textoBusqueda, indiceEstado);
             }
 
-            if (statusIndex == 1)
+            foreach (var categoria in listaFiltrada)
             {
-                filtrados = filtrados.Where(c => c.Activo);
-            }
-            else if (statusIndex == 2)
-            {
-                filtrados = filtrados.Where(c => !c.Activo);
-            }
-
-            var lista = filtrados.OrderBy(c => c.Nombre).ToList();
-
-            foreach (var c in lista)
-            {
-                int rowIndex = dgvCategories.Rows.Add(
-                    c.Id,
-                    c.Nombre,
-                    c.Descripcion,
-                    c.FechaCreacion.ToString("dd/MM/yyyy"),
-                    c.Activo ? "Activo" : "Inactivo"
+                int indiceFila = dgvCategories.Rows.Add(
+                    categoria.CategoriaId,
+                    categoria.Nombre,
+                    categoria.Descripcion ?? string.Empty,
+                    categoria.FechaCreacion.ToString("dd/MM/yyyy"),
+                    categoria.Activo ? "Activo" : "Inactivo"
                 );
 
-                if (!c.Activo)
+                if (!categoria.Activo)
                 {
-                    dgvCategories.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
+                    dgvCategories.Rows[indiceFila].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
                 }
             }
 
@@ -96,21 +109,44 @@ namespace ManagementSystem.UI.Forms
             }
         }
 
+        private List<Categoria> FiltrarEnMemoria(string textoBusqueda, int indiceEstado)
+        {
+            IEnumerable<Categoria> filtrados = _categorias;
+
+            if (!string.IsNullOrWhiteSpace(textoBusqueda))
+            {
+                filtrados = filtrados.Where(c =>
+                    c.Nombre.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                    (c.Descripcion != null && c.Descripcion.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase)));
+            }
+
+            if (indiceEstado == 1)
+            {
+                filtrados = filtrados.Where(c => c.Activo);
+            }
+            else if (indiceEstado == 2)
+            {
+                filtrados = filtrados.Where(c => !c.Activo);
+            }
+
+            return filtrados.OrderBy(c => c.Nombre).ToList();
+        }
+
         private void dgvCategories_SelectionChanged(object? sender, EventArgs e)
         {
             if (dgvCategories.SelectedRows.Count == 0) return;
 
-            var row = dgvCategories.SelectedRows[0];
-            if (row.Cells["colId"].Value == null) return;
+            var fila = dgvCategories.SelectedRows[0];
+            if (fila.Cells["colId"].Value == null) return;
 
-            int id = Convert.ToInt32(row.Cells["colId"].Value);
-            var cat = _categorias.FirstOrDefault(c => c.Id == id);
-            if (cat == null) return;
+            int id = Convert.ToInt32(fila.Cells["colId"].Value);
+            var categoria = _categorias.FirstOrDefault(c => c.CategoriaId == id);
+            if (categoria == null) return;
 
-            txtCategoryId.Text = cat.Id.ToString();
-            txtCategoryName.Text = cat.Nombre;
-            txtDescription.Text = cat.Descripcion;
-            chkActive.Checked = cat.Activo;
+            txtCategoryId.Text = categoria.CategoriaId.ToString();
+            txtCategoryName.Text = categoria.Nombre;
+            txtDescription.Text = categoria.Descripcion ?? string.Empty;
+            chkActive.Checked = categoria.Activo;
         }
 
         private void btnNew_Click(object? sender, EventArgs e)
@@ -129,73 +165,114 @@ namespace ManagementSystem.UI.Forms
 
         private void btnSave_Click(object? sender, EventArgs e)
         {
-            string nombre = txtCategoryName.Text.Trim();
-            if (string.IsNullOrWhiteSpace(nombre))
+            try
             {
-                MessageBox.Show("El nombre de la categoría es obligatorio.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCategoryName.Focus();
-                return;
-            }
-
-            int id = int.Parse(txtCategoryId.Text);
-
-            if (id == 0)
-            {
-                int nuevoId = _categorias.Any() ? _categorias.Max(c => c.Id) + 1 : 1;
-                _categorias.Add(new CategoriaViewModel
+                string nombre = txtCategoryName.Text.Trim();
+                if (string.IsNullOrWhiteSpace(nombre))
                 {
-                    Id = nuevoId,
+                    MessageBox.Show("El nombre de la categoría es obligatorio.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCategoryName.Focus();
+                    return;
+                }
+
+                int id = int.Parse(txtCategoryId.Text);
+                var entidad = new Categoria
+                {
+                    CategoriaId = id,
                     Nombre = nombre,
                     Descripcion = txtDescription.Text.Trim(),
                     FechaCreacion = DateTime.Now,
                     Activo = chkActive.Checked
-                });
+                };
 
-                MessageBox.Show("Categoría agregada exitosamente.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                var cat = _categorias.FirstOrDefault(c => c.Id == id);
-                if (cat != null)
+                if (!_modoMemoriaLocal)
                 {
-                    cat.Nombre = nombre;
-                    cat.Descripcion = txtDescription.Text.Trim();
-                    cat.Activo = chkActive.Checked;
-
-                    MessageBox.Show("Categoría actualizada correctamente.", "Éxito",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (id == 0)
+                    {
+                        _servicioCategorias.AgregarCategoria(entidad);
+                        MessageBox.Show("Categoría agregada exitosamente en la base de datos.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        _servicioCategorias.ActualizarCategoria(entidad);
+                        MessageBox.Show("Categoría actualizada correctamente en la base de datos.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
-            }
+                else
+                {
+                    if (id == 0)
+                    {
+                        entidad.CategoriaId = _categorias.Any() ? _categorias.Max(c => c.CategoriaId) + 1 : 1;
+                        _categorias.Add(entidad);
+                        MessageBox.Show("Categoría agregada exitosamente.", "Éxito",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        var existente = _categorias.FirstOrDefault(c => c.CategoriaId == id);
+                        if (existente != null)
+                        {
+                            existente.Nombre = entidad.Nombre;
+                            existente.Descripcion = entidad.Descripcion;
+                            existente.Activo = entidad.Activo;
+                            MessageBox.Show("Categoría actualizada correctamente.", "Éxito",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
 
-            ActualizarGrid();
+                ActualizarGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar la categoría: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object? sender, EventArgs e)
         {
-            int id = int.Parse(txtCategoryId.Text);
-            if (id == 0)
+            try
             {
-                MessageBox.Show("Seleccione una categoría para cambiar su estado.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                int id = int.Parse(txtCategoryId.Text);
+                if (id == 0)
+                {
+                    MessageBox.Show("Seleccione una categoría para cambiar su estado.", "Aviso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var categoria = _categorias.FirstOrDefault(c => c.CategoriaId == id);
+                if (categoria == null) return;
+
+                string accion = categoria.Activo ? "inactivar" : "activar";
+                var confirmacion = MessageBox.Show(
+                    $"¿Desea {accion} la categoría '{categoria.Nombre}'?",
+                    "Estado de Categoría",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmacion == DialogResult.Yes)
+                {
+                    bool nuevoEstado = !categoria.Activo;
+                    if (!_modoMemoriaLocal)
+                    {
+                        _servicioCategorias.CambiarEstadoCategoria(id, nuevoEstado);
+                    }
+                    else
+                    {
+                        categoria.Activo = nuevoEstado;
+                    }
+                    ActualizarGrid();
+                }
             }
-
-            var cat = _categorias.FirstOrDefault(c => c.Id == id);
-            if (cat == null) return;
-
-            string accion = cat.Activo ? "inactivar" : "activar";
-            var result = MessageBox.Show(
-                $"¿Desea {accion} la categoría '{cat.Nombre}'?",
-                "Estado de Categoría",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            catch (Exception ex)
             {
-                cat.Activo = !cat.Activo;
-                ActualizarGrid();
+                MessageBox.Show($"Error al cambiar el estado de la categoría: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

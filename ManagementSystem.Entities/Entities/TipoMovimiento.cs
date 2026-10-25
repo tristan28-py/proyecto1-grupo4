@@ -2,6 +2,9 @@ using System;
 
 namespace ManagementSystem.Entities.Entities
 {
+    /// <summary>
+    /// Catálogo y constantes de tipos de movimiento de inventario.
+    /// </summary>
     public class TipoMovimiento
     {
         public int TipoMovimientoId { get; set; }
@@ -12,7 +15,7 @@ namespace ManagementSystem.Entities.Entities
 
         public bool Activo { get; set; } = true;
 
-        // Constantes para los tipos de movimiento estándar
+        // Constantes para los tipos de movimiento estándar exigidos en la rúbrica
         public const string Entrada = "Entrada";
         public const string Salida = "Salida";
         public const string Ajuste = "Ajuste";

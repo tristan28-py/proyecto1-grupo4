@@ -1,5 +1,9 @@
 namespace ManagementSystem.Entities.DTOs
 {
+    /// <summary>
+    /// Objeto de transferencia de datos (DTO) que consolida la información de una Persona
+    /// junto con sus perfiles de Cliente, Empleado y Usuario.
+    /// </summary>
     public class ResumenPersonaDto
     {
         public int PersonaId { get; set; }

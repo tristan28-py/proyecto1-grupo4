@@ -3,36 +3,47 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ManagementSystem.Entities.DTOs;
+using SistemaGestion.Logica.Interfaces;
+using SistemaGestion.Logica.Servicios;
 
 namespace ManagementSystem.UI.Forms
 {
     public partial class ClientesForm : Form
     {
-        private class PersonaViewModel
-        {
-            public int Id { get; set; }
-            public string Identificacion { get; set; } = string.Empty;
-            public string NombreCompleto { get; set; } = string.Empty;
-            public string Email { get; set; } = string.Empty;
-            public string Telefono { get; set; } = string.Empty;
-            public string Tipo { get; set; } = "Cliente";
-            public decimal MontoAsignado { get; set; }
-            public bool Activo { get; set; } = true;
-        }
-
-        private readonly List<PersonaViewModel> _personas = new();
+        private readonly IServicioPersonas _servicioPersonas;
+        private List<ResumenPersonaDto> _personas = new();
+        private bool _modoMemoriaLocal;
 
         public ClientesForm()
         {
             InitializeComponent();
+            _servicioPersonas = new ServicioPersonas();
         }
 
         private void ClientesForm_Load(object? sender, EventArgs e)
         {
             cmbTypeFilter.SelectedIndex = 0;
             cmbPersonType.SelectedIndex = 0;
-            CargarDatosDePrueba();
+            CargarPersonas();
             ActualizarGrid();
+        }
+
+        private void CargarPersonas()
+        {
+            try
+            {
+                _personas = _servicioPersonas.ObtenerResumenPersonas();
+                _modoMemoriaLocal = false;
+            }
+            catch
+            {
+                _modoMemoriaLocal = true;
+                if (_personas.Count == 0)
+                {
+                    CargarDatosDePrueba();
+                }
+            }
         }
 
         private void CargarDatosDePrueba()
@@ -40,11 +51,10 @@ namespace ManagementSystem.UI.Forms
             _personas.Clear();
             _personas.AddRange(new[]
             {
-                new PersonaViewModel { Id = 1, Identificacion = "1-1111-1111", NombreCompleto = "Carlos Ramírez Soto", Email = "carlos@sistema.com", Telefono = "8888-1111", Tipo = "Usuario", MontoAsignado = 850.00m, Activo = true },
-                new PersonaViewModel { Id = 2, Identificacion = "2-2222-2222", NombreCompleto = "Ana Gómez Vargas", Email = "ana@sistema.com", Telefono = "8888-2222", Tipo = "Empleado", MontoAsignado = 620.00m, Activo = true },
-                new PersonaViewModel { Id = 3, Identificacion = "3-3333-3333", NombreCompleto = "María Fernández López", Email = "maria@correo.com", Telefono = "8888-3333", Tipo = "Cliente", MontoAsignado = 1500.00m, Activo = true },
-                new PersonaViewModel { Id = 4, Identificacion = "4-4444-4444", NombreCompleto = "Comercial El Sol S.A.", Email = "ventas@elsol.com", Telefono = "2222-4444", Tipo = "Cliente", MontoAsignado = 5000.00m, Activo = true },
-                new PersonaViewModel { Id = 5, Identificacion = "5-5555-5555", NombreCompleto = "Jorge Castro Méndez", Email = "jorge@correo.com", Telefono = "8777-5555", Tipo = "Cliente", MontoAsignado = 500.00m, Activo = false }
+                new ResumenPersonaDto { PersonaId = 1, Identificacion = "1-1520-0345", NombreCompleto = "Carlos Solís Delgado", Email = "carlos.solis@empresa.com", Telefono = "8888-1111", TiposPersona = "Usuario", Salario = 2500.00m, TieneUsuario = true, EsEmpleado = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 2, Identificacion = "2-0789-0123", NombreCompleto = "Ana María Morales Mora", Email = "ana.morales@empresa.com", Telefono = "8888-2222", TiposPersona = "Empleado", Salario = 950.00m, EsEmpleado = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 4, Identificacion = "1-0987-0654", NombreCompleto = "Juan Pérez Gómez", Email = "juan.perez@gmail.com", Telefono = "7777-1111", TiposPersona = "Cliente", LimiteCredito = 500.00m, EsCliente = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 5, Identificacion = "3-101-998877", NombreCompleto = "Empresa Alfa S.A.", Email = "compras@alfa.com", Telefono = "7777-2222", TiposPersona = "Cliente", LimiteCredito = 5000.00m, EsCliente = true, Activo = true }
             });
         }
 
@@ -52,39 +62,47 @@ namespace ManagementSystem.UI.Forms
         {
             dgvClients.Rows.Clear();
 
-            string query = txtSearch.Text.Trim().ToLower();
+            string textoBusqueda = txtSearch.Text.Trim();
             string tipoFiltro = cmbTypeFilter.SelectedItem?.ToString() ?? "Todos";
 
-            var filtrados = _personas.AsEnumerable();
-
-            if (!string.IsNullOrWhiteSpace(query))
+            List<ResumenPersonaDto> lista;
+            if (!_modoMemoriaLocal)
             {
-                filtrados = filtrados.Where(p => p.NombreCompleto.ToLower().Contains(query) ||
-                                                 p.Identificacion.ToLower().Contains(query));
+                try
+                {
+                    lista = _servicioPersonas.FiltrarResumenPersonas(textoBusqueda, tipoFiltro);
+                    _personas = _servicioPersonas.ObtenerResumenPersonas();
+                }
+                catch
+                {
+                    _modoMemoriaLocal = true;
+                    lista = FiltrarEnMemoria(textoBusqueda, tipoFiltro);
+                }
+            }
+            else
+            {
+                lista = FiltrarEnMemoria(textoBusqueda, tipoFiltro);
             }
 
-            if (tipoFiltro != "Todos")
+            foreach (var persona in lista)
             {
-                filtrados = filtrados.Where(p => p.Tipo == tipoFiltro);
-            }
+                decimal montoMostrado = persona.EsCliente
+                    ? (persona.LimiteCredito ?? 0m)
+                    : (persona.Salario ?? 0m);
 
-            var lista = filtrados.OrderBy(p => p.NombreCompleto).ToList();
-
-            foreach (var p in lista)
-            {
-                int rowIndex = dgvClients.Rows.Add(
-                    p.Id,
-                    p.Identificacion,
-                    p.NombreCompleto,
-                    p.Tipo,
-                    p.Telefono,
-                    p.MontoAsignado.ToString("C2"),
-                    p.Activo ? "Activo" : "Inactivo"
+                int indiceFila = dgvClients.Rows.Add(
+                    persona.PersonaId,
+                    persona.Identificacion,
+                    persona.NombreCompleto,
+                    persona.TiposPersona,
+                    persona.Telefono ?? string.Empty,
+                    montoMostrado.ToString("C2"),
+                    persona.Activo ? "Activo" : "Inactivo"
                 );
 
-                if (!p.Activo)
+                if (!persona.Activo)
                 {
-                    dgvClients.Rows[rowIndex].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
+                    dgvClients.Rows[indiceFila].DefaultCellStyle.ForeColor = Color.FromArgb(156, 163, 175);
                 }
             }
 
@@ -98,25 +116,56 @@ namespace ManagementSystem.UI.Forms
             }
         }
 
+        private List<ResumenPersonaDto> FiltrarEnMemoria(string textoBusqueda, string tipoFiltro)
+        {
+            IEnumerable<ResumenPersonaDto> filtrados = _personas;
+
+            if (!string.IsNullOrWhiteSpace(textoBusqueda))
+            {
+                filtrados = filtrados.Where(p =>
+                    p.NombreCompleto.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase) ||
+                    p.Identificacion.Contains(textoBusqueda, StringComparison.OrdinalIgnoreCase));
+            }
+
+            if (tipoFiltro != "Todos")
+            {
+                filtrados = filtrados.Where(p => p.TiposPersona.Equals(tipoFiltro, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return filtrados.OrderBy(p => p.NombreCompleto).ToList();
+        }
+
         private void dgvClients_SelectionChanged(object? sender, EventArgs e)
         {
             if (dgvClients.SelectedRows.Count == 0) return;
 
-            var row = dgvClients.SelectedRows[0];
-            if (row.Cells["colId"].Value == null) return;
+            var fila = dgvClients.SelectedRows[0];
+            if (fila.Cells["colId"].Value == null) return;
 
-            int id = Convert.ToInt32(row.Cells["colId"].Value);
-            var per = _personas.FirstOrDefault(p => p.Id == id);
-            if (per == null) return;
+            int id = Convert.ToInt32(fila.Cells["colId"].Value);
+            var persona = _personas.FirstOrDefault(p => p.PersonaId == id);
+            if (persona == null) return;
 
-            txtClientId.Text = per.Id.ToString();
-            txtFullName.Text = per.NombreCompleto;
-            txtIdentification.Text = per.Identificacion;
-            txtEmail.Text = per.Email;
-            txtPhone.Text = per.Telefono;
-            cmbPersonType.SelectedItem = per.Tipo;
-            nudCreditLimit.Value = per.MontoAsignado;
-            chkActive.Checked = per.Activo;
+            txtClientId.Text = persona.PersonaId.ToString();
+            txtFullName.Text = persona.NombreCompleto;
+            txtIdentification.Text = persona.Identificacion;
+            txtEmail.Text = persona.Email ?? string.Empty;
+            txtPhone.Text = persona.Telefono ?? string.Empty;
+
+            if (cmbPersonType.Items.Contains(persona.TiposPersona))
+            {
+                cmbPersonType.SelectedItem = persona.TiposPersona;
+            }
+            else if (cmbPersonType.Items.Count > 0)
+            {
+                cmbPersonType.SelectedIndex = 0;
+            }
+
+            decimal monto = persona.EsCliente
+                ? (persona.LimiteCredito ?? 0m)
+                : (persona.Salario ?? 0m);
+            nudCreditLimit.Value = monto;
+            chkActive.Checked = persona.Activo;
         }
 
         private void btnNew_Click(object? sender, EventArgs e)
@@ -139,90 +188,122 @@ namespace ManagementSystem.UI.Forms
 
         private void btnSave_Click(object? sender, EventArgs e)
         {
-            string nombre = txtFullName.Text.Trim();
-            string cedula = txtIdentification.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(nombre))
+            try
             {
-                MessageBox.Show("El nombre completo es obligatorio.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtFullName.Focus();
-                return;
-            }
+                string nombre = txtFullName.Text.Trim();
+                string identificacion = txtIdentification.Text.Trim();
+                string tipoSeleccionado = cmbPersonType.SelectedItem?.ToString() ?? "Cliente";
 
-            if (string.IsNullOrWhiteSpace(cedula))
-            {
-                MessageBox.Show("La identificación es obligatoria.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtIdentification.Focus();
-                return;
-            }
-
-            int id = int.Parse(txtClientId.Text);
-
-            if (id == 0)
-            {
-                int nuevoId = _personas.Any() ? _personas.Max(p => p.Id) + 1 : 1;
-                _personas.Add(new PersonaViewModel
+                if (!_servicioPersonas.ValidarDatosPersona(nombre, identificacion, nudCreditLimit.Value, out List<string> errores))
                 {
-                    Id = nuevoId,
+                    MessageBox.Show(string.Join(Environment.NewLine, errores), "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int id = int.Parse(txtClientId.Text);
+                var dto = new ResumenPersonaDto
+                {
+                    PersonaId = id,
                     NombreCompleto = nombre,
-                    Identificacion = cedula,
+                    Identificacion = identificacion,
                     Email = txtEmail.Text.Trim(),
                     Telefono = txtPhone.Text.Trim(),
-                    Tipo = cmbPersonType.SelectedItem?.ToString() ?? "Cliente",
-                    MontoAsignado = nudCreditLimit.Value,
+                    TiposPersona = tipoSeleccionado,
+                    EsCliente = tipoSeleccionado == "Cliente",
+                    EsEmpleado = tipoSeleccionado == "Empleado" || tipoSeleccionado == "Usuario",
+                    TieneUsuario = tipoSeleccionado == "Usuario",
+                    LimiteCredito = tipoSeleccionado == "Cliente" ? nudCreditLimit.Value : null,
+                    Salario = tipoSeleccionado != "Cliente" ? nudCreditLimit.Value : null,
+                    Puesto = tipoSeleccionado != "Cliente" ? $"Colaborador ({tipoSeleccionado})" : null,
                     Activo = chkActive.Checked
-                });
+                };
 
-                MessageBox.Show("Registro guardado exitosamente.", "Éxito",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                var per = _personas.FirstOrDefault(p => p.Id == id);
-                if (per != null)
+                if (!_modoMemoriaLocal)
                 {
-                    per.NombreCompleto = nombre;
-                    per.Identificacion = cedula;
-                    per.Email = txtEmail.Text.Trim();
-                    per.Telefono = txtPhone.Text.Trim();
-                    per.Tipo = cmbPersonType.SelectedItem?.ToString() ?? "Cliente";
-                    per.MontoAsignado = nudCreditLimit.Value;
-                    per.Activo = chkActive.Checked;
-
-                    MessageBox.Show("Registro actualizado correctamente.", "Éxito",
+                    _servicioPersonas.GuardarPersonaSegunTipo(dto);
+                    MessageBox.Show("Registro guardado correctamente en la base de datos.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
+                else
+                {
+                    if (id == 0)
+                    {
+                        dto.PersonaId = _personas.Any() ? _personas.Max(p => p.PersonaId) + 1 : 1;
+                        _personas.Add(dto);
+                    }
+                    else
+                    {
+                        var existente = _personas.FirstOrDefault(p => p.PersonaId == id);
+                        if (existente != null)
+                        {
+                            existente.NombreCompleto = dto.NombreCompleto;
+                            existente.Identificacion = dto.Identificacion;
+                            existente.Email = dto.Email;
+                            existente.Telefono = dto.Telefono;
+                            existente.TiposPersona = dto.TiposPersona;
+                            existente.EsCliente = dto.EsCliente;
+                            existente.EsEmpleado = dto.EsEmpleado;
+                            existente.TieneUsuario = dto.TieneUsuario;
+                            existente.LimiteCredito = dto.LimiteCredito;
+                            existente.Salario = dto.Salario;
+                            existente.Activo = dto.Activo;
+                        }
+                    }
 
-            ActualizarGrid();
+                    MessageBox.Show("Registro guardado exitosamente.", "Éxito",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                ActualizarGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar el registro: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnDelete_Click(object? sender, EventArgs e)
         {
-            int id = int.Parse(txtClientId.Text);
-            if (id == 0)
+            try
             {
-                MessageBox.Show("Seleccione un registro para cambiar su estado.", "Aviso",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                int id = int.Parse(txtClientId.Text);
+                if (id == 0)
+                {
+                    MessageBox.Show("Seleccione un registro para cambiar su estado.", "Aviso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var persona = _personas.FirstOrDefault(p => p.PersonaId == id);
+                if (persona == null) return;
+
+                string accion = persona.Activo ? "inactivar" : "activar";
+                var confirmacion = MessageBox.Show(
+                    $"¿Desea {accion} a '{persona.NombreCompleto}'?",
+                    "Confirmar Estado",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (confirmacion == DialogResult.Yes)
+                {
+                    bool nuevoEstado = !persona.Activo;
+                    if (!_modoMemoriaLocal)
+                    {
+                        _servicioPersonas.CambiarEstadoPersona(id, nuevoEstado);
+                    }
+                    else
+                    {
+                        persona.Activo = nuevoEstado;
+                    }
+                    ActualizarGrid();
+                }
             }
-
-            var per = _personas.FirstOrDefault(p => p.Id == id);
-            if (per == null) return;
-
-            string accion = per.Activo ? "inactivar" : "activar";
-            var result = MessageBox.Show(
-                $"¿Desea {accion} a '{per.NombreCompleto}'?",
-                "Confirmar Estado",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            catch (Exception ex)
             {
-                per.Activo = !per.Activo;
-                ActualizarGrid();
+                MessageBox.Show($"Error al cambiar el estado del registro: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

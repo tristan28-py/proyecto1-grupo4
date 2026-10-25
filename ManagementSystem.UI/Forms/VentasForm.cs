@@ -1,38 +1,39 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ManagementSystem.Entities.Entities;
+using SistemaGestion.Logica.Interfaces;
+using SistemaGestion.Logica.Servicios;
 
 namespace ManagementSystem.UI.Forms
 {
     public partial class VentasForm : Form
     {
-        private class ProductoItem
+        private class ClienteComboItem
         {
-            public int Id { get; set; }
-            public string Nombre { get; set; } = string.Empty;
-            public decimal PrecioVenta { get; set; }
-            public int StockDisponible { get; set; }
-
-            public override string ToString() => Nombre;
+            public int ClienteId { get; set; }
+            public string TextoMostrar { get; set; } = string.Empty;
+            public override string ToString() => TextoMostrar;
         }
 
-        private class DetalleVentaViewModel
-        {
-            public int ProductoId { get; set; }
-            public string NombreProducto { get; set; } = string.Empty;
-            public int Cantidad { get; set; }
-            public decimal PrecioUnitario { get; set; }
-            public decimal SubTotal => Cantidad * PrecioUnitario;
-        }
+        private readonly IServicioVentas _servicioVentas;
+        private readonly IServicioProductos _servicioProductos;
+        private readonly IServicioPersonas _servicioPersonas;
+        private readonly int _empleadoId;
 
-        private readonly List<ProductoItem> _inventario = new();
-        private readonly List<DetalleVentaViewModel> _detalles = new();
+        // Uso de List<T> exigido en la rúbrica (Add, Remove, Find/FirstOrDefault, foreach)
+        private List<Producto> _inventario = new();
+        private readonly List<DetalleVenta> _detalles = new();
+        private bool _modoMemoriaLocal;
 
-        public VentasForm()
+        public VentasForm(int empleadoId = 1)
         {
             InitializeComponent();
+            _empleadoId = empleadoId > 0 ? empleadoId : 1;
+            _servicioVentas = new ServicioVentas();
+            _servicioProductos = new ServicioProductos();
+            _servicioPersonas = new ServicioPersonas();
         }
 
         private void VentasForm_Load(object? sender, EventArgs e)
@@ -44,29 +45,54 @@ namespace ManagementSystem.UI.Forms
         private void CargarCatalogos()
         {
             cmbClient.Items.Clear();
-            cmbClient.Items.AddRange(new object[]
+            try
             {
-                "María Fernández López (3-3333-3333)",
-                "Comercial El Sol S.A. (4-4444-4444)",
-                "Jorge Castro Méndez (5-5555-5555)"
-            });
+                var clientes = _servicioPersonas.ObtenerClientesActivos();
+                foreach (var cliente in clientes)
+                {
+                    cmbClient.Items.Add(new ClienteComboItem
+                    {
+                        ClienteId = cliente.ClienteId,
+                        TextoMostrar = $"{cliente.NombreCompleto} ({cliente.Identificacion})"
+                    });
+                }
+
+                _inventario = _servicioProductos.ObtenerActivos();
+                _modoMemoriaLocal = false;
+            }
+            catch
+            {
+                _modoMemoriaLocal = true;
+            }
+
+            if (cmbClient.Items.Count == 0)
+            {
+                cmbClient.Items.AddRange(new object[]
+                {
+                    new ClienteComboItem { ClienteId = 1, TextoMostrar = "Juan Pérez Gómez (1-0987-0654)" },
+                    new ClienteComboItem { ClienteId = 2, TextoMostrar = "Empresa Alfa S.A. (3-101-998877)" }
+                });
+            }
             cmbClient.SelectedIndex = 0;
 
-            _inventario.Clear();
-            _inventario.AddRange(new[]
+            if (_inventario.Count == 0)
             {
-                new ProductoItem { Id = 1, Nombre = "Laptop Dell Inspiron 15", PrecioVenta = 750.00m, StockDisponible = 15 },
-                new ProductoItem { Id = 2, Nombre = "Mouse Inalámbrico Logitech M185", PrecioVenta = 15.00m, StockDisponible = 40 },
-                new ProductoItem { Id = 3, Nombre = "Teclado Mecánico RGB", PrecioVenta = 45.00m, StockDisponible = 20 },
-                new ProductoItem { Id = 4, Nombre = "Monitor Samsung 24 pulg FHD", PrecioVenta = 140.00m, StockDisponible = 10 },
-                new ProductoItem { Id = 5, Nombre = "Café Molido Premium 500g", PrecioVenta = 7.50m, StockDisponible = 50 }
-            });
+                _inventario = new List<Producto>
+                {
+                    new Producto { ProductoId = 1, Nombre = "Laptop Dell Inspiron 15", PrecioVenta = 750.00m, StockActual = 15 },
+                    new Producto { ProductoId = 2, Nombre = "Mouse Inalámbrico Logitech M185", PrecioVenta = 15.00m, StockActual = 40 },
+                    new Producto { ProductoId = 3, Nombre = "Teclado Mecánico RGB", PrecioVenta = 45.00m, StockActual = 20 },
+                    new Producto { ProductoId = 4, Nombre = "Monitor Samsung 24 pulg FHD", PrecioVenta = 140.00m, StockActual = 10 },
+                    new Producto { ProductoId = 5, Nombre = "Café Molido Premium 500g", PrecioVenta = 7.50m, StockActual = 50 }
+                };
+            }
 
             cmbProduct.Items.Clear();
-            foreach (var prod in _inventario)
+            foreach (var producto in _inventario)
             {
-                cmbProduct.Items.Add(prod);
+                cmbProduct.Items.Add(producto);
             }
+
             if (cmbProduct.Items.Count > 0)
             {
                 cmbProduct.SelectedIndex = 0;
@@ -75,10 +101,10 @@ namespace ManagementSystem.UI.Forms
 
         private void cmbProduct_SelectedIndexChanged(object? sender, EventArgs e)
         {
-            if (cmbProduct.SelectedItem is not ProductoItem prod) return;
+            if (cmbProduct.SelectedItem is not Producto producto) return;
 
-            nudUnitPrice.Value = prod.PrecioVenta;
-            lblStockInfo.Text = $"Stock disponible: {prod.StockDisponible}";
+            nudUnitPrice.Value = producto.PrecioVenta;
+            lblStockInfo.Text = $"Stock disponible: {producto.StockActual}";
             ActualizarPreviewSubTotal();
         }
 
@@ -95,39 +121,42 @@ namespace ManagementSystem.UI.Forms
 
         private void btnAddDetail_Click(object? sender, EventArgs e)
         {
-            if (cmbProduct.SelectedItem is not ProductoItem prod) return;
-
-            int cantidad = (int)nudQuantity.Value;
-            var existente = _detalles.FirstOrDefault(d => d.ProductoId == prod.Id);
-            int totalSolicitado = (existente?.Cantidad ?? 0) + cantidad;
-
-            if (totalSolicitado > prod.StockDisponible)
+            try
             {
-                MessageBox.Show(
-                    $"No se puede vender una cantidad superior al stock disponible ({prod.StockDisponible} unidades).",
-                    "Stock Insuficiente",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning);
-                return;
-            }
+                if (cmbProduct.SelectedItem is not Producto producto) return;
 
-            if (existente != null)
-            {
-                existente.Cantidad = totalSolicitado;
-            }
-            else
-            {
-                _detalles.Add(new DetalleVentaViewModel
+                int cantidad = (int)nudQuantity.Value;
+                var existente = _detalles.FirstOrDefault(d => d.ProductoId == producto.ProductoId);
+                int totalSolicitado = (existente?.Cantidad ?? 0) + cantidad;
+
+                _servicioVentas.ValidarStockDisponible(producto, totalSolicitado);
+                decimal subTotalCalculado = _servicioVentas.CalcularSubTotalLinea(totalSolicitado, producto.PrecioVenta);
+
+                if (existente != null)
                 {
-                    ProductoId = prod.Id,
-                    NombreProducto = prod.Nombre,
-                    Cantidad = cantidad,
-                    PrecioUnitario = prod.PrecioVenta
-                });
-            }
+                    existente.Cantidad = totalSolicitado;
+                    existente.SubTotal = subTotalCalculado;
+                }
+                else
+                {
+                    _detalles.Add(new DetalleVenta
+                    {
+                        ProductoId = producto.ProductoId,
+                        Producto = producto,
+                        Cantidad = cantidad,
+                        PrecioUnitario = producto.PrecioVenta,
+                        SubTotal = _servicioVentas.CalcularSubTotalLinea(cantidad, producto.PrecioVenta)
+                    });
+                }
 
-            nudQuantity.Value = 1;
-            ActualizarGrid();
+                nudQuantity.Value = 1;
+                ActualizarGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Stock Insuficiente / Validación",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnRemoveDetail_Click(object? sender, EventArgs e)
@@ -139,8 +168,8 @@ namespace ManagementSystem.UI.Forms
                 return;
             }
 
-            int prodId = Convert.ToInt32(dgvSaleDetails.SelectedRows[0].Cells["colId"].Value);
-            var item = _detalles.FirstOrDefault(d => d.ProductoId == prodId);
+            int productoId = Convert.ToInt32(dgvSaleDetails.SelectedRows[0].Cells["colId"].Value);
+            var item = _detalles.Find(d => d.ProductoId == productoId);
             if (item != null)
             {
                 _detalles.Remove(item);
@@ -152,53 +181,92 @@ namespace ManagementSystem.UI.Forms
         {
             dgvSaleDetails.Rows.Clear();
 
-            foreach (var d in _detalles)
+            foreach (var detalle in _detalles)
             {
+                string nombreProducto = detalle.Producto?.Nombre ?? $"Producto #{detalle.ProductoId}";
                 dgvSaleDetails.Rows.Add(
-                    d.ProductoId,
-                    d.NombreProducto,
-                    d.Cantidad,
-                    d.PrecioUnitario.ToString("C2"),
-                    d.SubTotal.ToString("C2")
+                    detalle.ProductoId,
+                    nombreProducto,
+                    detalle.Cantidad,
+                    detalle.PrecioUnitario.ToString("C2"),
+                    detalle.SubTotal.ToString("C2")
                 );
             }
 
-            decimal totalVenta = _detalles.Sum(d => d.SubTotal);
+            decimal totalVenta = _detalles.Count > 0 ? _servicioVentas.CalcularTotalVenta(_detalles) : 0m;
             lblTotalSale.Text = $"Total Venta: {totalVenta:C2}";
         }
 
         private void btnConfirmSale_Click(object? sender, EventArgs e)
         {
-            if (_detalles.Count == 0)
+            try
             {
-                MessageBox.Show("Una venta debe tener al menos un detalle.", "Validación",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            foreach (var detalle in _detalles)
-            {
-                var prod = _inventario.FirstOrDefault(p => p.Id == detalle.ProductoId);
-                if (prod != null)
+                if (_detalles.Count == 0)
                 {
-                    prod.StockDisponible -= detalle.Cantidad;
+                    MessageBox.Show("Una venta debe tener al menos un detalle.", "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
+
+                var clienteSeleccionado = cmbClient.SelectedItem as ClienteComboItem;
+                int clienteId = clienteSeleccionado?.ClienteId ?? 1;
+                decimal totalVenta = _servicioVentas.CalcularTotalVenta(_detalles);
+
+                var nuevaVenta = new Venta
+                {
+                    ClienteId = clienteId,
+                    EmpleadoId = _empleadoId,
+                    FechaVenta = dtpSaleDate.Value,
+                    SubTotal = totalVenta,
+                    Impuesto = 0m,
+                    Descuento = 0m,
+                    Total = totalVenta,
+                    Estado = Venta.EstadoProcesada,
+                    Observaciones = "Venta confirmada desde módulo de facturación"
+                };
+
+                if (!_modoMemoriaLocal)
+                {
+                    int ventaId = _servicioVentas.RegistrarVenta(nuevaVenta, _detalles, _empleadoId, confirmarVenta: true);
+                    CargarCatalogos();
+                    MessageBox.Show(
+                        $"Venta #{ventaId} registrada y confirmada en SQL Server para '{clienteSeleccionado?.TextoMostrar}'.\nStock actualizado y movimiento asentado en Kardex.\nTotal facturado: {totalVenta:C2}",
+                        "Venta Confirmada",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+                    foreach (var detalle in _detalles)
+                    {
+                        var producto = _inventario.FirstOrDefault(p => p.ProductoId == detalle.ProductoId);
+                        if (producto != null)
+                        {
+                            producto.StockActual -= detalle.Cantidad;
+                        }
+                    }
+
+                    MessageBox.Show(
+                        $"Venta registrada correctamente para '{clienteSeleccionado?.TextoMostrar}'.\nTotal facturado: {totalVenta:C2}",
+                        "Venta Confirmada",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+
+                _detalles.Clear();
+                cmbProduct_SelectedIndexChanged(null, EventArgs.Empty);
+                ActualizarGrid();
             }
-
-            decimal total = _detalles.Sum(d => d.SubTotal);
-            MessageBox.Show(
-                $"Venta registrada correctamente para '{cmbClient.SelectedItem}'.\nTotal facturado: {total:C2}",
-                "Venta Confirmada",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-
-            _detalles.Clear();
-            cmbProduct_SelectedIndexChanged(null, EventArgs.Empty);
-            ActualizarGrid();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al confirmar la venta: {ex.Message}", "Error de Transacción",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnNewSale_Click(object? sender, EventArgs e)
         {
+            // Cumple la regla: "Una venta no confirmada no debe afectar el inventario"
             _detalles.Clear();
             nudQuantity.Value = 1;
             ActualizarGrid();

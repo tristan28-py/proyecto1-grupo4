@@ -1,32 +1,92 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ManagementSystem.Entities.Entities
 {
+    /// <summary>
+    /// Entidad que representa el encabezado de una Venta.
+    /// Aplica encapsulamiento y métodos para el cálculo del total a partir de sus detalles.
+    /// </summary>
     public class Venta
     {
-        public int VentaId { get; set; }
+        public const string EstadoPendiente = "Pendiente";
+        public const string EstadoProcesada = "Procesada";
+        public const string EstadoAnulada = "Anulada";
 
-        public int ClienteId { get; set; }
+        private int _ventaId;
+        private int _clienteId;
+        private int _empleadoId;
+        private DateTime _fechaVenta = DateTime.Now;
+        private decimal _subTotal;
+        private decimal _impuesto;
+        private decimal _descuento;
+        private decimal _total;
+        private string _estado = EstadoPendiente;
+        private string? _observaciones;
 
-        public int EmpleadoId { get; set; }
+        public int VentaId
+        {
+            get => _ventaId;
+            set => _ventaId = value;
+        }
 
-        public DateTime FechaVenta { get; set; } = DateTime.Now;
+        public int ClienteId
+        {
+            get => _clienteId;
+            set => _clienteId = value;
+        }
 
-        public decimal SubTotal { get; set; }
+        public int EmpleadoId
+        {
+            get => _empleadoId;
+            set => _empleadoId = value;
+        }
 
-        public decimal Impuesto { get; set; }
+        public DateTime FechaVenta
+        {
+            get => _fechaVenta;
+            set => _fechaVenta = value;
+        }
 
-        public decimal Descuento { get; set; }
+        public decimal SubTotal
+        {
+            get => _subTotal;
+            set => _subTotal = value;
+        }
 
-        public decimal Total { get; set; }
+        public decimal Impuesto
+        {
+            get => _impuesto;
+            set => _impuesto = value;
+        }
+
+        public decimal Descuento
+        {
+            get => _descuento;
+            set => _descuento = value;
+        }
+
+        public decimal Total
+        {
+            get => _total;
+            set => _total = value;
+        }
 
         /// <summary>
-        /// Estados sugeridos: Pendiente, Procesada, Anulada
+        /// Estados permitidos: Pendiente, Procesada, Anulada.
         /// </summary>
-        public string Estado { get; set; } = "Pendiente";
+        public string Estado
+        {
+            get => _estado;
+            set => _estado = string.IsNullOrWhiteSpace(value) ? EstadoPendiente : value.Trim();
+        }
 
-        public string? Observaciones { get; set; }
+        public string? Observaciones
+        {
+            get => _observaciones;
+            set => _observaciones = value?.Trim();
+        }
 
         // Propiedades de navegación
         public virtual Cliente? Cliente { get; set; }
@@ -34,5 +94,26 @@ namespace ManagementSystem.Entities.Entities
         public virtual Empleado? Empleado { get; set; }
 
         public virtual ICollection<DetalleVenta> DetallesVenta { get; set; } = new List<DetalleVenta>();
+
+        /// <summary>
+        /// Recalcula el SubTotal y el Total de la venta sumando los subtotales de sus detalles.
+        /// Cumple con la validación mínima: "El total de la venta debe corresponder a la suma de sus subtotales".
+        /// </summary>
+        public decimal RecalcularTotales()
+        {
+            _subTotal = DetallesVenta != null && DetallesVenta.Any()
+                ? DetallesVenta.Sum(d => d.CalcularSubTotal())
+                : 0m;
+
+            _total = _subTotal + _impuesto - _descuento;
+            if (_total < 0m)
+            {
+                _total = 0m;
+            }
+
+            return _total;
+        }
+
+        public bool EstaConfirmada() => string.Equals(_estado, EstadoProcesada, StringComparison.OrdinalIgnoreCase);
     }
 }

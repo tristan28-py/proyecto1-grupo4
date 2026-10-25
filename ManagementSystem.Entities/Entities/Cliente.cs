@@ -3,14 +3,41 @@ using System.Collections.Generic;
 
 namespace ManagementSystem.Entities.Entities
 {
+    /// <summary>
+    /// Entidad Cliente que hereda de Persona.
+    /// Demuestra Herencia y Polimorfismo sobrescribiendo ObtenerTipoPersona y ObtenerResumenPerfil.
+    /// </summary>
     public class Cliente : Persona
     {
-        public int ClienteId { get; set; }
+        private int _clienteId;
+        private decimal _limiteCredito;
+        private DateTime _fechaAfiliacion = DateTime.Now;
 
-        public decimal LimiteCredito { get; set; }
+        public int ClienteId
+        {
+            get => _clienteId;
+            set => _clienteId = value;
+        }
 
-        public DateTime FechaAfiliacion { get; set; } = DateTime.Now;
+        public decimal LimiteCredito
+        {
+            get => _limiteCredito;
+            set => _limiteCredito = value;
+        }
+
+        public DateTime FechaAfiliacion
+        {
+            get => _fechaAfiliacion;
+            set => _fechaAfiliacion = value;
+        }
 
         public virtual ICollection<Venta> Ventas { get; set; } = new List<Venta>();
+
+        public override string ObtenerTipoPersona() => "Cliente";
+
+        public override string ObtenerResumenPerfil()
+        {
+            return $"[{ObtenerTipoPersona()}] {FormatearDatosBase()} - Límite Crédito: {_limiteCredito:C2}";
+        }
     }
 }

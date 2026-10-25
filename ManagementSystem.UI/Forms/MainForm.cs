@@ -6,60 +6,62 @@ namespace ManagementSystem.UI.Forms
 {
     public partial class MainForm : Form
     {
-        private Form? _activeForm;
-        private Button? _currentButton;
-        private readonly string _username;
-        private readonly string _role;
+        private Form? _formularioActivo;
+        private Button? _botonActual;
+        private readonly string _nombreUsuario;
+        private readonly string _rol;
+        private readonly int _empleadoId;
 
-        public MainForm(string username = "admin", string role = "Administrador")
+        public MainForm(string username = "admin", string role = "Administrador", int empleadoId = 1)
         {
             InitializeComponent();
-            _username = username;
-            _role = role;
+            _nombreUsuario = username;
+            _rol = role;
+            _empleadoId = empleadoId > 0 ? empleadoId : 1;
 
-            lblUserInfo.Text = $"Usuario: {_username} | Rol: {_role}";
-            _currentButton = btnDashboard;
+            lblUserInfo.Text = $"Usuario: {_nombreUsuario} | Rol: {_rol}";
+            _botonActual = btnDashboard;
         }
 
-        public void OpenChildForm(Form childForm, string title, Button senderBtn)
+        public void OpenChildForm(Form formularioHijo, string titulo, Button botonOrigen)
         {
-            _activeForm?.Close();
+            _formularioActivo?.Close();
 
-            HighlightButton(senderBtn);
+            ResaltarBoton(botonOrigen);
 
-            _activeForm = childForm;
-            childForm.TopLevel = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.Dock = DockStyle.Fill;
+            _formularioActivo = formularioHijo;
+            formularioHijo.TopLevel = false;
+            formularioHijo.FormBorderStyle = FormBorderStyle.None;
+            formularioHijo.Dock = DockStyle.Fill;
 
             pnlContent.Controls.Clear();
-            pnlContent.Controls.Add(childForm);
-            pnlContent.Tag = childForm;
+            pnlContent.Controls.Add(formularioHijo);
+            pnlContent.Tag = formularioHijo;
 
-            lblSectionTitle.Text = title;
-            childForm.BringToFront();
-            childForm.Show();
+            lblSectionTitle.Text = titulo;
+            formularioHijo.BringToFront();
+            formularioHijo.Show();
         }
 
-        private void HighlightButton(Button clickedBtn)
+        private void ResaltarBoton(Button botonSeleccionado)
         {
-            if (_currentButton != null)
+            if (_botonActual != null)
             {
-                _currentButton.BackColor = Color.FromArgb(30, 58, 138);
-                _currentButton.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
+                _botonActual.BackColor = Color.FromArgb(30, 58, 138);
+                _botonActual.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular);
             }
 
-            _currentButton = clickedBtn;
-            _currentButton.BackColor = Color.FromArgb(23, 44, 105);
-            _currentButton.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            _botonActual = botonSeleccionado;
+            _botonActual.BackColor = Color.FromArgb(23, 44, 105);
+            _botonActual.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         }
 
         private void btnDashboard_Click(object? sender, EventArgs e)
         {
-            _activeForm?.Close();
-            _activeForm = null;
+            _formularioActivo?.Close();
+            _formularioActivo = null;
 
-            HighlightButton(btnDashboard);
+            ResaltarBoton(btnDashboard);
             lblSectionTitle.Text = "Inicio";
 
             pnlContent.Controls.Clear();
@@ -83,7 +85,7 @@ namespace ManagementSystem.UI.Forms
 
         private void btnSales_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new VentasForm(), "Registrar Venta", btnSales);
+            OpenChildForm(new VentasForm(_empleadoId), "Registrar Venta", btnSales);
         }
 
         private void btnOrders_Click(object? sender, EventArgs e)
@@ -103,13 +105,13 @@ namespace ManagementSystem.UI.Forms
 
         private void btnLogout_Click(object? sender, EventArgs e)
         {
-            var confirm = MessageBox.Show(
+            var confirmacion = MessageBox.Show(
                 "¿Está seguro de que desea cerrar la sesión actual?",
                 "Cerrar Sesión",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question);
 
-            if (confirm == DialogResult.Yes)
+            if (confirmacion == DialogResult.Yes)
             {
                 this.Close();
             }
