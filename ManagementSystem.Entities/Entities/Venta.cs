@@ -5,8 +5,7 @@ using System.Linq;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad que representa el encabezado de una Venta.
-    /// Aplica encapsulamiento y métodos para el cálculo del total a partir de sus detalles.
+    /// Representa el encabezado de una factura o venta realizada a un cliente.
     /// </summary>
     public class Venta
     {
@@ -96,8 +95,7 @@ namespace ManagementSystem.Entities.Entities
         public virtual ICollection<DetalleVenta> DetallesVenta { get; set; } = new List<DetalleVenta>();
 
         /// <summary>
-        /// Recalcula el SubTotal y el Total de la venta sumando los subtotales de sus detalles.
-        /// Cumple con la validación mínima: "El total de la venta debe corresponder a la suma de sus subtotales".
+        /// Actualiza el subtotal y el monto total sumando las líneas de detalle.
         /// </summary>
         public decimal RecalcularTotales()
         {

@@ -10,10 +10,7 @@ using SistemaGestion.Logica.Interfaces;
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
-    /// Servicio de negocio para la generación de reportes y consultas analíticas.
-    /// Demuestra el uso combinado de:
-    /// 1. Consultas LINQ sobre colecciones List&lt;T&gt; (Where, Select, OrderBy, ThenBy, GroupBy, Sum, Count, Average, Max, Min, FirstOrDefault).
-    /// 2. Consultas mediante Entity Framework Core a través de IReporteRepositorio.
+    /// Servicio encargado de generar los reportes de inventario, ventas por cliente y estadísticas generales.
     /// </summary>
     public class ServicioReportes : IServicioReportes
     {

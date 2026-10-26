@@ -191,13 +191,13 @@ namespace ManagementSystem.UI.Forms
                     if (id == 0)
                     {
                         _servicioCategorias.AgregarCategoria(entidad);
-                        MessageBox.Show("Categoría agregada exitosamente en la base de datos.", "Éxito",
+                        MessageBox.Show("Categoría agregada exitosamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         _servicioCategorias.ActualizarCategoria(entidad);
-                        MessageBox.Show("Categoría actualizada correctamente en la base de datos.", "Éxito",
+                        MessageBox.Show("Categoría actualizada correctamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }

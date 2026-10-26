@@ -3,8 +3,7 @@ using System;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad que representa una línea de detalle de una Venta.
-    /// Cumple la regla de negocio: "El subtotal debe ser Cantidad * Precio".
+    /// Representa una línea de producto incluida dentro de una venta.
     /// </summary>
     public class DetalleVenta
     {

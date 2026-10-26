@@ -9,9 +9,7 @@ using SistemaGestion.Logica.Interfaces;
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
-    /// Servicio de lógica de negocio para la gestión de Productos.
-    /// Aplica las validaciones mínimas obligatorias de la rúbrica, consultas LINQ sobre List&lt;Producto&gt;
-    /// y polimorfismo mediante IProductoRepositorio.
+    /// Servicio encargado de validar y administrar el catálogo de productos.
     /// </summary>
     public class ServicioProductos : IServicioProductos
     {
@@ -101,10 +99,7 @@ namespace SistemaGestion.Logica.Servicios
         }
 
         /// <summary>
-        /// Valida las reglas de negocio obligatorias de un producto:
-        /// - Nombre obligatorio.
-        /// - No se puede registrar un producto con precio menor o igual a cero.
-        /// - No se puede registrar una cantidad negativa de inventario.
+        /// Verifica que el producto tenga un nombre válido, precio de venta positivo y existencias no negativas.
         /// </summary>
         public bool ValidarProducto(Producto producto, out List<string> errores)
         {

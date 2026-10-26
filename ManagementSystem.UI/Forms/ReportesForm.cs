@@ -36,7 +36,7 @@ namespace ManagementSystem.UI.Forms
         {
             try
             {
-                // Se intenta cargar primero mediante Entity Framework Core (módulo de reportes) y ADO.NET
+                // Carga del catálogo de productos y ventas registradas para generar los reportes
                 var productosEf = _servicioReportes.ConsultarProductosConCategoriaEf();
                 if (productosEf.Count > 0)
                 {

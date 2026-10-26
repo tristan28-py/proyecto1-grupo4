@@ -3,8 +3,7 @@ using System.Collections.Generic;
 namespace ManagementSystem.DataAccess.Interfaces
 {
     /// <summary>
-    /// Interfaz genérica base exigida por la rúbrica de POO para estandarizar operaciones CRUD.
-    /// Demuestra abstracción, interfaces genéricas y polimorfismo en la capa de Repositorio.
+    /// Interfaz base genérica para las operaciones de lectura y escritura de datos.
     /// </summary>
     public interface IRepositorio<T> where T : class
     {

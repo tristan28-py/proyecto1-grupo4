@@ -108,7 +108,7 @@ namespace ManagementSystem.UI.Forms
                 ServicioHistorial.InstanciaCompartida.RegistrarAccion(
                     modulo: "Pedidos",
                     descripcion: $"Se agregó a la cola el Pedido #{pedidoCreado.PedidoId} de '{cliente}'",
-                    tipoAccion: "Enqueue",
+                    tipoAccion: "Registro",
                     entidadId: pedidoCreado.PedidoId);
 
                 MessageBox.Show("Pedido agregado a la cola correctamente.", "Pedido Registrado",
@@ -138,11 +138,11 @@ namespace ManagementSystem.UI.Forms
                 ServicioHistorial.InstanciaCompartida.RegistrarAccion(
                     modulo: "Pedidos",
                     descripcion: $"Se atendió el Pedido #{atendido.PedidoId} de '{atendido.NombreCliente}'",
-                    tipoAccion: "Dequeue",
+                    tipoAccion: "Atención",
                     entidadId: atendido.PedidoId);
 
                 MessageBox.Show(
-                    $"Se atendió el Pedido #{atendido.PedidoId} (Orden FIFO):\n\nCliente: {atendido.NombreCliente}\nProducto: {atendido.NombreProducto} (x{atendido.Cantidad})",
+                    $"Se atendió el Pedido #{atendido.PedidoId}:\n\nCliente: {atendido.NombreCliente}\nProducto: {atendido.NombreProducto} (x{atendido.Cantidad})",
                     "Pedido Atendido",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);

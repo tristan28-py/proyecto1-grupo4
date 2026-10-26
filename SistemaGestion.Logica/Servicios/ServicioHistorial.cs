@@ -7,8 +7,7 @@ using SistemaGestion.Logica.Interfaces;
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
-    /// Servicio de negocio que administra el historial de acciones recientes mediante una Pila (Stack&lt;AccionHistorial&gt; - LIFO).
-    /// Cumple las operaciones mínimas exigidas en la rúbrica: Push, Peek, Pop y Count.
+    /// Gestiona la pila de acciones recientes para consultar y deshacer los últimos cambios realizados.
     /// </summary>
     public class ServicioHistorial : IServicioHistorial
     {

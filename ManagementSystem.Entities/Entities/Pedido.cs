@@ -3,7 +3,7 @@ using System;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad de dominio para la gestión de pedidos pendientes mediante la estructura Queue&lt;Pedido&gt; (FIFO).
+    /// Representa una solicitud de pedido pendiente de atención.
     /// </summary>
     public class Pedido
     {

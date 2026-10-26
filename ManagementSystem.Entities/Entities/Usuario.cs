@@ -3,8 +3,7 @@ using System;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad Usuario que hereda de Empleado (y por transitividad de Persona).
-    /// Demuestra Herencia multinivel y Polimorfismo.
+    /// Representa las credenciales de acceso y el rol asignado a un empleado.
     /// </summary>
     public class Usuario : Empleado
     {

@@ -12,18 +12,18 @@ namespace ManagementSystem.UI.Forms
         private readonly string _rol;
         private readonly int _empleadoId;
 
-        public MainForm(string username = "admin", string role = "Administrador", int empleadoId = 1)
+        public MainForm(string nombreUsuario = "admin", string rol = "Administrador", int empleadoId = 1)
         {
             InitializeComponent();
-            _nombreUsuario = username;
-            _rol = role;
+            _nombreUsuario = nombreUsuario;
+            _rol = rol;
             _empleadoId = empleadoId > 0 ? empleadoId : 1;
 
-            lblUserInfo.Text = $"Usuario: {_nombreUsuario} | Rol: {_rol}";
-            _botonActual = btnDashboard;
+            lblInfoUsuario.Text = $"Usuario: {_nombreUsuario} | Rol: {_rol}";
+            _botonActual = btnInicio;
         }
 
-        public void OpenChildForm(Form formularioHijo, string titulo, Button botonOrigen)
+        public void AbrirFormularioHijo(Form formularioHijo, string titulo, Button botonOrigen)
         {
             _formularioActivo?.Close();
 
@@ -34,11 +34,11 @@ namespace ManagementSystem.UI.Forms
             formularioHijo.FormBorderStyle = FormBorderStyle.None;
             formularioHijo.Dock = DockStyle.Fill;
 
-            pnlContent.Controls.Clear();
-            pnlContent.Controls.Add(formularioHijo);
-            pnlContent.Tag = formularioHijo;
+            pnlContenido.Controls.Clear();
+            pnlContenido.Controls.Add(formularioHijo);
+            pnlContenido.Tag = formularioHijo;
 
-            lblSectionTitle.Text = titulo;
+            lblTituloSeccion.Text = titulo;
             formularioHijo.BringToFront();
             formularioHijo.Show();
         }
@@ -56,54 +56,54 @@ namespace ManagementSystem.UI.Forms
             _botonActual.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
         }
 
-        private void btnDashboard_Click(object? sender, EventArgs e)
+        private void btnInicio_Click(object? sender, EventArgs e)
         {
             _formularioActivo?.Close();
             _formularioActivo = null;
 
-            ResaltarBoton(btnDashboard);
-            lblSectionTitle.Text = "Inicio";
+            ResaltarBoton(btnInicio);
+            lblTituloSeccion.Text = "Inicio";
 
-            pnlContent.Controls.Clear();
-            pnlContent.Controls.Add(pnlWelcome);
+            pnlContenido.Controls.Clear();
+            pnlContenido.Controls.Add(pnlBienvenida);
         }
 
-        private void btnProducts_Click(object? sender, EventArgs e)
+        private void btnProductos_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new ProductosForm(), "Mantenimiento de Productos", btnProducts);
+            AbrirFormularioHijo(new ProductosForm(), "Mantenimiento de Productos", btnProductos);
         }
 
-        private void btnCategories_Click(object? sender, EventArgs e)
+        private void btnCategorias_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new CategoriasForm(), "Mantenimiento de Categorías", btnCategories);
+            AbrirFormularioHijo(new CategoriasForm(), "Mantenimiento de Categorías", btnCategorias);
         }
 
-        private void btnClients_Click(object? sender, EventArgs e)
+        private void btnClientes_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new ClientesForm(), "Clientes y Personas", btnClients);
+            AbrirFormularioHijo(new ClientesForm(), "Clientes y Personas", btnClientes);
         }
 
-        private void btnSales_Click(object? sender, EventArgs e)
+        private void btnVentas_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new VentasForm(_empleadoId), "Registrar Venta", btnSales);
+            AbrirFormularioHijo(new VentasForm(_empleadoId), "Registrar Venta", btnVentas);
         }
 
-        private void btnOrders_Click(object? sender, EventArgs e)
+        private void btnPedidos_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new PedidosForm(), "Pedidos Pendientes", btnOrders);
+            AbrirFormularioHijo(new PedidosForm(), "Pedidos Pendientes", btnPedidos);
         }
 
-        private void btnReports_Click(object? sender, EventArgs e)
+        private void btnReportes_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new ReportesForm(), "Reportes y Consultas", btnReports);
+            AbrirFormularioHijo(new ReportesForm(), "Reportes y Consultas", btnReportes);
         }
 
-        private void btnHistory_Click(object? sender, EventArgs e)
+        private void btnHistorial_Click(object? sender, EventArgs e)
         {
-            OpenChildForm(new HistorialForm(), "Historial de Acciones", btnHistory);
+            AbrirFormularioHijo(new HistorialForm(), "Historial de Acciones", btnHistorial);
         }
 
-        private void btnLogout_Click(object? sender, EventArgs e)
+        private void btnCerrarSesion_Click(object? sender, EventArgs e)
         {
             var confirmacion = MessageBox.Show(
                 "¿Está seguro de que desea cerrar la sesión actual?",

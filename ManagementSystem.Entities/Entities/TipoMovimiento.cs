@@ -15,7 +15,7 @@ namespace ManagementSystem.Entities.Entities
 
         public bool Activo { get; set; } = true;
 
-        // Constantes para los tipos de movimiento estándar exigidos en la rúbrica
+        // Tipos de movimiento utilizados en el historial de inventario
         public const string Entrada = "Entrada";
         public const string Salida = "Salida";
         public const string Ajuste = "Ajuste";

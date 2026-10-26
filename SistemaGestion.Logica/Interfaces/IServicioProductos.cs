@@ -4,8 +4,7 @@ using ManagementSystem.Entities.Entities;
 namespace SistemaGestion.Logica.Interfaces
 {
     /// <summary>
-    /// Contrato del servicio de negocio para la administración de Productos.
-    /// Demuestra el uso de interfaces y polimorfismo en la capa de Aplicación/Negocio.
+    /// Operaciones disponibles para la administración y consulta de productos.
     /// </summary>
     public interface IServicioProductos
     {

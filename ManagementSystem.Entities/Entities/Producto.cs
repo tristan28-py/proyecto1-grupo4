@@ -4,8 +4,7 @@ using System.Collections.Generic;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad de dominio que representa un producto del inventario.
-    /// Demuestra encapsulamiento mediante atributos privados y métodos públicos de validación y negocio.
+    /// Representa un artículo del catálogo de inventario con sus precios y existencias.
     /// </summary>
     public class Producto : IEntidadActivable
     {

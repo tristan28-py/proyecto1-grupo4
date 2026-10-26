@@ -10,8 +10,7 @@ using SistemaGestion.Logica.Interfaces;
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
-    /// Servicio de negocio para la administración de Personas, Clientes, Empleados y Usuarios.
-    /// Demuestra el uso explícito de Herencia y Polimorfismo sobre la jerarquía Persona -> Cliente / Empleado -> Usuario.
+    /// Servicio para el registro y mantenimiento de clientes, empleados y usuarios del sistema.
     /// </summary>
     public class ServicioPersonas : IServicioPersonas
     {
@@ -115,8 +114,7 @@ namespace SistemaGestion.Logica.Servicios
         }
 
         /// <summary>
-        /// Demuestra Polimorfismo en tiempo de ejecución tratando instancias de Cliente, Empleado y Usuario
-        /// a través de una lista de su clase base Persona e invocando el método virtual ObtenerResumenPerfil().
+        /// Obtiene el resumen de perfil de todas las personas registradas según su rol en el sistema.
         /// </summary>
         public List<string> ObtenerPerfilesPolimorficos()
         {

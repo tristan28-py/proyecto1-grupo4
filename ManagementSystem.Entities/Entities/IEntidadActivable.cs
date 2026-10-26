@@ -3,8 +3,7 @@ using System;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Contrato de abstracción para las entidades del dominio que admiten borrado lógico (campo Activo).
-    /// Demuestra el uso de abstracción, interfaces y polimorfismo en la capa de Dominio.
+    /// Interfaz común para las entidades que manejan estado activo o inactivo (borrado lógico).
     /// </summary>
     public interface IEntidadActivable
     {

@@ -15,10 +15,8 @@ namespace ManagementSystem.DataAccess.ADONET
     public class VentaRepositorioAdo : IVentaRepositorio
     {
         /// <summary>
-        /// Registra una venta y sus detalles dentro de una transacción ADO.NET.
-        /// Cumple las reglas de la rúbrica:
-        /// - "Al confirmar una venta (Estado = 'Procesada'), el stock debe disminuir y se debe registrar en el histórico el movimiento."
-        /// - "Una venta no confirmada (Estado = 'Pendiente') no debe afectar el inventario."
+        /// Registra el encabezado y los detalles de una venta dentro de una misma transacción.
+        /// Cuando la venta está confirmada, rebaja las existencias y guarda el movimiento en el historial de inventario.
         /// </summary>
         public int RegistrarVentaConTransaccion(Venta venta, IEnumerable<DetalleVenta> detalles, int empleadoId)
         {

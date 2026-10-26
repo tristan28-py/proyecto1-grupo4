@@ -9,14 +9,11 @@ using Xunit;
 namespace SistemaGestion.Pruebas
 {
     /// <summary>
-    /// Pruebas unitarias sobre la capa de lógica de negocio (SistemaGestion.Logica)
-    /// para verificar las reglas obligatorias de la rúbrica de evaluación.
+    /// Pruebas unitarias para los servicios de ventas, productos, pedidos e historial.
     /// </summary>
     public class PruebasReglasNegocio
     {
-        // =========================================================================
-        // 1. Pruebas de Stock Disponible (No permitir vender más que el stock)
-        // =========================================================================
+        // Validación de existencias disponibles en inventario
 
         [Fact]
         public void ValidarStockDisponible_CuandoStockEsSuficiente_NoLanzaExcepcion()
@@ -76,9 +73,7 @@ namespace SistemaGestion.Pruebas
             Assert.Contains("superior al stock disponible", excepcion.Message);
         }
 
-        // =========================================================================
-        // 2. Pruebas de Cálculo de Subtotal
-        // =========================================================================
+        // Cálculo de subtotales por línea de detalle
 
         [Fact]
         public void CalcularSubTotalLinea_ConCantidadYPrecioValidos_RetornaMultiplicacionExacta()
@@ -108,9 +103,7 @@ namespace SistemaGestion.Pruebas
                 servicioVentas.CalcularSubTotalLinea(cantidad, precioUnitario));
         }
 
-        // =========================================================================
-        // 3. Pruebas de Cálculo del Total de una Venta
-        // =========================================================================
+        // Cálculo del monto total de la venta
 
         [Fact]
         public void CalcularTotalVenta_ConVariosDetalles_RetornaSumaExactaDeSubtotales()
@@ -143,9 +136,7 @@ namespace SistemaGestion.Pruebas
                 servicioVentas.CalcularTotalVenta(detallesVacios));
         }
 
-        // =========================================================================
-        // 4. Pruebas de Rechazo de Precios y Stock Inválidos en Productos
-        // =========================================================================
+        // Validación de precios y existencias al registrar productos
 
         [Theory]
         [InlineData(0)]
@@ -191,9 +182,7 @@ namespace SistemaGestion.Pruebas
             Assert.Throws<ArgumentException>(() => servicioProductos.AgregarProducto(productoStockNegativo));
         }
 
-        // =========================================================================
-        // 5. Pruebas de Cola (Queue<Pedido>) en Orden FIFO (Primero en Entrar, Primero en Salir)
-        // =========================================================================
+        // Atención de pedidos pendientes por orden de llegada
 
         [Fact]
         public void ServicioPedidos_EncolarYAtenderPedidos_RespetaOrdenFifo()
@@ -237,9 +226,7 @@ namespace SistemaGestion.Pruebas
             Assert.Throws<InvalidOperationException>(() => servicioPedidos.AtenderSiguientePedido());
         }
 
-        // =========================================================================
-        // 6. Pruebas de Pila (Stack<AccionHistorial>) en Orden LIFO (Último en Entrar, Primero en Salir)
-        // =========================================================================
+        // Registro y reversión de acciones recientes en el historial
 
         [Fact]
         public void ServicioHistorial_RegistrarYDeshacerAcciones_RespetaOrdenLifo()
@@ -291,9 +278,7 @@ namespace SistemaGestion.Pruebas
             Assert.Throws<InvalidOperationException>(() => servicioHistorial.DeshacerUltimaAccion());
         }
 
-        // =========================================================================
-        // 7. Pruebas de Consultas LINQ sobre List<T> y Polimorfismo POO
-        // =========================================================================
+        // Consultas de productos y perfiles de personas
 
         [Fact]
         public void ServicioProductos_ConsultasLinqSobreLista_FiltraYOrdenaCorrectamente()
@@ -391,9 +376,7 @@ namespace SistemaGestion.Pruebas
             Assert.All(personas, p => Assert.False(string.IsNullOrWhiteSpace(p.ObtenerResumenPerfil())));
         }
 
-        // =========================================================================
-        // Repositorios Falsos en Memoria (Mocks ligeros) para aislar la Lógica
-        // =========================================================================
+        // Repositorios en memoria para ejecutar las pruebas sin depender de SQL Server
 
         private static ServicioVentas CrearServicioVentasConRepositoriosEnMemoria()
         {

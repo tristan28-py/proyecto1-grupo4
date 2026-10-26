@@ -3,8 +3,7 @@ using System;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Clase base que representa una Persona dentro del sistema.
-    /// Demuestra Herencia, Encapsulamiento (campos privados y método protegido) y Polimorfismo (métodos virtuales).
+    /// Clase base con los datos personales comunes para clientes, empleados y usuarios.
     /// </summary>
     public class Persona : IEntidadActivable
     {
@@ -71,7 +70,7 @@ namespace ManagementSystem.Entities.Entities
         public virtual Empleado? Empleado { get; set; }
 
         /// <summary>
-        /// Método protegido accesible únicamente por las clases derivadas (Cliente, Empleado, Usuario).
+        /// Formatea el nombre y la identificación para uso en las clases hijas.
         /// </summary>
         protected string FormatearDatosBase()
         {
@@ -79,12 +78,12 @@ namespace ManagementSystem.Entities.Entities
         }
 
         /// <summary>
-        /// Método virtual polimórfico que cada subclase sobrescribe para indicar su rol en el dominio.
+        /// Devuelve el tipo de registro según el perfil de la persona.
         /// </summary>
         public virtual string ObtenerTipoPersona() => "Persona";
 
         /// <summary>
-        /// Método virtual polimórfico para obtener el resumen descriptivo del perfil.
+        /// Devuelve un resumen legible con los datos principales del perfil.
         /// </summary>
         public virtual string ObtenerResumenPerfil()
         {

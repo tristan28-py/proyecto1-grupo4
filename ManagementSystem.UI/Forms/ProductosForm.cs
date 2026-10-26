@@ -221,13 +221,13 @@ namespace ManagementSystem.UI.Forms
                     if (id == 0)
                     {
                         _servicioProductos.AgregarProducto(entidadProducto);
-                        MessageBox.Show("Producto registrado correctamente en la base de datos.", "Éxito",
+                        MessageBox.Show("Producto registrado correctamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
                         _servicioProductos.ActualizarProducto(entidadProducto);
-                        MessageBox.Show("Producto actualizado correctamente en la base de datos.", "Éxito",
+                        MessageBox.Show("Producto actualizado correctamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     CargarProductos();

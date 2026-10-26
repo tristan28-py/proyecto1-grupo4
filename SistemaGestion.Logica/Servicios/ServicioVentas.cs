@@ -9,14 +9,7 @@ using SistemaGestion.Logica.Interfaces;
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
-    /// Servicio de negocio para la gestión y validación de Ventas.
-    /// Cumple las reglas obligatorias de la rúbrica:
-    /// - No se puede vender una cantidad superior al stock disponible.
-    /// - Una venta debe tener al menos un detalle.
-    /// - El subtotal debe ser Cantidad * Precio.
-    /// - El total de la venta debe corresponder a la suma de sus subtotales.
-    /// - Al confirmar una venta, el stock debe disminuir y se debe registrar en el histórico el movimiento.
-    /// - Una venta no confirmada no debe afectar el inventario.
+    /// Servicio encargado del cálculo de importes, verificación de existencias y registro de ventas.
     /// </summary>
     public class ServicioVentas : IServicioVentas
     {

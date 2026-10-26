@@ -7,8 +7,7 @@ using SistemaGestion.Logica.Interfaces;
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
-    /// Servicio de negocio que administra los pedidos pendientes de atención mediante una Cola (Queue&lt;Pedido&gt; - FIFO).
-    /// Cumple las operaciones mínimas exigidas en la rúbrica: Enqueue, Peek, Dequeue y Count.
+    /// Gestiona la cola de pedidos pendientes por orden de llegada.
     /// </summary>
     public class ServicioPedidos : IServicioPedidos
     {

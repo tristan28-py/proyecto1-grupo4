@@ -222,7 +222,7 @@ namespace ManagementSystem.UI.Forms
                 if (!_modoMemoriaLocal)
                 {
                     _servicioPersonas.GuardarPersonaSegunTipo(dto);
-                    MessageBox.Show("Registro guardado correctamente en la base de datos.", "Éxito",
+                    MessageBox.Show("Registro guardado correctamente.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else

@@ -3,7 +3,7 @@ using System;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad de dominio para el registro y deshacer de acciones recientes mediante Stack&lt;AccionHistorial&gt; (LIFO).
+    /// Representa un evento o cambio registrado en el historial de actividades recientes.
     /// </summary>
     public class AccionHistorial
     {

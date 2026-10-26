@@ -4,8 +4,7 @@ using System.Collections.Generic;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad de dominio que representa una categoría de productos.
-    /// Aplica encapsulamiento mediante campos privados y métodos públicos de negocio.
+    /// Representa una categoría utilizada para clasificar los productos del inventario.
     /// </summary>
     public class Categoria : IEntidadActivable
     {

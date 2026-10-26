@@ -5,19 +5,9 @@ using ManagementSystem.Entities.Entities;
 namespace ManagementSystem.DataAccess.EntityFramework
 {
     /// <summary>
-    /// Contexto de datos de Entity Framework Core para el módulo delimitado de Consultas y Reportes.
-    /// 
-    /// DOCUMENTACIÓN TÉCNICA (Exigida por la Rúbrica - Sección Entity Framework):
-    /// - ¿Qué operación se realizó con EF Core?:
-    ///   Se implementó la consulta relacional de Productos con su Categoría (Include/JOIN automático),
-    ///   el filtrado de productos por categoría, la detección de productos con stock bajo y la consulta
-    ///   de movimientos de inventario y ventas para el módulo de Reportes.
-    /// - ¿Por qué se separó del acceso ADO.NET?:
-    ///   Las operaciones transaccionales críticas (CRUD principal y facturación con descuento de stock en VentaRepositorioAdo)
-    ///   se mantienen en ADO.NET puro para tener control explícito de SqlConnection, SqlCommand, SqlParameter y SqlTransaction.
-    ///   Por su parte, Entity Framework Core se separó en el módulo de Reportes porque permite construir proyecciones
-    ///   fuertemente tipadas con LINQ to Entities, carga ansiosa (Include) y lecturas optimizadas sin seguimiento (AsNoTracking),
-    ///   reduciendo el código repetitivo de mapeo manual en consultas analíticas.
+    /// Contexto de Entity Framework Core utilizado para las consultas del módulo de reportes.
+    /// Se mantiene separado de los repositorios ADO.NET (que gestionan el mantenimiento y la facturación transaccional)
+    /// para aprovechar las consultas relacionales con Include y las proyecciones de solo lectura sin seguimiento (AsNoTracking).
     /// </summary>
     public class SistemaGestionDbContext : DbContext
     {

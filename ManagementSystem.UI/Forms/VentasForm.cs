@@ -22,7 +22,6 @@ namespace ManagementSystem.UI.Forms
         private readonly IServicioPersonas _servicioPersonas;
         private readonly int _empleadoId;
 
-        // Uso de List<T> exigido en la rúbrica (Add, Remove, Find/FirstOrDefault, foreach)
         private List<Producto> _inventario = new();
         private readonly List<DetalleVenta> _detalles = new();
         private bool _modoMemoriaLocal;
@@ -230,7 +229,7 @@ namespace ManagementSystem.UI.Forms
                     int ventaId = _servicioVentas.RegistrarVenta(nuevaVenta, _detalles, _empleadoId, confirmarVenta: true);
                     CargarCatalogos();
                     MessageBox.Show(
-                        $"Venta #{ventaId} registrada y confirmada en SQL Server para '{clienteSeleccionado?.TextoMostrar}'.\nStock actualizado y movimiento asentado en Kardex.\nTotal facturado: {totalVenta:C2}",
+                        $"Venta #{ventaId} registrada correctamente para '{clienteSeleccionado?.TextoMostrar}'.\nLas existencias de inventario fueron actualizadas.\nTotal facturado: {totalVenta:C2}",
                         "Venta Confirmada",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -266,7 +265,7 @@ namespace ManagementSystem.UI.Forms
 
         private void btnNewSale_Click(object? sender, EventArgs e)
         {
-            // Cumple la regla: "Una venta no confirmada no debe afectar el inventario"
+            // Se descartan las líneas temporales sin modificar el inventario
             _detalles.Clear();
             nudQuantity.Value = 1;
             ActualizarGrid();

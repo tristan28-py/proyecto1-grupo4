@@ -4,8 +4,7 @@ using System.Collections.Generic;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad Empleado que hereda de Persona.
-    /// Demuestra Herencia y Polimorfismo sobrescribiendo ObtenerTipoPersona y ObtenerResumenPerfil.
+    /// Representa a un colaborador de la empresa con su puesto y salario asignado.
     /// </summary>
     public class Empleado : Persona
     {

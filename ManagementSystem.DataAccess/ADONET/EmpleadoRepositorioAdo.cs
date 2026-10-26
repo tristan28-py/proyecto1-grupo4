@@ -9,8 +9,7 @@ using ManagementSystem.Entities.Entities;
 namespace ManagementSystem.DataAccess.ADONET
 {
     /// <summary>
-    /// Repositorio ADO.NET para la entidad Empleado (demuestra Herencia de Persona).
-    /// Aplica parámetros SQL, bloques using y cierre de conexión en finally.
+    /// Acceso a datos mediante ADO.NET para la tabla de empleados y sus datos personales asociados.
     /// </summary>
     public class EmpleadoRepositorioAdo : IEmpleadoRepositorio
     {

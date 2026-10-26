@@ -67,7 +67,7 @@ namespace ManagementSystem.UI.Forms
                 string modulo = cmbModule.SelectedItem?.ToString() ?? "General";
                 _servicioHistorial.RegistrarAccion(modulo, descripcion);
 
-                MessageBox.Show("Acción registrada en el historial (Push).", "Acción Registrada",
+                MessageBox.Show("Acción registrada en el historial.", "Acción Registrada",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 txtDescription.Clear();
@@ -93,7 +93,7 @@ namespace ManagementSystem.UI.Forms
                 var deshecha = _servicioHistorial.DeshacerUltimaAccion();
 
                 MessageBox.Show(
-                    $"Se deshizo la última acción (Orden LIFO):\n\nMódulo: {deshecha.Modulo}\nAcción: {deshecha.Descripcion}",
+                    $"Se deshizo la última acción registrada:\n\nMódulo: {deshecha.Modulo}\nAcción: {deshecha.Descripcion}",
                     "Acción Deshecha",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Information);

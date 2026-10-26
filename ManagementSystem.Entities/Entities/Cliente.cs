@@ -4,8 +4,7 @@ using System.Collections.Generic;
 namespace ManagementSystem.Entities.Entities
 {
     /// <summary>
-    /// Entidad Cliente que hereda de Persona.
-    /// Demuestra Herencia y Polimorfismo sobrescribiendo ObtenerTipoPersona y ObtenerResumenPerfil.
+    /// Representa a un cliente registrado en el sistema junto con su límite de crédito.
     /// </summary>
     public class Cliente : Persona
     {

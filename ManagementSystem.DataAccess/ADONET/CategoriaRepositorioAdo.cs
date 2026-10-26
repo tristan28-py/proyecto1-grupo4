@@ -172,7 +172,7 @@ namespace ManagementSystem.DataAccess.ADONET
 
         public bool Eliminar(int id)
         {
-            // Eliminación lógica exigida en la rúbrica (conservar registros utilizando el campo Activo)
+            // Se desactiva el registro en lugar de borrarlo físicamente para mantener el historial
             using (var conexion = ConfiguracionBaseDatos.CrearConexion())
             {
                 try
