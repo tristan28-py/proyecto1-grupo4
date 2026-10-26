@@ -1,6 +1,6 @@
-using System.Collections.Generic;
-using ManagementSystem.Entities.DTOs;
-using ManagementSystem.Entities.Entities;
+﻿using System.Collections.Generic;
+using SistemaGestion.Entidades.DTOs;
+using SistemaGestion.Entidades.Entidades;
 
 namespace SistemaGestion.Logica.Interfaces
 {

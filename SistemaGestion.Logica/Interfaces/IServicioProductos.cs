@@ -1,5 +1,5 @@
-using System.Collections.Generic;
-using ManagementSystem.Entities.Entities;
+﻿using System.Collections.Generic;
+using SistemaGestion.Entidades.Entidades;
 
 namespace SistemaGestion.Logica.Interfaces
 {

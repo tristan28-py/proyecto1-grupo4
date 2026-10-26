@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 using SistemaGestion.Logica.Servicios;
 
@@ -84,16 +84,6 @@ namespace ManagementSystem.UI.Forms
         private void CargarDatosDePrueba()
         {
             _productos.Clear();
-            _productos.AddRange(new[]
-            {
-                new Producto { ProductoId = 1, Nombre = "Laptop Dell Inspiron 15", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 320000.00m, PrecioVenta = 450000.00m, StockActual = 15, StockMinimo = 3, Descripcion = "Intel Core i5, 16GB RAM, SSD 512GB", Activo = true },
-                new Producto { ProductoId = 2, Nombre = "Mouse Inalámbrico Logitech M185", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 5500.00m, PrecioVenta = 9500.00m, StockActual = 40, StockMinimo = 5, Descripcion = "Sensor óptico 2.4GHz", Activo = true },
-                new Producto { ProductoId = 3, Nombre = "Teclado Mecánico RGB", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 18000.00m, PrecioVenta = 28500.00m, StockActual = 20, StockMinimo = 4, Descripcion = "Switches Red", Activo = true },
-                new Producto { ProductoId = 4, Nombre = "Monitor Samsung 24 pulg FHD", CategoriaId = 1, Categoria = new Categoria { CategoriaId = 1, Nombre = "Electrónica y Cómputo" }, PrecioCompra = 55000.00m, PrecioVenta = 85000.00m, StockActual = 10, StockMinimo = 2, Descripcion = "Panel IPS 75Hz", Activo = true },
-                new Producto { ProductoId = 5, Nombre = "Café Molido Premium 500g", CategoriaId = 2, Categoria = new Categoria { CategoriaId = 2, Nombre = "Bebidas y Alimentos" }, PrecioCompra = 2400.00m, PrecioVenta = 4200.00m, StockActual = 50, StockMinimo = 10, Descripcion = "Tueste medio artesanal", Activo = true },
-                new Producto { ProductoId = 6, Nombre = "Resma Papel Bond A4 75g", CategoriaId = 3, Categoria = new Categoria { CategoriaId = 3, Nombre = "Papelería y Oficina" }, PrecioCompra = 2200.00m, PrecioVenta = 3800.00m, StockActual = 100, StockMinimo = 20, Descripcion = "500 hojas blancas", Activo = true },
-                new Producto { ProductoId = 7, Nombre = "Alcohol en Gel 1 Litro", CategoriaId = 4, Categoria = new Categoria { CategoriaId = 4, Nombre = "Limpieza y Hogar" }, PrecioCompra = 1600.00m, PrecioVenta = 2850.00m, StockActual = 30, StockMinimo = 5, Descripcion = "Antiséptico 70%", Activo = true }
-            });
         }
 
         private void ActualizarGrid(List<Producto>? lista = null)
@@ -220,7 +210,8 @@ namespace ManagementSystem.UI.Forms
                 {
                     if (id == 0)
                     {
-                        _servicioProductos.AgregarProducto(entidadProducto);
+                        int nuevoId = _servicioProductos.AgregarProducto(entidadProducto);
+                        txtProductId.Text = nuevoId.ToString();
                         MessageBox.Show("Producto registrado correctamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -238,6 +229,7 @@ namespace ManagementSystem.UI.Forms
                     {
                         entidadProducto.ProductoId = _productos.Any() ? _productos.Max(p => p.ProductoId) + 1 : 1;
                         _productos.Add(entidadProducto);
+                        txtProductId.Text = entidadProducto.ProductoId.ToString();
                         MessageBox.Show("Producto registrado correctamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

@@ -1,4 +1,4 @@
-using ManagementSystem.Entities.Entities;
+﻿using SistemaGestion.Entidades.Entidades;
 
 namespace SistemaGestion.Logica.Interfaces
 {

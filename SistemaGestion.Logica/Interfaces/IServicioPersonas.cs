@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using ManagementSystem.Entities.DTOs;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.DTOs;
+using SistemaGestion.Entidades.Entidades;
 
 namespace SistemaGestion.Logica.Interfaces
 {
@@ -17,6 +17,7 @@ namespace SistemaGestion.Logica.Interfaces
         List<ResumenPersonaDto> FiltrarResumenPersonas(string? textoBusqueda, string? tipoFiltro);
         List<string> ObtenerPerfilesPolimorficos();
         bool ValidarDatosPersona(string nombreCompleto, string identificacion, decimal montoAsignado, out List<string> errores);
+        bool ValidarDatosPersona(string nombreCompleto, string identificacion, string? email, string? telefono, decimal montoAsignado, out List<string> errores);
         int GuardarPersonaSegunTipo(ResumenPersonaDto datos, string? contrasenaPlana = null);
         bool CambiarEstadoPersona(int personaId, bool nuevoEstado);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ManagementSystem.Entities.DTOs;
+using SistemaGestion.Entidades.DTOs;
 using SistemaGestion.Logica.Interfaces;
 using SistemaGestion.Logica.Servicios;
 
@@ -19,6 +19,20 @@ namespace ManagementSystem.UI.Forms
         {
             InitializeComponent();
             _servicioPersonas = new ServicioPersonas();
+
+            // Validaciones en tiempo real para evitar caracteres inválidos
+            txtFullName.KeyPress += (s, e) =>
+            {
+                if (char.IsDigit(e.KeyChar)) e.Handled = true; // Bloquea números en nombres
+            };
+            txtIdentification.KeyPress += (s, e) =>
+            {
+                if (char.IsLetter(e.KeyChar)) e.Handled = true; // Bloquea letras en identificación
+            };
+            txtPhone.KeyPress += (s, e) =>
+            {
+                if (char.IsLetter(e.KeyChar)) e.Handled = true; // Bloquea letras en teléfono
+            };
         }
 
         private void ClientesForm_Load(object? sender, EventArgs e)
@@ -51,10 +65,10 @@ namespace ManagementSystem.UI.Forms
             _personas.Clear();
             _personas.AddRange(new[]
             {
-                new ResumenPersonaDto { PersonaId = 1, Identificacion = "1-1520-0345", NombreCompleto = "Carlos Solís Delgado", Email = "carlos.solis@empresa.com", Telefono = "8888-1111", TiposPersona = "Usuario", Salario = 1250000.00m, TieneUsuario = true, EsEmpleado = true, Activo = true },
-                new ResumenPersonaDto { PersonaId = 2, Identificacion = "2-0789-0123", NombreCompleto = "Ana María Morales Mora", Email = "ana.morales@empresa.com", Telefono = "8888-2222", TiposPersona = "Empleado", Salario = 550000.00m, EsEmpleado = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 1, Identificacion = "1-1520-0345", NombreCompleto = "Carlos Solís Delgado", Email = "carlos.solis@gmail.com", Telefono = "8888-1111", TiposPersona = "Usuario", Salario = 1250000.00m, TieneUsuario = true, EsEmpleado = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 2, Identificacion = "2-0789-0123", NombreCompleto = "Ana María Morales Mora", Email = "ana.morales@gmail.com", Telefono = "8888-2222", TiposPersona = "Empleado", Salario = 550000.00m, EsEmpleado = true, Activo = true },
                 new ResumenPersonaDto { PersonaId = 4, Identificacion = "1-0987-0654", NombreCompleto = "Juan Pérez Gómez", Email = "juan.perez@gmail.com", Telefono = "7777-1111", TiposPersona = "Cliente", LimiteCredito = 350000.00m, EsCliente = true, Activo = true },
-                new ResumenPersonaDto { PersonaId = 5, Identificacion = "3-101-998877", NombreCompleto = "Empresa Alfa S.A.", Email = "compras@alfa.com", Telefono = "7777-2222", TiposPersona = "Cliente", LimiteCredito = 2500000.00m, EsCliente = true, Activo = true }
+                new ResumenPersonaDto { PersonaId = 5, Identificacion = "3-101-998877", NombreCompleto = "Empresa Alfa S.A.", Email = "compras.alfa@gmail.com", Telefono = "7777-2222", TiposPersona = "Cliente", LimiteCredito = 2500000.00m, EsCliente = true, Activo = true }
             });
         }
 
@@ -192,9 +206,11 @@ namespace ManagementSystem.UI.Forms
             {
                 string nombre = txtFullName.Text.Trim();
                 string identificacion = txtIdentification.Text.Trim();
+                string email = txtEmail.Text.Trim();
+                string telefono = txtPhone.Text.Trim();
                 string tipoSeleccionado = cmbPersonType.SelectedItem?.ToString() ?? "Cliente";
 
-                if (!_servicioPersonas.ValidarDatosPersona(nombre, identificacion, nudCreditLimit.Value, out List<string> errores))
+                if (!_servicioPersonas.ValidarDatosPersona(nombre, identificacion, email, telefono, nudCreditLimit.Value, out List<string> errores))
                 {
                     MessageBox.Show(string.Join(Environment.NewLine, errores), "Validación",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -207,8 +223,8 @@ namespace ManagementSystem.UI.Forms
                     PersonaId = id,
                     NombreCompleto = nombre,
                     Identificacion = identificacion,
-                    Email = txtEmail.Text.Trim(),
-                    Telefono = txtPhone.Text.Trim(),
+                    Email = email,
+                    Telefono = telefono,
                     TiposPersona = tipoSeleccionado,
                     EsCliente = tipoSeleccionado == "Cliente",
                     EsEmpleado = tipoSeleccionado == "Empleado" || tipoSeleccionado == "Usuario",
@@ -221,7 +237,8 @@ namespace ManagementSystem.UI.Forms
 
                 if (!_modoMemoriaLocal)
                 {
-                    _servicioPersonas.GuardarPersonaSegunTipo(dto);
+                    int idGenerado = _servicioPersonas.GuardarPersonaSegunTipo(dto);
+                    txtClientId.Text = idGenerado.ToString();
                     MessageBox.Show("Registro guardado correctamente.", "Éxito",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -231,6 +248,7 @@ namespace ManagementSystem.UI.Forms
                     {
                         dto.PersonaId = _personas.Any() ? _personas.Max(p => p.PersonaId) + 1 : 1;
                         _personas.Add(dto);
+                        txtClientId.Text = dto.PersonaId.ToString();
                     }
                     else
                     {

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 
 namespace SistemaGestion.Logica.Servicios
@@ -17,33 +17,9 @@ namespace SistemaGestion.Logica.Servicios
         /// <summary>
         /// Instancia compartida para conservar la cola de pedidos pendientes durante la sesión.
         /// </summary>
-        public static ServicioPedidos InstanciaCompartida { get; } = CrearConDatosIniciales();
+        public static ServicioPedidos InstanciaCompartida { get; } = new ServicioPedidos();
 
         public int CantidadPendientes => _colaPedidos.Count;
-
-        private static ServicioPedidos CrearConDatosIniciales()
-        {
-            var servicio = new ServicioPedidos();
-            servicio.EncolarPedido(new Pedido
-            {
-                NombreCliente = "Juan Pérez Gómez",
-                NombreProducto = "Laptop Dell Inspiron 15",
-                Cantidad = 2,
-                HoraRegistro = DateTime.Now.AddMinutes(-20),
-                Observaciones = "Entrega en sucursal central"
-            });
-
-            servicio.EncolarPedido(new Pedido
-            {
-                NombreCliente = "Empresa Alfa S.A.",
-                NombreProducto = "Monitor Samsung 24 pulg FHD",
-                Cantidad = 5,
-                HoraRegistro = DateTime.Now.AddMinutes(-10),
-                Observaciones = "Facturar a crédito corporativo"
-            });
-
-            return servicio;
-        }
 
         /// <summary>
         /// Agrega un nuevo pedido al final de la cola de atención (operación Enqueue).
@@ -84,6 +60,11 @@ namespace SistemaGestion.Logica.Servicios
             if (string.IsNullOrWhiteSpace(pedido.NombreCliente))
             {
                 throw new ArgumentException("El nombre del cliente es obligatorio para registrar un pedido.", nameof(pedido));
+            }
+
+            if (System.Text.RegularExpressions.Regex.IsMatch(pedido.NombreCliente, @"\d"))
+            {
+                throw new ArgumentException("El nombre del cliente no puede contener números.", nameof(pedido));
             }
 
             if (string.IsNullOrWhiteSpace(pedido.NombreProducto))

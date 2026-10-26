@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.DataAccess.Interfaces;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.AccesoDatos.Interfaces;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Servicios;
 using Xunit;
 
@@ -374,6 +374,113 @@ namespace SistemaGestion.Pruebas
             Assert.Equal("Empleado", personas[1].ObtenerTipoPersona());
             Assert.Equal("Usuario", personas[2].ObtenerTipoPersona());
             Assert.All(personas, p => Assert.False(string.IsNullOrWhiteSpace(p.ObtenerResumenPerfil())));
+        }
+
+        // Validaciones estrictas de reglas de negocio en personas, categorías y pedidos
+
+        [Fact]
+        public void ValidarDatosPersona_ConNumerosEnNombre_RetornaError()
+        {
+            var servicio = new ServicioPersonas();
+            bool esValido = servicio.ValidarDatosPersona(
+                nombreCompleto: "Carlos 123 Solís",
+                identificacion: "1-1111-1111",
+                email: "carlos@gmail.com",
+                telefono: "8888-8888",
+                montoAsignado: 500000m,
+                out List<string> errores);
+
+            Assert.False(esValido);
+            Assert.Contains(errores, e => e.Contains("números"));
+        }
+
+        [Fact]
+        public void ValidarDatosPersona_ConLetrasEnIdentificacion_RetornaError()
+        {
+            var servicio = new ServicioPersonas();
+            bool esValido = servicio.ValidarDatosPersona(
+                nombreCompleto: "Carlos Solís Delgado",
+                identificacion: "1-ABC-1111",
+                email: "carlos@gmail.com",
+                telefono: "8888-8888",
+                montoAsignado: 500000m,
+                out List<string> errores);
+
+            Assert.False(esValido);
+            Assert.Contains(errores, e => e.Contains("identificación solo puede contener números"));
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("carlos@hotmail.com")]
+        [InlineData("carlos@yahoo.es")]
+        [InlineData("carlos-sin-arroba")]
+        public void ValidarDatosPersona_SinCuentaGmail_RetornaError(string emailInvalido)
+        {
+            var servicio = new ServicioPersonas();
+            bool esValido = servicio.ValidarDatosPersona(
+                nombreCompleto: "Carlos Solís Delgado",
+                identificacion: "1-1111-1111",
+                email: emailInvalido,
+                telefono: "8888-8888",
+                montoAsignado: 500000m,
+                out List<string> errores);
+
+            Assert.False(esValido);
+            Assert.Contains(errores, e => e.Contains("Gmail", StringComparison.OrdinalIgnoreCase));
+        }
+
+        [Fact]
+        public void ValidarDatosPersona_ConLetrasEnTelefono_RetornaError()
+        {
+            var servicio = new ServicioPersonas();
+            bool esValido = servicio.ValidarDatosPersona(
+                nombreCompleto: "Carlos Solís Delgado",
+                identificacion: "1-1111-1111",
+                email: "carlos@gmail.com",
+                telefono: "8888-TEL",
+                montoAsignado: 500000m,
+                out List<string> errores);
+
+            Assert.False(esValido);
+            Assert.Contains(errores, e => e.Contains("teléfono solo puede contener números"));
+        }
+
+        [Fact]
+        public void ValidarDatosPersona_ConDatosCorrectos_RetornaVerdadero()
+        {
+            var servicio = new ServicioPersonas();
+            bool esValido = servicio.ValidarDatosPersona(
+                nombreCompleto: "Carlos Solís Delgado",
+                identificacion: "1-1520-0345",
+                email: "carlos.solis@gmail.com",
+                telefono: "8888-1111",
+                montoAsignado: 1250000m,
+                out List<string> errores);
+
+            Assert.True(esValido);
+            Assert.Empty(errores);
+        }
+
+        [Fact]
+        public void ValidarCategoria_ConNumerosEnNombre_RetornaError()
+        {
+            var servicio = new ServicioCategorias();
+            var categoria = new Categoria { Nombre = "Bebidas 2026", Descripcion = "Prueba" };
+            bool esValido = servicio.ValidarCategoria(categoria, out List<string> errores);
+
+            Assert.False(esValido);
+            Assert.Contains(errores, e => e.Contains("números"));
+        }
+
+        [Fact]
+        public void EncolarPedido_ConNumerosEnNombreCliente_LanzaArgumentException()
+        {
+            var servicio = new ServicioPedidos();
+            var ex = Assert.Throws<ArgumentException>(() =>
+                servicio.EncolarPedido("Cliente 99", "Laptop", 1));
+
+            Assert.Contains("números", ex.Message);
         }
 
         // Repositorios en memoria para ejecutar las pruebas sin depender de SQL Server

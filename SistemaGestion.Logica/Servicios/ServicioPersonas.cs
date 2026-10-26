@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.DataAccess.ADONET;
-using ManagementSystem.DataAccess.Interfaces;
-using ManagementSystem.Entities.DTOs;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.AccesoDatos.ADONET;
+using SistemaGestion.AccesoDatos.Interfaces;
+using SistemaGestion.Entidades.DTOs;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 
 namespace SistemaGestion.Logica.Servicios
@@ -137,16 +137,54 @@ namespace SistemaGestion.Logica.Servicios
             decimal montoAsignado,
             out List<string> errores)
         {
+            return ValidarDatosPersona(nombreCompleto, identificacion, "usuario@gmail.com", null, montoAsignado, out errores);
+        }
+
+        public bool ValidarDatosPersona(
+            string nombreCompleto,
+            string identificacion,
+            string? email,
+            string? telefono,
+            decimal montoAsignado,
+            out List<string> errores)
+        {
             errores = new List<string>();
 
             if (string.IsNullOrWhiteSpace(nombreCompleto))
             {
                 errores.Add("El nombre completo es obligatorio.");
             }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(nombreCompleto, @"\d"))
+            {
+                errores.Add("El nombre completo no puede contener números.");
+            }
 
             if (string.IsNullOrWhiteSpace(identificacion))
             {
                 errores.Add("La identificación es obligatoria.");
+            }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(identificacion, @"[a-zA-Z]"))
+            {
+                errores.Add("La identificación solo puede contener números y guiones (sin letras).");
+            }
+
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                errores.Add("El correo electrónico es obligatorio (debe ser una cuenta de Gmail).");
+            }
+            else
+            {
+                string emailLimpio = email.Trim();
+                if (!emailLimpio.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase) ||
+                    !System.Text.RegularExpressions.Regex.IsMatch(emailLimpio, @"^[a-zA-Z0-9._%+-]+@gmail\.com$", System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                {
+                    errores.Add("El correo electrónico debe ser una cuenta válida de Gmail (ejemplo: usuario@gmail.com).");
+                }
+            }
+
+            if (!string.IsNullOrWhiteSpace(telefono) && System.Text.RegularExpressions.Regex.IsMatch(telefono, @"[a-zA-Z]"))
+            {
+                errores.Add("El número de teléfono solo puede contener números y guiones (sin letras).");
             }
 
             if (montoAsignado < 0)
@@ -171,7 +209,7 @@ namespace SistemaGestion.Logica.Servicios
                 ? (datos.LimiteCredito ?? 0m)
                 : (datos.Salario ?? 0m);
 
-            if (!ValidarDatosPersona(datos.NombreCompleto, datos.Identificacion, monto, out List<string> errores))
+            if (!ValidarDatosPersona(datos.NombreCompleto, datos.Identificacion, datos.Email, datos.Telefono, monto, out List<string> errores))
             {
                 throw new ArgumentException(string.Join(Environment.NewLine, errores));
             }

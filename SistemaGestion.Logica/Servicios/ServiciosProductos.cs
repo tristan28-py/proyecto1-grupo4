@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.DataAccess.ADONET;
-using ManagementSystem.DataAccess.Interfaces;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.AccesoDatos.ADONET;
+using SistemaGestion.AccesoDatos.Interfaces;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 
 namespace SistemaGestion.Logica.Servicios
@@ -114,6 +114,10 @@ namespace SistemaGestion.Logica.Servicios
             if (string.IsNullOrWhiteSpace(producto.Nombre))
             {
                 errores.Add("El nombre del producto es obligatorio.");
+            }
+            else if (decimal.TryParse(producto.Nombre.Trim(), out _))
+            {
+                errores.Add("El nombre del producto no puede consistir únicamente en números.");
             }
 
             if (producto.PrecioVenta <= 0)

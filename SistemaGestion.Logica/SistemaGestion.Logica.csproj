@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ManagementSystem.DataAccess\ManagementSystem.DataAccess.csproj" />
-    <ProjectReference Include="..\ManagementSystem.Entities\ManagementSystem.Entities.csproj" />
+    <ProjectReference Include="..\SistemaGestion.AccesoDatos\SistemaGestion.AccesoDatos.csproj" />
+    <ProjectReference Include="..\SistemaGestion.Entidades\SistemaGestion.Entidades.csproj" />
   </ItemGroup>
 
 </Project>

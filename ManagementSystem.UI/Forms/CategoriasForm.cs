@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 using SistemaGestion.Logica.Servicios;
 
@@ -19,6 +19,12 @@ namespace ManagementSystem.UI.Forms
         {
             InitializeComponent();
             _servicioCategorias = new ServicioCategorias();
+
+            // Bloquear números en el nombre de la categoría
+            txtCategoryName.KeyPress += (s, e) =>
+            {
+                if (char.IsDigit(e.KeyChar)) e.Handled = true;
+            };
         }
 
         private void CategoriasForm_Load(object? sender, EventArgs e)
@@ -186,11 +192,19 @@ namespace ManagementSystem.UI.Forms
                     Activo = chkActive.Checked
                 };
 
+                if (!_servicioCategorias.ValidarCategoria(entidad, out List<string> errores))
+                {
+                    MessageBox.Show(string.Join(Environment.NewLine, errores), "Validación",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 if (!_modoMemoriaLocal)
                 {
                     if (id == 0)
                     {
-                        _servicioCategorias.AgregarCategoria(entidad);
+                        int nuevoId = _servicioCategorias.AgregarCategoria(entidad);
+                        txtCategoryId.Text = nuevoId.ToString();
                         MessageBox.Show("Categoría agregada exitosamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -207,6 +221,7 @@ namespace ManagementSystem.UI.Forms
                     {
                         entidad.CategoriaId = _categorias.Any() ? _categorias.Max(c => c.CategoriaId) + 1 : 1;
                         _categorias.Add(entidad);
+                        txtCategoryId.Text = entidad.CategoriaId.ToString();
                         MessageBox.Show("Categoría agregada exitosamente.", "Éxito",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

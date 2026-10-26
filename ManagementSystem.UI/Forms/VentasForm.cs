@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 using SistemaGestion.Logica.Servicios;
 
@@ -74,18 +74,6 @@ namespace ManagementSystem.UI.Forms
             }
             cmbClient.SelectedIndex = 0;
 
-            if (_inventario.Count == 0)
-            {
-                _inventario = new List<Producto>
-                {
-                    new Producto { ProductoId = 1, Nombre = "Laptop Dell Inspiron 15", PrecioVenta = 450000.00m, StockActual = 15 },
-                    new Producto { ProductoId = 2, Nombre = "Mouse Inalámbrico Logitech M185", PrecioVenta = 9500.00m, StockActual = 40 },
-                    new Producto { ProductoId = 3, Nombre = "Teclado Mecánico RGB", PrecioVenta = 28500.00m, StockActual = 20 },
-                    new Producto { ProductoId = 4, Nombre = "Monitor Samsung 24 pulg FHD", PrecioVenta = 85000.00m, StockActual = 10 },
-                    new Producto { ProductoId = 5, Nombre = "Café Molido Premium 500g", PrecioVenta = 4200.00m, StockActual = 50 }
-                };
-            }
-
             cmbProduct.Items.Clear();
             foreach (var producto in _inventario)
             {
@@ -95,6 +83,12 @@ namespace ManagementSystem.UI.Forms
             if (cmbProduct.Items.Count > 0)
             {
                 cmbProduct.SelectedIndex = 0;
+            }
+            else
+            {
+                nudUnitPrice.Value = 0;
+                lblStockInfo.Text = "No hay productos registrados";
+                lblLineSubTotal.Text = "Subtotal línea: ₡0,00";
             }
         }
 

@@ -228,32 +228,20 @@ INSERT INTO dbo.Categorias (Nombre, Descripcion, Activo) VALUES
 ('Limpieza y Hogar', 'Artículos de higiene, desinfectantes y papel', 1);
 GO
 
--- C. PRODUCTOS
-INSERT INTO dbo.Productos (Nombre, Descripcion, PrecioCompra, PrecioVenta, StockActual, StockMinimo, CategoriaId, Activo) VALUES
-('Laptop Dell Inspiron 15', 'Intel Core i5, 16GB RAM, SSD 512GB', 320000.00, 450000.00, 15, 3, 1, 1),
-('Mouse Inalámbrico Logitech M185', 'Sensor óptico 2.4GHz, 1000 DPI', 5500.00, 9500.00, 40, 5, 1, 1),
-('Teclado Mecánico RGB', 'Switches Red para oficina y programación', 18000.00, 28500.00, 20, 4, 1, 1),
-('Monitor Samsung 24 pulg FHD', 'Panel IPS 75Hz HDMI/VGA', 55000.00, 85000.00, 10, 2, 1, 1),
-('Café Molido Premium 500g', 'Tueste medio artesanal 100% arábica', 2400.00, 4200.00, 50, 10, 2, 1),
-('Paquete Galletas Surtidas', 'Caja con 12 paquetes individuales', 1800.00, 2550000.00, 60, 10, 2, 1),
-('Resma Papel Bond A4 75g', '500 hojas blancas multiuso', 2200.00, 3800.00, 100, 20, 3, 1),
-('Pack Bolígrafos Gel Azul x12', 'Tinta continua secado rápido 0.7mm', 1500.00, 2700.00, 80, 15, 3, 1),
-('Alcohol en Gel 1 Litro', 'Desinfectante antiséptico 70% alcohol', 1600.00, 2480000.00, 30, 5, 4, 1),
-('Detergente Multiusos 2Kg', 'Limpieza profunda biodegradable', 2100.00, 3600.00, 25, 5, 4, 1);
-GO
+-- C. PRODUCTOS (Los productos se gestionan desde la aplicación)
 
 -- D. PERSONAS (Para Empleados y Clientes)
 INSERT INTO dbo.Persona (NombreCompleto, Identificacion, Email, Telefono, Direccion, Activo) VALUES
 -- 1: Empleado Administrador
-('Carlos Solís Delgado', '1-1520-0345', 'carlos.solis@empresa.com', '8888-1111', 'San José, Costa Rica', 1),
+('Carlos Solís Delgado', '1-1520-0345', 'carlos.solis@gmail.com', '8888-1111', 'San José, Costa Rica', 1),
 -- 2: Empleado Vendedor
-('Ana María Morales Mora', '2-0789-0123', 'ana.morales@empresa.com', '8888-2222', 'Alajuela, Costa Rica', 1),
+('Ana María Morales Mora', '2-0789-0123', 'ana.morales@gmail.com', '8888-2222', 'Alajuela, Costa Rica', 1),
 -- 3: Empleado Bodeguero
-('Roberto Jiménez Castro', '3-0456-0789', 'roberto.jimenez@empresa.com', '8888-3333', 'Heredia, Costa Rica', 1),
+('Roberto Jiménez Castro', '3-0456-0789', 'roberto.jimenez@gmail.com', '8888-3333', 'Heredia, Costa Rica', 1),
 -- 4: Cliente Regular
 ('Juan Pérez Gómez', '1-0987-0654', 'juan.perez@gmail.com', '7777-1111', 'Cartago, Costa Rica', 1),
 -- 5: Cliente Corporativo
-('Empresa Alfa S.A.', '3-101-998877', 'compras@alfa.com', '7777-2222', 'Escazú, San José', 1);
+('Empresa Alfa S.A.', '3-101-998877', 'compras.alfa@gmail.com', '7777-2222', 'Escazú, San José', 1);
 GO
 
 -- E. EMPLEADOS (Asociados a Persona 1, 2, 3)
@@ -281,15 +269,7 @@ INSERT INTO dbo.Usuarios (EmpleadoId, NombreUsuario, ContrasenaHash, RolId, Acti
 (3, 'bodega',   LOWER(CONVERT(VARCHAR(64), HASHBYTES('SHA2_256', 'bodega123'), 2)), 3, 1);
 GO
 
--- H. REGISTRO INICIAL DE KARDEX (Entrada por inventario inicial)
-INSERT INTO dbo.HistoricoMovimientosInventario 
-    (ProductoId, EmpleadoId, FechaMovimiento, TipoMovimiento, Cantidad, StockAnterior, StockNuevo, Observacion)
-VALUES
-(1, 3, GETDATE(), 'Entrada', 15, 0, 15, 'Carga de inventario inicial - Apertura'),
-(2, 3, GETDATE(), 'Entrada', 40, 0, 40, 'Carga de inventario inicial - Apertura'),
-(3, 3, GETDATE(), 'Entrada', 20, 0, 20, 'Carga de inventario inicial - Apertura'),
-(4, 3, GETDATE(), 'Entrada', 10, 0, 10, 'Carga de inventario inicial - Apertura');
-GO
+-- H. REGISTRO INICIAL DE KARDEX (Los movimientos se registran desde la aplicación)
 
 PRINT '=======================================================';
 PRINT '  BASE DE DATOS [SistemaGestionDB] CREADA CON ÉXITO   ';

@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SistemaGestion.Logica\SistemaGestion.Logica.csproj" />
-    <ProjectReference Include="..\ManagementSystem.Entities\ManagementSystem.Entities.csproj" />
+    <ProjectReference Include="..\SistemaGestion.Entidades\SistemaGestion.Entidades.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.DataAccess.EntityFramework;
-using ManagementSystem.DataAccess.Interfaces;
-using ManagementSystem.Entities.DTOs;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.AccesoDatos.EntityFramework;
+using SistemaGestion.AccesoDatos.Interfaces;
+using SistemaGestion.Entidades.DTOs;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 
 namespace SistemaGestion.Logica.Servicios

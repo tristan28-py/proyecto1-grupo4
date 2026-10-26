@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.DataAccess.ADONET;
-using ManagementSystem.DataAccess.Interfaces;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.AccesoDatos.ADONET;
+using SistemaGestion.AccesoDatos.Interfaces;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 
 namespace SistemaGestion.Logica.Servicios

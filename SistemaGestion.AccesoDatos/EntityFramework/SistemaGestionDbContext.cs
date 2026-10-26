@@ -1,0 +1,128 @@
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaGestion.AccesoDatos.Connection;
+using SistemaGestion.Entidades.Entidades;
+
+namespace SistemaGestion.AccesoDatos.EntityFramework
+{
+    /// <summary>
+    /// Contexto de Entity Framework Core utilizado para las consultas del módulo de reportes.
+    /// Se mantiene separado de los repositorios ADO.NET (que gestionan el mantenimiento y la facturación transaccional)
+    /// para aprovechar las consultas relacionales con Include y las proyecciones de solo lectura sin seguimiento (AsNoTracking).
+    /// </summary>
+    public class SistemaGestionDbContext : DbContext
+    {
+        private readonly string _cadenaConexion;
+
+        public SistemaGestionDbContext()
+        {
+            _cadenaConexion = ConfiguracionBaseDatos.CadenaConexion;
+        }
+
+        public SistemaGestionDbContext(string cadenaConexion)
+        {
+            _cadenaConexion = cadenaConexion;
+        }
+
+        public SistemaGestionDbContext(DbContextOptions<SistemaGestionDbContext> opciones)
+            : base(opciones)
+        {
+            _cadenaConexion = ConfiguracionBaseDatos.CadenaConexion;
+        }
+
+        public DbSet<Categoria> Categorias => Set<Categoria>();
+        public DbSet<Producto> Productos => Set<Producto>();
+        public DbSet<Venta> Ventas => Set<Venta>();
+        public DbSet<DetalleVenta> DetallesVenta => Set<DetalleVenta>();
+        public DbSet<HistoricoMovimientosInventario> HistoricoMovimientosInventario => Set<HistoricoMovimientosInventario>();
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(_cadenaConexion);
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Configuración de la tabla Categorias
+            modelBuilder.Entity<Categoria>(entidad =>
+            {
+                entidad.ToTable("Categorias", "dbo");
+                entidad.HasKey(c => c.CategoriaId);
+                entidad.Property(c => c.Nombre).HasMaxLength(100).IsRequired();
+                entidad.Property(c => c.Descripcion).HasMaxLength(255);
+                entidad.Property(c => c.FechaCreacion).HasColumnType("datetime");
+                entidad.Property(c => c.Activo).IsRequired();
+            });
+
+            // Configuración de la tabla Productos y su relación N:1 con Categorias
+            modelBuilder.Entity<Producto>(entidad =>
+            {
+                entidad.ToTable("Productos", "dbo");
+                entidad.HasKey(p => p.ProductoId);
+                entidad.Property(p => p.Nombre).HasMaxLength(150).IsRequired();
+                entidad.Property(p => p.Descripcion).HasMaxLength(500);
+                entidad.Property(p => p.PrecioCompra).HasColumnType("decimal(18,2)");
+                entidad.Property(p => p.PrecioVenta).HasColumnType("decimal(18,2)");
+                entidad.Property(p => p.StockActual).IsRequired();
+                entidad.Property(p => p.StockMinimo).IsRequired();
+                entidad.Property(p => p.FechaRegistro).HasColumnType("datetime");
+                entidad.Property(p => p.Activo).IsRequired();
+
+                entidad.HasOne(p => p.Categoria)
+                       .WithMany(c => c.Productos)
+                       .HasForeignKey(p => p.CategoriaId);
+            });
+
+            // Configuración de la tabla Venta
+            modelBuilder.Entity<Venta>(entidad =>
+            {
+                entidad.ToTable("Venta", "dbo");
+                entidad.HasKey(v => v.VentaId);
+                entidad.Property(v => v.SubTotal).HasColumnType("decimal(18,2)");
+                entidad.Property(v => v.Impuesto).HasColumnType("decimal(18,2)");
+                entidad.Property(v => v.Descuento).HasColumnType("decimal(18,2)");
+                entidad.Property(v => v.Total).HasColumnType("decimal(18,2)");
+                entidad.Property(v => v.Estado).HasMaxLength(30).IsRequired();
+                entidad.Property(v => v.Observaciones).HasMaxLength(500);
+                entidad.Ignore(v => v.Cliente);
+                entidad.Ignore(v => v.Empleado);
+            });
+
+            // Configuración de la tabla DetalleVenta
+            modelBuilder.Entity<DetalleVenta>(entidad =>
+            {
+                entidad.ToTable("DetalleVenta", "dbo");
+                entidad.HasKey(d => d.DetalleVentaId);
+                entidad.Property(d => d.PrecioUnitario).HasColumnType("decimal(18,2)");
+                entidad.Property(d => d.Descuento).HasColumnType("decimal(18,2)");
+                entidad.Property(d => d.SubTotal).HasColumnType("decimal(18,2)");
+
+                entidad.HasOne(d => d.Venta)
+                       .WithMany(v => v.DetallesVenta)
+                       .HasForeignKey(d => d.VentaId);
+
+                entidad.HasOne(d => d.Producto)
+                       .WithMany(p => p.DetallesVenta)
+                       .HasForeignKey(d => d.ProductoId);
+            });
+
+            // Configuración de la tabla HistoricoMovimientosInventario
+            modelBuilder.Entity<HistoricoMovimientosInventario>(entidad =>
+            {
+                entidad.ToTable("HistoricoMovimientosInventario", "dbo");
+                entidad.HasKey(h => h.MovimientoId);
+                entidad.Property(h => h.TipoMovimiento).HasMaxLength(30).IsRequired();
+                entidad.Property(h => h.Observacion).HasMaxLength(255);
+                entidad.Ignore(h => h.Empleado);
+
+                entidad.HasOne(h => h.Producto)
+                       .WithMany(p => p.MovimientosInventario)
+                       .HasForeignKey(h => h.ProductoId);
+            });
+        }
+    }
+}

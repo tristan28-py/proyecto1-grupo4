@@ -15,6 +15,12 @@ namespace ManagementSystem.UI.Forms
             InitializeComponent();
             _servicioPedidos = ServicioPedidos.InstanciaCompartida;
             _servicioProductos = new ServicioProductos();
+
+            // Bloquear números en el nombre del cliente
+            txtClientName.KeyPress += (s, e) =>
+            {
+                if (char.IsDigit(e.KeyChar)) e.Handled = true;
+            };
         }
 
         private void PedidosForm_Load(object? sender, EventArgs e)
@@ -36,19 +42,7 @@ namespace ManagementSystem.UI.Forms
             }
             catch
             {
-                // Respaldo si no hay conexión a base de datos
-            }
-
-            if (cmbProduct.Items.Count == 0)
-            {
-                cmbProduct.Items.AddRange(new object[]
-                {
-                    "Laptop Dell Inspiron 15",
-                    "Mouse Inalámbrico Logitech M185",
-                    "Teclado Mecánico RGB",
-                    "Monitor Samsung 24 pulg FHD",
-                    "Resma Papel Bond A4 75g"
-                });
+                // Manejo de error si no hay conexión
             }
 
             if (cmbProduct.Items.Count > 0)

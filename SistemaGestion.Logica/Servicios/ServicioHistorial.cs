@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 
 namespace SistemaGestion.Logica.Servicios
@@ -16,37 +16,11 @@ namespace SistemaGestion.Logica.Servicios
 
         /// <summary>
         /// Instancia compartida para mantener el historial de acciones durante toda la sesión de la aplicación.
+        /// Inicia vacía para registrar las acciones reales del usuario.
         /// </summary>
-        public static ServicioHistorial InstanciaCompartida { get; } = CrearConDatosIniciales();
+        public static ServicioHistorial InstanciaCompartida { get; } = new ServicioHistorial();
 
         public int CantidadAcciones => _pilaHistorial.Count;
-
-        private static ServicioHistorial CrearConDatosIniciales()
-        {
-            var servicio = new ServicioHistorial();
-            servicio.RegistrarAccion(new AccionHistorial
-            {
-                Modulo = "Categorías",
-                TipoAccion = "Creación",
-                Descripcion = "Se registró la categoría 'Electrónica y Cómputo'",
-                FechaHora = DateTime.Now.AddMinutes(-25)
-            });
-            servicio.RegistrarAccion(new AccionHistorial
-            {
-                Modulo = "Productos",
-                TipoAccion = "Actualización",
-                Descripcion = "Se actualizó el stock de 'Laptop Dell Inspiron 15'",
-                FechaHora = DateTime.Now.AddMinutes(-12)
-            });
-            servicio.RegistrarAccion(new AccionHistorial
-            {
-                Modulo = "Ventas",
-                TipoAccion = "Facturación",
-                Descripcion = "Se registró la venta #101 para Juan Pérez Gómez",
-                FechaHora = DateTime.Now.AddMinutes(-4)
-            });
-            return servicio;
-        }
 
         /// <summary>
         /// Registra una nueva acción en la cima de la pila (operación Push).

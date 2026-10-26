@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ManagementSystem.Entities\ManagementSystem.Entities.csproj" />
-    <ProjectReference Include="..\ManagementSystem.DataAccess\ManagementSystem.DataAccess.csproj" />
+    <ProjectReference Include="..\SistemaGestion.Entidades\SistemaGestion.Entidades.csproj" />
+    <ProjectReference Include="..\SistemaGestion.AccesoDatos\SistemaGestion.AccesoDatos.csproj" />
     <ProjectReference Include="..\SistemaGestion.Logica\SistemaGestion.Logica.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using System.Windows.Forms;
-using ManagementSystem.Entities.Entities;
+using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
 using SistemaGestion.Logica.Servicios;
 
