@@ -68,11 +68,11 @@ namespace ManagementSystem.UI.Forms
             pnlTop.Controls.Add(txtSearch);
             pnlTop.Controls.Add(lblSearch);
             pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(15, 15);
+            pnlTop.Location = new Point(10, 10);
             pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
             pnlTop.Padding = new Padding(15);
-            pnlTop.Size = new Size(1070, 65);
+            pnlTop.Size = new Size(1000, 64);
             pnlTop.TabIndex = 0;
             // 
             // cmbStatusFilter
@@ -81,43 +81,45 @@ namespace ManagementSystem.UI.Forms
             cmbStatusFilter.Font = new Font("Segoe UI", 9F);
             cmbStatusFilter.FormattingEnabled = true;
             cmbStatusFilter.Items.AddRange(new object[] { "Todos los estados", "Solo Activos", "Solo Inactivos" });
-            cmbStatusFilter.Location = new Point(620, 18);
+            cmbStatusFilter.Location = new Point(580, 18);
             cmbStatusFilter.Name = "cmbStatusFilter";
-            cmbStatusFilter.Size = new Size(160, 28);
+            cmbStatusFilter.Size = new Size(185, 28);
             cmbStatusFilter.TabIndex = 3;
             cmbStatusFilter.SelectedIndexChanged += cmbStatusFilter_SelectedIndexChanged;
             // 
             // lblStatusFilter
             // 
-            lblStatusFilter.AutoSize = true;
+            lblStatusFilter.AutoSize = false;
             lblStatusFilter.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblStatusFilter.ForeColor = Color.FromArgb(75, 85, 99);
-            lblStatusFilter.Location = new Point(480, 21);
+            lblStatusFilter.Location = new Point(440, 18);
             lblStatusFilter.Name = "lblStatusFilter";
-            lblStatusFilter.Size = new Size(134, 20);
+            lblStatusFilter.Size = new Size(135, 28);
             lblStatusFilter.TabIndex = 2;
             lblStatusFilter.Text = "Filtrar por Estado:";
+            lblStatusFilter.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtSearch
             // 
             txtSearch.Font = new Font("Segoe UI", 9.5F);
-            txtSearch.Location = new Point(145, 18);
+            txtSearch.Location = new Point(155, 18);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Escriba para filtrar...";
-            txtSearch.Size = new Size(290, 29);
+            txtSearch.Size = new Size(265, 29);
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // lblSearch
             // 
-            lblSearch.AutoSize = true;
+            lblSearch.AutoSize = false;
             lblSearch.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblSearch.ForeColor = Color.FromArgb(30, 58, 138);
-            lblSearch.Location = new Point(15, 21);
+            lblSearch.Location = new Point(15, 18);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(124, 21);
+            lblSearch.Size = new Size(136, 28);
             lblSearch.TabIndex = 0;
-            lblSearch.Text = "Buscar Categ.:";
+            lblSearch.Text = "Buscar Categoría:";
+            lblSearch.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlDetail
             // 
@@ -135,10 +137,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblCategoryId);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(720, 80);
+            pnlDetail.Location = new Point(655, 74);
             pnlDetail.Name = "pnlDetail";
-            pnlDetail.Padding = new Padding(15);
-            pnlDetail.Size = new Size(365, 605);
+            pnlDetail.Padding = new Padding(16);
+            pnlDetail.Size = new Size(355, 596);
             pnlDetail.TabIndex = 1;
             // 
             // chkActive
@@ -148,7 +150,7 @@ namespace ManagementSystem.UI.Forms
             chkActive.CheckState = CheckState.Checked;
             chkActive.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             chkActive.ForeColor = Color.FromArgb(30, 58, 138);
-            chkActive.Location = new Point(20, 310);
+            chkActive.Location = new Point(18, 318);
             chkActive.Name = "chkActive";
             chkActive.Size = new Size(160, 25);
             chkActive.TabIndex = 7;
@@ -163,7 +165,7 @@ namespace ManagementSystem.UI.Forms
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(235, 360);
+            btnDelete.Location = new Point(236, 364);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(100, 38);
             btnDelete.TabIndex = 10;
@@ -179,9 +181,9 @@ namespace ManagementSystem.UI.Forms
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(125, 360);
+            btnSave.Location = new Point(126, 364);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(100, 38);
+            btnSave.Size = new Size(102, 38);
             btnSave.TabIndex = 9;
             btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = false;
@@ -195,9 +197,9 @@ namespace ManagementSystem.UI.Forms
             btnNew.FlatStyle = FlatStyle.Flat;
             btnNew.Font = new Font("Segoe UI", 9F);
             btnNew.ForeColor = Color.FromArgb(55, 65, 81);
-            btnNew.Location = new Point(20, 360);
+            btnNew.Location = new Point(18, 364);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(95, 38);
+            btnNew.Size = new Size(100, 38);
             btnNew.TabIndex = 8;
             btnNew.Text = "Nuevo";
             btnNew.UseVisualStyleBackColor = false;
@@ -206,85 +208,89 @@ namespace ManagementSystem.UI.Forms
             // txtDescription
             // 
             txtDescription.Font = new Font("Segoe UI", 9F);
-            txtDescription.Location = new Point(20, 195);
+            txtDescription.Location = new Point(18, 210);
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.ScrollBars = ScrollBars.Vertical;
-            txtDescription.Size = new Size(315, 90);
+            txtDescription.Size = new Size(318, 92);
             txtDescription.TabIndex = 6;
             // 
             // lblDescription
             // 
-            lblDescription.AutoSize = true;
-            lblDescription.Font = new Font("Segoe UI", 8.5F);
+            lblDescription.AutoSize = false;
+            lblDescription.Font = new Font("Segoe UI", 8.75F);
             lblDescription.ForeColor = Color.FromArgb(75, 85, 99);
-            lblDescription.Location = new Point(20, 172);
+            lblDescription.Location = new Point(18, 186);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(90, 20);
+            lblDescription.Size = new Size(318, 22);
             lblDescription.TabIndex = 5;
             lblDescription.Text = "Descripción:";
+            lblDescription.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtCategoryName
             // 
             txtCategoryName.Font = new Font("Segoe UI", 9F);
-            txtCategoryName.Location = new Point(20, 125);
+            txtCategoryName.Location = new Point(18, 144);
             txtCategoryName.Name = "txtCategoryName";
             txtCategoryName.PlaceholderText = "Ej. Bebidas y Alimentos";
-            txtCategoryName.Size = new Size(315, 27);
+            txtCategoryName.Size = new Size(318, 27);
             txtCategoryName.TabIndex = 4;
             // 
             // lblCategoryName
             // 
-            lblCategoryName.AutoSize = true;
-            lblCategoryName.Font = new Font("Segoe UI", 8.5F);
+            lblCategoryName.AutoSize = false;
+            lblCategoryName.Font = new Font("Segoe UI", 8.75F);
             lblCategoryName.ForeColor = Color.FromArgb(75, 85, 99);
-            lblCategoryName.Location = new Point(20, 102);
+            lblCategoryName.Location = new Point(18, 120);
             lblCategoryName.Name = "lblCategoryName";
-            lblCategoryName.Size = new Size(153, 20);
+            lblCategoryName.Size = new Size(318, 22);
             lblCategoryName.TabIndex = 3;
-            lblCategoryName.Text = "Nombre Categoría (*):";
+            lblCategoryName.Text = "Nombre de Categoría (*):";
+            lblCategoryName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtCategoryId
             // 
             txtCategoryId.BackColor = Color.FromArgb(243, 244, 246);
             txtCategoryId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            txtCategoryId.Location = new Point(20, 60);
+            txtCategoryId.Location = new Point(18, 78);
             txtCategoryId.Name = "txtCategoryId";
             txtCategoryId.ReadOnly = true;
-            txtCategoryId.Size = new Size(100, 27);
+            txtCategoryId.Size = new Size(110, 27);
             txtCategoryId.TabIndex = 2;
             txtCategoryId.Text = "0";
             // 
             // lblCategoryId
             // 
-            lblCategoryId.AutoSize = true;
-            lblCategoryId.Font = new Font("Segoe UI", 8.5F);
+            lblCategoryId.AutoSize = false;
+            lblCategoryId.Font = new Font("Segoe UI", 8.75F);
             lblCategoryId.ForeColor = Color.FromArgb(75, 85, 99);
-            lblCategoryId.Location = new Point(20, 37);
+            lblCategoryId.Location = new Point(18, 54);
             lblCategoryId.Name = "lblCategoryId";
-            lblCategoryId.Size = new Size(27, 20);
+            lblCategoryId.Size = new Size(318, 22);
             lblCategoryId.TabIndex = 1;
-            lblCategoryId.Text = "ID:";
+            lblCategoryId.Text = "ID de Categoría:";
+            lblCategoryId.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblDetailHeader
             // 
-            lblDetailHeader.AutoSize = true;
+            lblDetailHeader.AutoSize = false;
             lblDetailHeader.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
-            lblDetailHeader.Location = new Point(15, 5);
+            lblDetailHeader.Location = new Point(16, 14);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(183, 25);
+            lblDetailHeader.Size = new Size(320, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Datos de Categoría";
+            lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlGrid
             // 
             pnlGrid.Controls.Add(dgvCategories);
             pnlGrid.Dock = DockStyle.Fill;
-            pnlGrid.Location = new Point(15, 80);
+            pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
-            pnlGrid.Padding = new Padding(0, 0, 15, 0);
-            pnlGrid.Size = new Size(705, 605);
+            pnlGrid.Padding = new Padding(0, 10, 12, 0);
+            pnlGrid.Size = new Size(645, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvCategories
@@ -306,7 +312,7 @@ namespace ManagementSystem.UI.Forms
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvCategories.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvCategories.ColumnHeadersHeight = 35;
+            dgvCategories.ColumnHeadersHeight = 40;
             dgvCategories.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvCategories.Columns.AddRange(new DataGridViewColumn[] { colId, colNombre, colDescripcion, colFecha, colEstado });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -320,64 +326,64 @@ namespace ManagementSystem.UI.Forms
             dgvCategories.Dock = DockStyle.Fill;
             dgvCategories.EnableHeadersVisualStyles = false;
             dgvCategories.GridColor = Color.FromArgb(229, 231, 235);
-            dgvCategories.Location = new Point(0, 0);
+            dgvCategories.Location = new Point(0, 10);
             dgvCategories.MultiSelect = false;
             dgvCategories.Name = "dgvCategories";
             dgvCategories.ReadOnly = true;
             dgvCategories.RowHeadersVisible = false;
             dgvCategories.RowHeadersWidth = 51;
-            dgvCategories.RowTemplate.Height = 30;
+            dgvCategories.RowTemplate.Height = 32;
             dgvCategories.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvCategories.Size = new Size(690, 605);
+            dgvCategories.Size = new Size(633, 586);
             dgvCategories.TabIndex = 0;
             dgvCategories.SelectionChanged += dgvCategories_SelectionChanged;
             // 
             // colId
             // 
-            colId.FillWeight = 40F;
+            colId.FillWeight = 45F;
             colId.HeaderText = "ID";
-            colId.MinimumWidth = 40;
+            colId.MinimumWidth = 42;
             colId.Name = "colId";
             colId.ReadOnly = true;
             // 
             // colNombre
             // 
-            colNombre.FillWeight = 130F;
+            colNombre.FillWeight = 135F;
             colNombre.HeaderText = "Nombre";
-            colNombre.MinimumWidth = 120;
+            colNombre.MinimumWidth = 110;
             colNombre.Name = "colNombre";
             colNombre.ReadOnly = true;
             // 
             // colDescripcion
             // 
-            colDescripcion.FillWeight = 180F;
+            colDescripcion.FillWeight = 185F;
             colDescripcion.HeaderText = "Descripción";
-            colDescripcion.MinimumWidth = 150;
+            colDescripcion.MinimumWidth = 140;
             colDescripcion.Name = "colDescripcion";
             colDescripcion.ReadOnly = true;
             // 
             // colFecha
             // 
-            colFecha.FillWeight = 90F;
+            colFecha.FillWeight = 95F;
             colFecha.HeaderText = "Fecha Creación";
-            colFecha.MinimumWidth = 80;
+            colFecha.MinimumWidth = 90;
             colFecha.Name = "colFecha";
             colFecha.ReadOnly = true;
             // 
             // colEstado
             // 
-            colEstado.FillWeight = 60F;
+            colEstado.FillWeight = 65F;
             colEstado.HeaderText = "Estado";
-            colEstado.MinimumWidth = 60;
+            colEstado.MinimumWidth = 65;
             colEstado.Name = "colEstado";
             colEstado.ReadOnly = true;
             // 
             // CategoriasForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 244, 246);
-            ClientSize = new Size(1100, 700);
+            ClientSize = new Size(1020, 680);
             Controls.Add(pnlGrid);
             Controls.Add(pnlDetail);
             Controls.Add(pnlTop);
@@ -385,7 +391,7 @@ namespace ManagementSystem.UI.Forms
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "CategoriasForm";
-            Padding = new Padding(15);
+            Padding = new Padding(10);
             Text = "Mantenimiento de Categorías";
             Load += CategoriasForm_Load;
             pnlTop.ResumeLayout(false);

@@ -74,64 +74,68 @@ namespace ManagementSystem.UI.Forms
             pnlTop.Controls.Add(cmbClient);
             pnlTop.Controls.Add(lblClient);
             pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(15, 15);
+            pnlTop.Location = new Point(10, 10);
             pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
             pnlTop.Padding = new Padding(15);
-            pnlTop.Size = new Size(1070, 65);
+            pnlTop.Size = new Size(1000, 64);
             pnlTop.TabIndex = 0;
             // 
             // lblTotalSale
             // 
-            lblTotalSale.AutoSize = true;
+            lblTotalSale.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblTotalSale.AutoSize = false;
             lblTotalSale.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             lblTotalSale.ForeColor = Color.FromArgb(30, 58, 138);
-            lblTotalSale.Location = new Point(740, 18);
+            lblTotalSale.Location = new Point(595, 14);
             lblTotalSale.Name = "lblTotalSale";
-            lblTotalSale.Size = new Size(165, 28);
+            lblTotalSale.Size = new Size(388, 36);
             lblTotalSale.TabIndex = 4;
             lblTotalSale.Text = "Total Venta: $0.00";
+            lblTotalSale.TextAlign = ContentAlignment.MiddleRight;
             // 
             // dtpSaleDate
             // 
             dtpSaleDate.Font = new Font("Segoe UI", 9F);
             dtpSaleDate.Format = DateTimePickerFormat.Short;
-            dtpSaleDate.Location = new Point(515, 18);
+            dtpSaleDate.Location = new Point(450, 18);
             dtpSaleDate.Name = "dtpSaleDate";
-            dtpSaleDate.Size = new Size(145, 27);
+            dtpSaleDate.Size = new Size(135, 27);
             dtpSaleDate.TabIndex = 3;
             // 
             // lblDate
             // 
-            lblDate.AutoSize = true;
+            lblDate.AutoSize = false;
             lblDate.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblDate.ForeColor = Color.FromArgb(75, 85, 99);
-            lblDate.Location = new Point(450, 21);
+            lblDate.Location = new Point(390, 18);
             lblDate.Name = "lblDate";
-            lblDate.Size = new Size(55, 20);
+            lblDate.Size = new Size(56, 28);
             lblDate.TabIndex = 2;
             lblDate.Text = "Fecha:";
+            lblDate.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbClient
             // 
             cmbClient.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbClient.Font = new Font("Segoe UI", 9F);
             cmbClient.FormattingEnabled = true;
-            cmbClient.Location = new Point(115, 18);
+            cmbClient.Location = new Point(108, 18);
             cmbClient.Name = "cmbClient";
-            cmbClient.Size = new Size(300, 28);
+            cmbClient.Size = new Size(268, 28);
             cmbClient.TabIndex = 1;
             // 
             // lblClient
             // 
-            lblClient.AutoSize = true;
+            lblClient.AutoSize = false;
             lblClient.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblClient.ForeColor = Color.FromArgb(30, 58, 138);
-            lblClient.Location = new Point(15, 21);
+            lblClient.Location = new Point(15, 18);
             lblClient.Name = "lblClient";
-            lblClient.Size = new Size(92, 21);
+            lblClient.Size = new Size(90, 28);
             lblClient.TabIndex = 0;
             lblClient.Text = "Cliente (*):";
+            lblClient.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlDetail
             // 
@@ -151,10 +155,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblProduct);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(720, 80);
+            pnlDetail.Location = new Point(655, 74);
             pnlDetail.Name = "pnlDetail";
-            pnlDetail.Padding = new Padding(15);
-            pnlDetail.Size = new Size(365, 605);
+            pnlDetail.Padding = new Padding(16);
+            pnlDetail.Size = new Size(355, 596);
             pnlDetail.TabIndex = 1;
             // 
             // btnNewSale
@@ -165,9 +169,9 @@ namespace ManagementSystem.UI.Forms
             btnNewSale.FlatStyle = FlatStyle.Flat;
             btnNewSale.Font = new Font("Segoe UI", 9F);
             btnNewSale.ForeColor = Color.FromArgb(55, 65, 81);
-            btnNewSale.Location = new Point(20, 415);
+            btnNewSale.Location = new Point(18, 376);
             btnNewSale.Name = "btnNewSale";
-            btnNewSale.Size = new Size(315, 38);
+            btnNewSale.Size = new Size(318, 38);
             btnNewSale.TabIndex = 12;
             btnNewSale.Text = "Limpiar / Nueva Venta";
             btnNewSale.UseVisualStyleBackColor = false;
@@ -181,9 +185,9 @@ namespace ManagementSystem.UI.Forms
             btnConfirmSale.FlatStyle = FlatStyle.Flat;
             btnConfirmSale.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             btnConfirmSale.ForeColor = Color.White;
-            btnConfirmSale.Location = new Point(20, 365);
+            btnConfirmSale.Location = new Point(18, 324);
             btnConfirmSale.Name = "btnConfirmSale";
-            btnConfirmSale.Size = new Size(315, 42);
+            btnConfirmSale.Size = new Size(318, 42);
             btnConfirmSale.TabIndex = 11;
             btnConfirmSale.Text = "Confirmar Venta";
             btnConfirmSale.UseVisualStyleBackColor = false;
@@ -197,9 +201,9 @@ namespace ManagementSystem.UI.Forms
             btnRemoveDetail.FlatStyle = FlatStyle.Flat;
             btnRemoveDetail.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnRemoveDetail.ForeColor = Color.White;
-            btnRemoveDetail.Location = new Point(185, 300);
+            btnRemoveDetail.Location = new Point(184, 266);
             btnRemoveDetail.Name = "btnRemoveDetail";
-            btnRemoveDetail.Size = new Size(150, 38);
+            btnRemoveDetail.Size = new Size(152, 38);
             btnRemoveDetail.TabIndex = 10;
             btnRemoveDetail.Text = "Quitar Línea";
             btnRemoveDetail.UseVisualStyleBackColor = false;
@@ -213,122 +217,128 @@ namespace ManagementSystem.UI.Forms
             btnAddDetail.FlatStyle = FlatStyle.Flat;
             btnAddDetail.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnAddDetail.ForeColor = Color.White;
-            btnAddDetail.Location = new Point(20, 300);
+            btnAddDetail.Location = new Point(18, 266);
             btnAddDetail.Name = "btnAddDetail";
-            btnAddDetail.Size = new Size(150, 38);
+            btnAddDetail.Size = new Size(152, 38);
             btnAddDetail.TabIndex = 9;
-            btnAddDetail.Text = "Agregar";
+            btnAddDetail.Text = "Agregar Línea";
             btnAddDetail.UseVisualStyleBackColor = false;
             btnAddDetail.Click += btnAddDetail_Click;
             // 
             // lblLineSubTotal
             // 
-            lblLineSubTotal.AutoSize = true;
+            lblLineSubTotal.AutoSize = false;
             lblLineSubTotal.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblLineSubTotal.ForeColor = Color.FromArgb(30, 58, 138);
-            lblLineSubTotal.Location = new Point(20, 255);
+            lblLineSubTotal.Location = new Point(18, 222);
             lblLineSubTotal.Name = "lblLineSubTotal";
-            lblLineSubTotal.Size = new Size(175, 23);
+            lblLineSubTotal.Size = new Size(318, 28);
             lblLineSubTotal.TabIndex = 8;
             lblLineSubTotal.Text = "Subtotal línea: $0.00";
+            lblLineSubTotal.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // nudQuantity
             // 
             nudQuantity.Font = new Font("Segoe UI", 9F);
-            nudQuantity.Location = new Point(185, 200);
+            nudQuantity.Location = new Point(184, 182);
             nudQuantity.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             nudQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQuantity.Name = "nudQuantity";
-            nudQuantity.Size = new Size(150, 27);
+            nudQuantity.Size = new Size(152, 27);
             nudQuantity.TabIndex = 7;
             nudQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudQuantity.ValueChanged += nudQuantity_ValueChanged;
             // 
             // lblQuantity
             // 
-            lblQuantity.AutoSize = true;
-            lblQuantity.Font = new Font("Segoe UI", 8.5F);
+            lblQuantity.AutoSize = false;
+            lblQuantity.Font = new Font("Segoe UI", 8.75F);
             lblQuantity.ForeColor = Color.FromArgb(75, 85, 99);
-            lblQuantity.Location = new Point(185, 177);
+            lblQuantity.Location = new Point(184, 158);
             lblQuantity.Name = "lblQuantity";
-            lblQuantity.Size = new Size(92, 20);
+            lblQuantity.Size = new Size(152, 22);
             lblQuantity.TabIndex = 6;
             lblQuantity.Text = "Cantidad (*):";
+            lblQuantity.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // nudUnitPrice
             // 
             nudUnitPrice.DecimalPlaces = 2;
             nudUnitPrice.Enabled = false;
             nudUnitPrice.Font = new Font("Segoe UI", 9F);
-            nudUnitPrice.Location = new Point(20, 200);
+            nudUnitPrice.Location = new Point(18, 182);
             nudUnitPrice.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
             nudUnitPrice.Name = "nudUnitPrice";
-            nudUnitPrice.Size = new Size(150, 27);
+            nudUnitPrice.Size = new Size(152, 27);
             nudUnitPrice.TabIndex = 5;
             // 
             // lblUnitPrice
             // 
-            lblUnitPrice.AutoSize = true;
-            lblUnitPrice.Font = new Font("Segoe UI", 8.5F);
+            lblUnitPrice.AutoSize = false;
+            lblUnitPrice.Font = new Font("Segoe UI", 8.75F);
             lblUnitPrice.ForeColor = Color.FromArgb(75, 85, 99);
-            lblUnitPrice.Location = new Point(20, 177);
+            lblUnitPrice.Location = new Point(18, 158);
             lblUnitPrice.Name = "lblUnitPrice";
-            lblUnitPrice.Size = new Size(106, 20);
+            lblUnitPrice.Size = new Size(152, 22);
             lblUnitPrice.TabIndex = 4;
             lblUnitPrice.Text = "Precio Unitario:";
+            lblUnitPrice.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStockInfo
             // 
-            lblStockInfo.AutoSize = true;
-            lblStockInfo.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            lblStockInfo.AutoSize = false;
+            lblStockInfo.Font = new Font("Segoe UI", 9.25F, FontStyle.Bold);
             lblStockInfo.ForeColor = Color.FromArgb(16, 185, 129);
-            lblStockInfo.Location = new Point(20, 130);
+            lblStockInfo.Location = new Point(18, 118);
             lblStockInfo.Name = "lblStockInfo";
-            lblStockInfo.Size = new Size(152, 20);
+            lblStockInfo.Size = new Size(318, 26);
             lblStockInfo.TabIndex = 3;
             lblStockInfo.Text = "Stock disponible: 0";
+            lblStockInfo.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbProduct
             // 
             cmbProduct.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbProduct.Font = new Font("Segoe UI", 9F);
             cmbProduct.FormattingEnabled = true;
-            cmbProduct.Location = new Point(20, 90);
+            cmbProduct.Location = new Point(18, 80);
             cmbProduct.Name = "cmbProduct";
-            cmbProduct.Size = new Size(315, 28);
+            cmbProduct.Size = new Size(318, 28);
             cmbProduct.TabIndex = 2;
             cmbProduct.SelectedIndexChanged += cmbProduct_SelectedIndexChanged;
             // 
             // lblProduct
             // 
-            lblProduct.AutoSize = true;
-            lblProduct.Font = new Font("Segoe UI", 8.5F);
+            lblProduct.AutoSize = false;
+            lblProduct.Font = new Font("Segoe UI", 8.75F);
             lblProduct.ForeColor = Color.FromArgb(75, 85, 99);
-            lblProduct.Location = new Point(20, 67);
+            lblProduct.Location = new Point(18, 56);
             lblProduct.Name = "lblProduct";
-            lblProduct.Size = new Size(92, 20);
+            lblProduct.Size = new Size(318, 22);
             lblProduct.TabIndex = 1;
             lblProduct.Text = "Producto (*):";
+            lblProduct.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblDetailHeader
             // 
-            lblDetailHeader.AutoSize = true;
+            lblDetailHeader.AutoSize = false;
             lblDetailHeader.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
-            lblDetailHeader.Location = new Point(15, 15);
+            lblDetailHeader.Location = new Point(16, 14);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(175, 25);
+            lblDetailHeader.Size = new Size(320, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Agregar al Detalle";
+            lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlGrid
             // 
             pnlGrid.Controls.Add(dgvSaleDetails);
             pnlGrid.Dock = DockStyle.Fill;
-            pnlGrid.Location = new Point(15, 80);
+            pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
-            pnlGrid.Padding = new Padding(0, 0, 15, 0);
-            pnlGrid.Size = new Size(705, 605);
+            pnlGrid.Padding = new Padding(0, 10, 12, 0);
+            pnlGrid.Size = new Size(645, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvSaleDetails
@@ -350,7 +360,7 @@ namespace ManagementSystem.UI.Forms
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvSaleDetails.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvSaleDetails.ColumnHeadersHeight = 35;
+            dgvSaleDetails.ColumnHeadersHeight = 40;
             dgvSaleDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvSaleDetails.Columns.AddRange(new DataGridViewColumn[] { colId, colProducto, colCantidad, colPrecioUnitario, colSubTotal });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -364,30 +374,30 @@ namespace ManagementSystem.UI.Forms
             dgvSaleDetails.Dock = DockStyle.Fill;
             dgvSaleDetails.EnableHeadersVisualStyles = false;
             dgvSaleDetails.GridColor = Color.FromArgb(229, 231, 235);
-            dgvSaleDetails.Location = new Point(0, 0);
+            dgvSaleDetails.Location = new Point(0, 10);
             dgvSaleDetails.MultiSelect = false;
             dgvSaleDetails.Name = "dgvSaleDetails";
             dgvSaleDetails.ReadOnly = true;
             dgvSaleDetails.RowHeadersVisible = false;
             dgvSaleDetails.RowHeadersWidth = 51;
-            dgvSaleDetails.RowTemplate.Height = 30;
+            dgvSaleDetails.RowTemplate.Height = 32;
             dgvSaleDetails.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvSaleDetails.Size = new Size(690, 605);
+            dgvSaleDetails.Size = new Size(633, 586);
             dgvSaleDetails.TabIndex = 0;
             // 
             // colId
             // 
-            colId.FillWeight = 45F;
+            colId.FillWeight = 50F;
             colId.HeaderText = "ID Prod.";
-            colId.MinimumWidth = 45;
+            colId.MinimumWidth = 50;
             colId.Name = "colId";
             colId.ReadOnly = true;
             // 
             // colProducto
             // 
-            colProducto.FillWeight = 180F;
+            colProducto.FillWeight = 185F;
             colProducto.HeaderText = "Producto";
-            colProducto.MinimumWidth = 140;
+            colProducto.MinimumWidth = 130;
             colProducto.Name = "colProducto";
             colProducto.ReadOnly = true;
             // 
@@ -395,7 +405,7 @@ namespace ManagementSystem.UI.Forms
             // 
             colCantidad.FillWeight = 70F;
             colCantidad.HeaderText = "Cantidad";
-            colCantidad.MinimumWidth = 60;
+            colCantidad.MinimumWidth = 65;
             colCantidad.Name = "colCantidad";
             colCantidad.ReadOnly = true;
             // 
@@ -409,7 +419,7 @@ namespace ManagementSystem.UI.Forms
             // 
             // colSubTotal
             // 
-            colSubTotal.FillWeight = 90F;
+            colSubTotal.FillWeight = 95F;
             colSubTotal.HeaderText = "Subtotal";
             colSubTotal.MinimumWidth = 80;
             colSubTotal.Name = "colSubTotal";
@@ -417,10 +427,10 @@ namespace ManagementSystem.UI.Forms
             // 
             // VentasForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 244, 246);
-            ClientSize = new Size(1100, 700);
+            ClientSize = new Size(1020, 680);
             Controls.Add(pnlGrid);
             Controls.Add(pnlDetail);
             Controls.Add(pnlTop);
@@ -428,7 +438,7 @@ namespace ManagementSystem.UI.Forms
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "VentasForm";
-            Padding = new Padding(15);
+            Padding = new Padding(10);
             Text = "Registrar Venta";
             Load += VentasForm_Load;
             pnlTop.ResumeLayout(false);

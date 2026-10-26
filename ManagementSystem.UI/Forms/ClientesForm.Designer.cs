@@ -79,11 +79,11 @@ namespace ManagementSystem.UI.Forms
             pnlTop.Controls.Add(txtSearch);
             pnlTop.Controls.Add(lblSearch);
             pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(15, 15);
+            pnlTop.Location = new Point(10, 10);
             pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
             pnlTop.Padding = new Padding(15);
-            pnlTop.Size = new Size(1070, 65);
+            pnlTop.Size = new Size(1000, 64);
             pnlTop.TabIndex = 0;
             // 
             // cmbTypeFilter
@@ -92,22 +92,23 @@ namespace ManagementSystem.UI.Forms
             cmbTypeFilter.Font = new Font("Segoe UI", 9F);
             cmbTypeFilter.FormattingEnabled = true;
             cmbTypeFilter.Items.AddRange(new object[] { "Todos", "Cliente", "Empleado", "Usuario" });
-            cmbTypeFilter.Location = new Point(620, 18);
+            cmbTypeFilter.Location = new Point(575, 18);
             cmbTypeFilter.Name = "cmbTypeFilter";
-            cmbTypeFilter.Size = new Size(160, 28);
+            cmbTypeFilter.Size = new Size(175, 28);
             cmbTypeFilter.TabIndex = 3;
             cmbTypeFilter.SelectedIndexChanged += cmbTypeFilter_SelectedIndexChanged;
             // 
             // lblTypeFilter
             // 
-            lblTypeFilter.AutoSize = true;
+            lblTypeFilter.AutoSize = false;
             lblTypeFilter.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblTypeFilter.ForeColor = Color.FromArgb(75, 85, 99);
-            lblTypeFilter.Location = new Point(495, 21);
+            lblTypeFilter.Location = new Point(445, 18);
             lblTypeFilter.Name = "lblTypeFilter";
-            lblTypeFilter.Size = new Size(118, 20);
+            lblTypeFilter.Size = new Size(125, 28);
             lblTypeFilter.TabIndex = 2;
             lblTypeFilter.Text = "Filtrar por Tipo:";
+            lblTypeFilter.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtSearch
             // 
@@ -115,20 +116,21 @@ namespace ManagementSystem.UI.Forms
             txtSearch.Location = new Point(155, 18);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Nombre o identificación...";
-            txtSearch.Size = new Size(290, 29);
+            txtSearch.Size = new Size(270, 29);
             txtSearch.TabIndex = 1;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // lblSearch
             // 
-            lblSearch.AutoSize = true;
+            lblSearch.AutoSize = false;
             lblSearch.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblSearch.ForeColor = Color.FromArgb(30, 58, 138);
-            lblSearch.Location = new Point(15, 21);
+            lblSearch.Location = new Point(15, 18);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(134, 21);
+            lblSearch.Size = new Size(136, 28);
             lblSearch.TabIndex = 0;
             lblSearch.Text = "Buscar Persona:";
+            lblSearch.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlDetail
             // 
@@ -154,10 +156,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblClientId);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(720, 80);
+            pnlDetail.Location = new Point(655, 74);
             pnlDetail.Name = "pnlDetail";
-            pnlDetail.Padding = new Padding(15);
-            pnlDetail.Size = new Size(365, 605);
+            pnlDetail.Padding = new Padding(16);
+            pnlDetail.Size = new Size(355, 596);
             pnlDetail.TabIndex = 1;
             // 
             // chkActive
@@ -165,11 +167,11 @@ namespace ManagementSystem.UI.Forms
             chkActive.AutoSize = true;
             chkActive.Checked = true;
             chkActive.CheckState = CheckState.Checked;
-            chkActive.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
+            chkActive.Font = new Font("Segoe UI", 9.25F, FontStyle.Bold);
             chkActive.ForeColor = Color.FromArgb(30, 58, 138);
-            chkActive.Location = new Point(20, 470);
+            chkActive.Location = new Point(150, 65);
             chkActive.Name = "chkActive";
-            chkActive.Size = new Size(148, 25);
+            chkActive.Size = new Size(150, 25);
             chkActive.TabIndex = 15;
             chkActive.Text = "Registro Activo";
             chkActive.UseVisualStyleBackColor = true;
@@ -182,7 +184,7 @@ namespace ManagementSystem.UI.Forms
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(235, 515);
+            btnDelete.Location = new Point(236, 396);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(100, 38);
             btnDelete.TabIndex = 18;
@@ -198,9 +200,9 @@ namespace ManagementSystem.UI.Forms
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(125, 515);
+            btnSave.Location = new Point(126, 396);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(100, 38);
+            btnSave.Size = new Size(102, 38);
             btnSave.TabIndex = 17;
             btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = false;
@@ -214,9 +216,9 @@ namespace ManagementSystem.UI.Forms
             btnNew.FlatStyle = FlatStyle.Flat;
             btnNew.Font = new Font("Segoe UI", 9F);
             btnNew.ForeColor = Color.FromArgb(55, 65, 81);
-            btnNew.Location = new Point(20, 515);
+            btnNew.Location = new Point(18, 396);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(95, 38);
+            btnNew.Size = new Size(100, 38);
             btnNew.TabIndex = 16;
             btnNew.Text = "Nuevo";
             btnNew.UseVisualStyleBackColor = false;
@@ -227,22 +229,23 @@ namespace ManagementSystem.UI.Forms
             nudCreditLimit.DecimalPlaces = 2;
             nudCreditLimit.Font = new Font("Segoe UI", 9F);
             nudCreditLimit.Increment = new decimal(new int[] { 50, 0, 0, 0 });
-            nudCreditLimit.Location = new Point(20, 420);
+            nudCreditLimit.Location = new Point(18, 348);
             nudCreditLimit.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
             nudCreditLimit.Name = "nudCreditLimit";
-            nudCreditLimit.Size = new Size(315, 27);
+            nudCreditLimit.Size = new Size(318, 27);
             nudCreditLimit.TabIndex = 14;
             // 
             // lblCreditLimit
             // 
-            lblCreditLimit.AutoSize = true;
-            lblCreditLimit.Font = new Font("Segoe UI", 8.5F);
+            lblCreditLimit.AutoSize = false;
+            lblCreditLimit.Font = new Font("Segoe UI", 8.75F);
             lblCreditLimit.ForeColor = Color.FromArgb(75, 85, 99);
-            lblCreditLimit.Location = new Point(20, 397);
+            lblCreditLimit.Location = new Point(18, 324);
             lblCreditLimit.Name = "lblCreditLimit";
-            lblCreditLimit.Size = new Size(165, 20);
+            lblCreditLimit.Size = new Size(318, 22);
             lblCreditLimit.TabIndex = 13;
-            lblCreditLimit.Text = "Límite Crédito / Salario:";
+            lblCreditLimit.Text = "Límite de Crédito / Salario:";
+            lblCreditLimit.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbPersonType
             // 
@@ -250,143 +253,150 @@ namespace ManagementSystem.UI.Forms
             cmbPersonType.Font = new Font("Segoe UI", 9F);
             cmbPersonType.FormattingEnabled = true;
             cmbPersonType.Items.AddRange(new object[] { "Cliente", "Empleado", "Usuario" });
-            cmbPersonType.Location = new Point(20, 355);
+            cmbPersonType.Location = new Point(18, 290);
             cmbPersonType.Name = "cmbPersonType";
-            cmbPersonType.Size = new Size(315, 28);
+            cmbPersonType.Size = new Size(318, 28);
             cmbPersonType.TabIndex = 12;
             // 
             // lblPersonType
             // 
-            lblPersonType.AutoSize = true;
-            lblPersonType.Font = new Font("Segoe UI", 8.5F);
+            lblPersonType.AutoSize = false;
+            lblPersonType.Font = new Font("Segoe UI", 8.75F);
             lblPersonType.ForeColor = Color.FromArgb(75, 85, 99);
-            lblPersonType.Location = new Point(20, 332);
+            lblPersonType.Location = new Point(18, 266);
             lblPersonType.Name = "lblPersonType";
-            lblPersonType.Size = new Size(138, 20);
+            lblPersonType.Size = new Size(318, 22);
             lblPersonType.TabIndex = 11;
             lblPersonType.Text = "Tipo de Persona (*):";
+            lblPersonType.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtPhone
             // 
             txtPhone.Font = new Font("Segoe UI", 9F);
-            txtPhone.Location = new Point(185, 290);
+            txtPhone.Location = new Point(184, 176);
             txtPhone.Name = "txtPhone";
             txtPhone.PlaceholderText = "8888-8888";
-            txtPhone.Size = new Size(150, 27);
+            txtPhone.Size = new Size(152, 27);
             txtPhone.TabIndex = 10;
             // 
             // lblPhone
             // 
-            lblPhone.AutoSize = true;
-            lblPhone.Font = new Font("Segoe UI", 8.5F);
+            lblPhone.AutoSize = false;
+            lblPhone.Font = new Font("Segoe UI", 8.75F);
             lblPhone.ForeColor = Color.FromArgb(75, 85, 99);
-            lblPhone.Location = new Point(185, 267);
+            lblPhone.Location = new Point(184, 152);
             lblPhone.Name = "lblPhone";
-            lblPhone.Size = new Size(68, 20);
+            lblPhone.Size = new Size(152, 22);
             lblPhone.TabIndex = 9;
             lblPhone.Text = "Teléfono:";
+            lblPhone.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtEmail
             // 
             txtEmail.Font = new Font("Segoe UI", 9F);
-            txtEmail.Location = new Point(20, 290);
+            txtEmail.Location = new Point(18, 234);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "correo@ejemplo.com";
-            txtEmail.Size = new Size(150, 27);
+            txtEmail.Size = new Size(318, 27);
             txtEmail.TabIndex = 8;
             // 
             // lblEmail
             // 
-            lblEmail.AutoSize = true;
-            lblEmail.Font = new Font("Segoe UI", 8.5F);
+            lblEmail.AutoSize = false;
+            lblEmail.Font = new Font("Segoe UI", 8.75F);
             lblEmail.ForeColor = Color.FromArgb(75, 85, 99);
-            lblEmail.Location = new Point(20, 267);
+            lblEmail.Location = new Point(18, 210);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(56, 20);
+            lblEmail.Size = new Size(318, 22);
             lblEmail.TabIndex = 7;
-            lblEmail.Text = "Correo:";
+            lblEmail.Text = "Correo Electrónico:";
+            lblEmail.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtIdentification
             // 
             txtIdentification.Font = new Font("Segoe UI", 9F);
-            txtIdentification.Location = new Point(20, 220);
+            txtIdentification.Location = new Point(18, 176);
             txtIdentification.Name = "txtIdentification";
             txtIdentification.PlaceholderText = "Ej. 1-1234-5678";
-            txtIdentification.Size = new Size(315, 27);
+            txtIdentification.Size = new Size(152, 27);
             txtIdentification.TabIndex = 6;
             // 
             // lblIdentification
             // 
-            lblIdentification.AutoSize = true;
-            lblIdentification.Font = new Font("Segoe UI", 8.5F);
+            lblIdentification.AutoSize = false;
+            lblIdentification.Font = new Font("Segoe UI", 8.75F);
             lblIdentification.ForeColor = Color.FromArgb(75, 85, 99);
-            lblIdentification.Location = new Point(20, 197);
+            lblIdentification.Location = new Point(18, 152);
             lblIdentification.Name = "lblIdentification";
-            lblIdentification.Size = new Size(122, 20);
+            lblIdentification.Size = new Size(152, 22);
             lblIdentification.TabIndex = 5;
             lblIdentification.Text = "Identificación (*):";
+            lblIdentification.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtFullName
             // 
             txtFullName.Font = new Font("Segoe UI", 9F);
-            txtFullName.Location = new Point(20, 150);
+            txtFullName.Location = new Point(18, 120);
             txtFullName.Name = "txtFullName";
             txtFullName.PlaceholderText = "Nombre y apellidos";
-            txtFullName.Size = new Size(315, 27);
+            txtFullName.Size = new Size(318, 27);
             txtFullName.TabIndex = 4;
             // 
             // lblFullName
             // 
-            lblFullName.AutoSize = true;
-            lblFullName.Font = new Font("Segoe UI", 8.5F);
+            lblFullName.AutoSize = false;
+            lblFullName.Font = new Font("Segoe UI", 8.75F);
             lblFullName.ForeColor = Color.FromArgb(75, 85, 99);
-            lblFullName.Location = new Point(20, 127);
+            lblFullName.Location = new Point(18, 96);
             lblFullName.Name = "lblFullName";
-            lblFullName.Size = new Size(154, 20);
+            lblFullName.Size = new Size(318, 22);
             lblFullName.TabIndex = 3;
             lblFullName.Text = "Nombre Completo (*):";
+            lblFullName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtClientId
             // 
             txtClientId.BackColor = Color.FromArgb(243, 244, 246);
             txtClientId.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
-            txtClientId.Location = new Point(20, 80);
+            txtClientId.Location = new Point(18, 64);
             txtClientId.Name = "txtClientId";
             txtClientId.ReadOnly = true;
-            txtClientId.Size = new Size(100, 27);
+            txtClientId.Size = new Size(110, 27);
             txtClientId.TabIndex = 2;
             txtClientId.Text = "0";
             // 
             // lblClientId
             // 
-            lblClientId.AutoSize = true;
-            lblClientId.Font = new Font("Segoe UI", 8.5F);
+            lblClientId.AutoSize = false;
+            lblClientId.Font = new Font("Segoe UI", 8.75F);
             lblClientId.ForeColor = Color.FromArgb(75, 85, 99);
-            lblClientId.Location = new Point(20, 57);
+            lblClientId.Location = new Point(18, 40);
             lblClientId.Name = "lblClientId";
-            lblClientId.Size = new Size(27, 20);
+            lblClientId.Size = new Size(120, 22);
             lblClientId.TabIndex = 1;
-            lblClientId.Text = "ID:";
+            lblClientId.Text = "ID Persona:";
+            lblClientId.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblDetailHeader
             // 
-            lblDetailHeader.AutoSize = true;
+            lblDetailHeader.AutoSize = false;
             lblDetailHeader.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
-            lblDetailHeader.Location = new Point(15, 15);
+            lblDetailHeader.Location = new Point(16, 10);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(225, 25);
+            lblDetailHeader.Size = new Size(320, 26);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Datos de Cliente / Persona";
+            lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlGrid
             // 
             pnlGrid.Controls.Add(dgvClients);
             pnlGrid.Dock = DockStyle.Fill;
-            pnlGrid.Location = new Point(15, 80);
+            pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
-            pnlGrid.Padding = new Padding(0, 0, 15, 0);
-            pnlGrid.Size = new Size(705, 605);
+            pnlGrid.Padding = new Padding(0, 10, 12, 0);
+            pnlGrid.Size = new Size(645, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvClients
@@ -408,7 +418,7 @@ namespace ManagementSystem.UI.Forms
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvClients.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvClients.ColumnHeadersHeight = 35;
+            dgvClients.ColumnHeadersHeight = 42;
             dgvClients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvClients.Columns.AddRange(new DataGridViewColumn[] { colId, colIdentificacion, colNombre, colTipo, colTelefono, colCredito, colEstado });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -422,29 +432,29 @@ namespace ManagementSystem.UI.Forms
             dgvClients.Dock = DockStyle.Fill;
             dgvClients.EnableHeadersVisualStyles = false;
             dgvClients.GridColor = Color.FromArgb(229, 231, 235);
-            dgvClients.Location = new Point(0, 0);
+            dgvClients.Location = new Point(0, 10);
             dgvClients.MultiSelect = false;
             dgvClients.Name = "dgvClients";
             dgvClients.ReadOnly = true;
             dgvClients.RowHeadersVisible = false;
             dgvClients.RowHeadersWidth = 51;
-            dgvClients.RowTemplate.Height = 30;
+            dgvClients.RowTemplate.Height = 32;
             dgvClients.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvClients.Size = new Size(690, 605);
+            dgvClients.Size = new Size(633, 586);
             dgvClients.TabIndex = 0;
             dgvClients.SelectionChanged += dgvClients_SelectionChanged;
             // 
             // colId
             // 
-            colId.FillWeight = 40F;
+            colId.FillWeight = 38F;
             colId.HeaderText = "ID";
-            colId.MinimumWidth = 40;
+            colId.MinimumWidth = 36;
             colId.Name = "colId";
             colId.ReadOnly = true;
             // 
             // colIdentificacion
             // 
-            colIdentificacion.FillWeight = 90F;
+            colIdentificacion.FillWeight = 92F;
             colIdentificacion.HeaderText = "Identificación";
             colIdentificacion.MinimumWidth = 80;
             colIdentificacion.Name = "colIdentificacion";
@@ -452,50 +462,50 @@ namespace ManagementSystem.UI.Forms
             // 
             // colNombre
             // 
-            colNombre.FillWeight = 150F;
+            colNombre.FillWeight = 155F;
             colNombre.HeaderText = "Nombre Completo";
-            colNombre.MinimumWidth = 120;
+            colNombre.MinimumWidth = 115;
             colNombre.Name = "colNombre";
             colNombre.ReadOnly = true;
             // 
             // colTipo
             // 
-            colTipo.FillWeight = 80F;
+            colTipo.FillWeight = 75F;
             colTipo.HeaderText = "Tipo";
-            colTipo.MinimumWidth = 70;
+            colTipo.MinimumWidth = 65;
             colTipo.Name = "colTipo";
             colTipo.ReadOnly = true;
             // 
             // colTelefono
             // 
-            colTelefono.FillWeight = 80F;
+            colTelefono.FillWeight = 78F;
             colTelefono.HeaderText = "Teléfono";
-            colTelefono.MinimumWidth = 70;
+            colTelefono.MinimumWidth = 68;
             colTelefono.Name = "colTelefono";
             colTelefono.ReadOnly = true;
             // 
             // colCredito
             // 
-            colCredito.FillWeight = 85F;
+            colCredito.FillWeight = 90F;
             colCredito.HeaderText = "Crédito / Salario";
-            colCredito.MinimumWidth = 75;
+            colCredito.MinimumWidth = 80;
             colCredito.Name = "colCredito";
             colCredito.ReadOnly = true;
             // 
             // colEstado
             // 
-            colEstado.FillWeight = 60F;
+            colEstado.FillWeight = 62F;
             colEstado.HeaderText = "Estado";
-            colEstado.MinimumWidth = 55;
+            colEstado.MinimumWidth = 56;
             colEstado.Name = "colEstado";
             colEstado.ReadOnly = true;
             // 
             // ClientesForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 244, 246);
-            ClientSize = new Size(1100, 700);
+            ClientSize = new Size(1020, 680);
             Controls.Add(pnlGrid);
             Controls.Add(pnlDetail);
             Controls.Add(pnlTop);
@@ -503,7 +513,7 @@ namespace ManagementSystem.UI.Forms
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ClientesForm";
-            Padding = new Padding(15);
+            Padding = new Padding(10);
             Text = "Mantenimiento de Clientes y Personas";
             Load += ClientesForm_Load;
             pnlTop.ResumeLayout(false);

@@ -72,7 +72,7 @@ namespace ManagementSystem.UI.Forms
             pnlSidebar.Location = new Point(0, 0);
             pnlSidebar.Margin = new Padding(3, 4, 3, 4);
             pnlSidebar.Name = "pnlSidebar";
-            pnlSidebar.Size = new Size(230, 700);
+            pnlSidebar.Size = new Size(240, 760);
             pnlSidebar.TabIndex = 0;
             // 
             // btnLogout
@@ -84,11 +84,11 @@ namespace ManagementSystem.UI.Forms
             btnLogout.FlatStyle = FlatStyle.Flat;
             btnLogout.Font = new Font("Segoe UI", 9.5F);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(0, 650);
+            btnLogout.Location = new Point(0, 710);
             btnLogout.Margin = new Padding(0);
             btnLogout.Name = "btnLogout";
-            btnLogout.Padding = new Padding(20, 0, 0, 0);
-            btnLogout.Size = new Size(230, 50);
+            btnLogout.Padding = new Padding(20, 0, 10, 0);
+            btnLogout.Size = new Size(240, 50);
             btnLogout.TabIndex = 9;
             btnLogout.Text = "Cerrar Sesión";
             btnLogout.TextAlign = ContentAlignment.MiddleLeft;
@@ -103,11 +103,11 @@ namespace ManagementSystem.UI.Forms
             btnHistory.FlatStyle = FlatStyle.Flat;
             btnHistory.Font = new Font("Segoe UI", 9.5F);
             btnHistory.ForeColor = Color.White;
-            btnHistory.Location = new Point(0, 395);
+            btnHistory.Location = new Point(0, 412);
             btnHistory.Margin = new Padding(0);
             btnHistory.Name = "btnHistory";
-            btnHistory.Padding = new Padding(20, 0, 0, 0);
-            btnHistory.Size = new Size(230, 45);
+            btnHistory.Padding = new Padding(20, 0, 10, 0);
+            btnHistory.Size = new Size(240, 46);
             btnHistory.TabIndex = 8;
             btnHistory.Text = "Historial";
             btnHistory.TextAlign = ContentAlignment.MiddleLeft;
@@ -122,11 +122,11 @@ namespace ManagementSystem.UI.Forms
             btnReports.FlatStyle = FlatStyle.Flat;
             btnReports.Font = new Font("Segoe UI", 9.5F);
             btnReports.ForeColor = Color.White;
-            btnReports.Location = new Point(0, 350);
+            btnReports.Location = new Point(0, 366);
             btnReports.Margin = new Padding(0);
             btnReports.Name = "btnReports";
-            btnReports.Padding = new Padding(20, 0, 0, 0);
-            btnReports.Size = new Size(230, 45);
+            btnReports.Padding = new Padding(20, 0, 10, 0);
+            btnReports.Size = new Size(240, 46);
             btnReports.TabIndex = 7;
             btnReports.Text = "Reportes";
             btnReports.TextAlign = ContentAlignment.MiddleLeft;
@@ -141,11 +141,11 @@ namespace ManagementSystem.UI.Forms
             btnOrders.FlatStyle = FlatStyle.Flat;
             btnOrders.Font = new Font("Segoe UI", 9.5F);
             btnOrders.ForeColor = Color.White;
-            btnOrders.Location = new Point(0, 305);
+            btnOrders.Location = new Point(0, 320);
             btnOrders.Margin = new Padding(0);
             btnOrders.Name = "btnOrders";
-            btnOrders.Padding = new Padding(20, 0, 0, 0);
-            btnOrders.Size = new Size(230, 45);
+            btnOrders.Padding = new Padding(20, 0, 10, 0);
+            btnOrders.Size = new Size(240, 46);
             btnOrders.TabIndex = 6;
             btnOrders.Text = "Pedidos";
             btnOrders.TextAlign = ContentAlignment.MiddleLeft;
@@ -160,11 +160,11 @@ namespace ManagementSystem.UI.Forms
             btnSales.FlatStyle = FlatStyle.Flat;
             btnSales.Font = new Font("Segoe UI", 9.5F);
             btnSales.ForeColor = Color.White;
-            btnSales.Location = new Point(0, 260);
+            btnSales.Location = new Point(0, 274);
             btnSales.Margin = new Padding(0);
             btnSales.Name = "btnSales";
-            btnSales.Padding = new Padding(20, 0, 0, 0);
-            btnSales.Size = new Size(230, 45);
+            btnSales.Padding = new Padding(20, 0, 10, 0);
+            btnSales.Size = new Size(240, 46);
             btnSales.TabIndex = 5;
             btnSales.Text = "Registrar Venta";
             btnSales.TextAlign = ContentAlignment.MiddleLeft;
@@ -179,11 +179,11 @@ namespace ManagementSystem.UI.Forms
             btnClients.FlatStyle = FlatStyle.Flat;
             btnClients.Font = new Font("Segoe UI", 9.5F);
             btnClients.ForeColor = Color.White;
-            btnClients.Location = new Point(0, 215);
+            btnClients.Location = new Point(0, 228);
             btnClients.Margin = new Padding(0);
             btnClients.Name = "btnClients";
-            btnClients.Padding = new Padding(20, 0, 0, 0);
-            btnClients.Size = new Size(230, 45);
+            btnClients.Padding = new Padding(20, 0, 10, 0);
+            btnClients.Size = new Size(240, 46);
             btnClients.TabIndex = 4;
             btnClients.Text = "Clientes y Personas";
             btnClients.TextAlign = ContentAlignment.MiddleLeft;
@@ -198,11 +198,11 @@ namespace ManagementSystem.UI.Forms
             btnCategories.FlatStyle = FlatStyle.Flat;
             btnCategories.Font = new Font("Segoe UI", 9.5F);
             btnCategories.ForeColor = Color.White;
-            btnCategories.Location = new Point(0, 170);
+            btnCategories.Location = new Point(0, 182);
             btnCategories.Margin = new Padding(0);
             btnCategories.Name = "btnCategories";
-            btnCategories.Padding = new Padding(20, 0, 0, 0);
-            btnCategories.Size = new Size(230, 45);
+            btnCategories.Padding = new Padding(20, 0, 10, 0);
+            btnCategories.Size = new Size(240, 46);
             btnCategories.TabIndex = 3;
             btnCategories.Text = "Categorías";
             btnCategories.TextAlign = ContentAlignment.MiddleLeft;
@@ -217,11 +217,11 @@ namespace ManagementSystem.UI.Forms
             btnProducts.FlatStyle = FlatStyle.Flat;
             btnProducts.Font = new Font("Segoe UI", 9.5F);
             btnProducts.ForeColor = Color.White;
-            btnProducts.Location = new Point(0, 125);
+            btnProducts.Location = new Point(0, 136);
             btnProducts.Margin = new Padding(0);
             btnProducts.Name = "btnProducts";
-            btnProducts.Padding = new Padding(20, 0, 0, 0);
-            btnProducts.Size = new Size(230, 45);
+            btnProducts.Padding = new Padding(20, 0, 10, 0);
+            btnProducts.Size = new Size(240, 46);
             btnProducts.TabIndex = 2;
             btnProducts.Text = "Productos";
             btnProducts.TextAlign = ContentAlignment.MiddleLeft;
@@ -237,11 +237,11 @@ namespace ManagementSystem.UI.Forms
             btnDashboard.FlatStyle = FlatStyle.Flat;
             btnDashboard.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(0, 80);
+            btnDashboard.Location = new Point(0, 90);
             btnDashboard.Margin = new Padding(0);
             btnDashboard.Name = "btnDashboard";
-            btnDashboard.Padding = new Padding(20, 0, 0, 0);
-            btnDashboard.Size = new Size(230, 45);
+            btnDashboard.Padding = new Padding(20, 0, 10, 0);
+            btnDashboard.Size = new Size(240, 46);
             btnDashboard.TabIndex = 1;
             btnDashboard.Text = "Inicio";
             btnDashboard.TextAlign = ContentAlignment.MiddleLeft;
@@ -257,30 +257,32 @@ namespace ManagementSystem.UI.Forms
             pnlLogo.Location = new Point(0, 0);
             pnlLogo.Margin = new Padding(3, 4, 3, 4);
             pnlLogo.Name = "pnlLogo";
-            pnlLogo.Size = new Size(230, 80);
+            pnlLogo.Size = new Size(240, 90);
             pnlLogo.TabIndex = 0;
             // 
             // lblLogoSubtitle
             // 
-            lblLogoSubtitle.AutoSize = true;
-            lblLogoSubtitle.Font = new Font("Segoe UI", 8F);
+            lblLogoSubtitle.AutoSize = false;
+            lblLogoSubtitle.Font = new Font("Segoe UI", 8.75F);
             lblLogoSubtitle.ForeColor = Color.FromArgb(209, 213, 219);
-            lblLogoSubtitle.Location = new Point(20, 45);
+            lblLogoSubtitle.Location = new Point(18, 52);
             lblLogoSubtitle.Name = "lblLogoSubtitle";
-            lblLogoSubtitle.Size = new Size(127, 19);
+            lblLogoSubtitle.Size = new Size(204, 24);
             lblLogoSubtitle.TabIndex = 1;
             lblLogoSubtitle.Text = "Inventario y Ventas";
+            lblLogoSubtitle.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblLogoTitle
             // 
-            lblLogoTitle.AutoSize = true;
-            lblLogoTitle.Font = new Font("Segoe UI", 11.5F, FontStyle.Bold);
+            lblLogoTitle.AutoSize = false;
+            lblLogoTitle.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblLogoTitle.ForeColor = Color.White;
-            lblLogoTitle.Location = new Point(18, 18);
+            lblLogoTitle.Location = new Point(18, 16);
             lblLogoTitle.Name = "lblLogoTitle";
-            lblLogoTitle.Size = new Size(187, 28);
+            lblLogoTitle.Size = new Size(204, 32);
             lblLogoTitle.TabIndex = 0;
-            lblLogoTitle.Text = "SISTEMA GESTIÓN";
+            lblLogoTitle.Text = "SISTEMA DE GESTIÓN";
+            lblLogoTitle.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlHeader
             // 
@@ -288,46 +290,48 @@ namespace ManagementSystem.UI.Forms
             pnlHeader.Controls.Add(lblUserInfo);
             pnlHeader.Controls.Add(lblSectionTitle);
             pnlHeader.Dock = DockStyle.Top;
-            pnlHeader.Location = new Point(230, 0);
+            pnlHeader.Location = new Point(240, 0);
             pnlHeader.Margin = new Padding(3, 4, 3, 4);
             pnlHeader.Name = "pnlHeader";
-            pnlHeader.Size = new Size(870, 70);
+            pnlHeader.Size = new Size(1040, 68);
             pnlHeader.TabIndex = 1;
             // 
             // lblUserInfo
             // 
             lblUserInfo.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            lblUserInfo.AutoSize = true;
-            lblUserInfo.Font = new Font("Segoe UI", 9F);
+            lblUserInfo.AutoSize = false;
+            lblUserInfo.Font = new Font("Segoe UI", 9.25F);
             lblUserInfo.ForeColor = Color.FromArgb(75, 85, 99);
-            lblUserInfo.Location = new Point(600, 26);
+            lblUserInfo.Location = new Point(580, 20);
             lblUserInfo.Name = "lblUserInfo";
-            lblUserInfo.Size = new Size(269, 20);
+            lblUserInfo.Size = new Size(436, 28);
             lblUserInfo.TabIndex = 1;
             lblUserInfo.Text = "Usuario: admin | Rol: Administrador";
             lblUserInfo.TextAlign = ContentAlignment.MiddleRight;
             // 
             // lblSectionTitle
             // 
-            lblSectionTitle.AutoSize = true;
-            lblSectionTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblSectionTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblSectionTitle.AutoSize = false;
+            lblSectionTitle.Font = new Font("Segoe UI", 13.5F, FontStyle.Bold);
             lblSectionTitle.ForeColor = Color.FromArgb(30, 58, 138);
-            lblSectionTitle.Location = new Point(25, 18);
+            lblSectionTitle.Location = new Point(22, 16);
             lblSectionTitle.Name = "lblSectionTitle";
-            lblSectionTitle.Size = new Size(227, 32);
+            lblSectionTitle.Size = new Size(540, 36);
             lblSectionTitle.TabIndex = 0;
             lblSectionTitle.Text = "Inicio";
+            lblSectionTitle.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlContent
             // 
             pnlContent.BackColor = Color.FromArgb(243, 244, 246);
             pnlContent.Controls.Add(pnlWelcome);
             pnlContent.Dock = DockStyle.Fill;
-            pnlContent.Location = new Point(230, 70);
+            pnlContent.Location = new Point(240, 68);
             pnlContent.Margin = new Padding(3, 4, 3, 4);
             pnlContent.Name = "pnlContent";
-            pnlContent.Padding = new Padding(25);
-            pnlContent.Size = new Size(870, 630);
+            pnlContent.Padding = new Padding(12);
+            pnlContent.Size = new Size(1040, 692);
             pnlContent.TabIndex = 2;
             // 
             // pnlWelcome
@@ -336,57 +340,57 @@ namespace ManagementSystem.UI.Forms
             pnlWelcome.BackColor = Color.White;
             pnlWelcome.Controls.Add(lblWelcomeDesc);
             pnlWelcome.Controls.Add(lblWelcomeTitle);
-            pnlWelcome.Location = new Point(25, 25);
+            pnlWelcome.Location = new Point(16, 16);
             pnlWelcome.Margin = new Padding(3, 4, 3, 4);
             pnlWelcome.Name = "pnlWelcome";
             pnlWelcome.Padding = new Padding(25);
-            pnlWelcome.Size = new Size(820, 160);
+            pnlWelcome.Size = new Size(1008, 170);
             pnlWelcome.TabIndex = 0;
             // 
             // lblWelcomeDesc
             // 
             lblWelcomeDesc.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lblWelcomeDesc.Font = new Font("Segoe UI", 9.5F);
+            lblWelcomeDesc.AutoSize = false;
+            lblWelcomeDesc.Font = new Font("Segoe UI", 10F);
             lblWelcomeDesc.ForeColor = Color.FromArgb(75, 85, 99);
             lblWelcomeDesc.Location = new Point(25, 70);
             lblWelcomeDesc.Name = "lblWelcomeDesc";
-            lblWelcomeDesc.Size = new Size(770, 65);
+            lblWelcomeDesc.Size = new Size(958, 72);
             lblWelcomeDesc.TabIndex = 1;
-            lblWelcomeDesc.Text = "Seleccione una opción del menú lateral para administrar el inventario, clientes, ventas, pedidos y reportes.";
+            lblWelcomeDesc.Text = "Seleccione una opción del menú lateral para administrar el inventario, categorías, clientes, ventas, pedidos pendientes y reportes.";
             // 
             // lblWelcomeTitle
             // 
-            lblWelcomeTitle.AutoSize = true;
+            lblWelcomeTitle.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lblWelcomeTitle.AutoSize = false;
             lblWelcomeTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
             lblWelcomeTitle.ForeColor = Color.FromArgb(30, 58, 138);
-            lblWelcomeTitle.Location = new Point(25, 25);
+            lblWelcomeTitle.Location = new Point(25, 22);
             lblWelcomeTitle.Name = "lblWelcomeTitle";
-            lblWelcomeTitle.Size = new Size(409, 32);
+            lblWelcomeTitle.Size = new Size(958, 38);
             lblWelcomeTitle.TabIndex = 0;
             lblWelcomeTitle.Text = "Bienvenido al Sistema de Gestión";
+            lblWelcomeTitle.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1100, 700);
+            ClientSize = new Size(1280, 760);
             Controls.Add(pnlContent);
             Controls.Add(pnlHeader);
             Controls.Add(pnlSidebar);
             Font = new Font("Segoe UI", 9F);
             Margin = new Padding(3, 4, 3, 4);
-            MinimumSize = new Size(1000, 600);
+            MinimumSize = new Size(1150, 680);
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Sistema de Gestión de Inventario y Ventas";
             pnlSidebar.ResumeLayout(false);
             pnlLogo.ResumeLayout(false);
-            pnlLogo.PerformLayout();
             pnlHeader.ResumeLayout(false);
-            pnlHeader.PerformLayout();
             pnlContent.ResumeLayout(false);
             pnlWelcome.ResumeLayout(false);
-            pnlWelcome.PerformLayout();
             ResumeLayout(false);
         }
 

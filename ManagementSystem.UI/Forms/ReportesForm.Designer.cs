@@ -63,33 +63,35 @@ namespace ManagementSystem.UI.Forms
             pnlTop.Controls.Add(cmbReportType);
             pnlTop.Controls.Add(lblReportType);
             pnlTop.Dock = DockStyle.Top;
-            pnlTop.Location = new Point(15, 15);
+            pnlTop.Location = new Point(10, 10);
             pnlTop.Margin = new Padding(3, 4, 3, 4);
             pnlTop.Name = "pnlTop";
             pnlTop.Padding = new Padding(15);
-            pnlTop.Size = new Size(1070, 65);
+            pnlTop.Size = new Size(1000, 64);
             pnlTop.TabIndex = 0;
             // 
             // txtSearch
             // 
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtSearch.Font = new Font("Segoe UI", 9.5F);
-            txtSearch.Location = new Point(625, 18);
+            txtSearch.Location = new Point(580, 18);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Filtrar por coincidencia...";
-            txtSearch.Size = new Size(250, 29);
+            txtSearch.Size = new Size(400, 29);
             txtSearch.TabIndex = 3;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // lblSearch
             // 
-            lblSearch.AutoSize = true;
+            lblSearch.AutoSize = false;
             lblSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblSearch.ForeColor = Color.FromArgb(75, 85, 99);
-            lblSearch.Location = new Point(505, 21);
+            lblSearch.Location = new Point(468, 18);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(112, 20);
+            lblSearch.Size = new Size(108, 28);
             lblSearch.TabIndex = 2;
             lblSearch.Text = "Buscar Texto:";
+            lblSearch.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbReportType
             // 
@@ -102,22 +104,23 @@ namespace ManagementSystem.UI.Forms
                 "Productos con Stock Bajo",
                 "Total de Ventas por Cliente"
             });
-            cmbReportType.Location = new Point(165, 18);
+            cmbReportType.Location = new Point(150, 18);
             cmbReportType.Name = "cmbReportType";
-            cmbReportType.Size = new Size(315, 28);
+            cmbReportType.Size = new Size(300, 28);
             cmbReportType.TabIndex = 1;
             cmbReportType.SelectedIndexChanged += cmbReportType_SelectedIndexChanged;
             // 
             // lblReportType
             // 
-            lblReportType.AutoSize = true;
+            lblReportType.AutoSize = false;
             lblReportType.Font = new Font("Segoe UI", 9.5F, FontStyle.Bold);
             lblReportType.ForeColor = Color.FromArgb(30, 58, 138);
-            lblReportType.Location = new Point(15, 21);
+            lblReportType.Location = new Point(15, 18);
             lblReportType.Name = "lblReportType";
-            lblReportType.Size = new Size(142, 21);
+            lblReportType.Size = new Size(132, 28);
             lblReportType.TabIndex = 0;
             lblReportType.Text = "Tipo de Reporte:";
+            lblReportType.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlDetail
             // 
@@ -130,86 +133,102 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblStatCount);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(720, 80);
+            pnlDetail.Location = new Point(655, 74);
             pnlDetail.Name = "pnlDetail";
-            pnlDetail.Padding = new Padding(15);
-            pnlDetail.Size = new Size(365, 605);
+            pnlDetail.Padding = new Padding(16);
+            pnlDetail.Size = new Size(355, 596);
             pnlDetail.TabIndex = 1;
             // 
             // lblStatMin
             // 
-            lblStatMin.AutoSize = true;
+            lblStatMin.AutoSize = false;
+            lblStatMin.BackColor = Color.FromArgb(249, 250, 251);
             lblStatMin.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblStatMin.ForeColor = Color.FromArgb(55, 65, 81);
-            lblStatMin.Location = new Point(20, 250);
+            lblStatMin.Location = new Point(18, 254);
             lblStatMin.Name = "lblStatMin";
-            lblStatMin.Size = new Size(165, 23);
+            lblStatMin.Padding = new Padding(10, 0, 10, 0);
+            lblStatMin.Size = new Size(318, 40);
             lblStatMin.TabIndex = 5;
             lblStatMin.Text = "Valor mínimo: $0.00";
+            lblStatMin.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatMax
             // 
-            lblStatMax.AutoSize = true;
+            lblStatMax.AutoSize = false;
+            lblStatMax.BackColor = Color.FromArgb(249, 250, 251);
             lblStatMax.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblStatMax.ForeColor = Color.FromArgb(55, 65, 81);
-            lblStatMax.Location = new Point(20, 205);
+            lblStatMax.Location = new Point(18, 204);
             lblStatMax.Name = "lblStatMax";
-            lblStatMax.Size = new Size(170, 23);
+            lblStatMax.Padding = new Padding(10, 0, 10, 0);
+            lblStatMax.Size = new Size(318, 40);
             lblStatMax.TabIndex = 4;
             lblStatMax.Text = "Valor máximo: $0.00";
+            lblStatMax.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatAvg
             // 
-            lblStatAvg.AutoSize = true;
+            lblStatAvg.AutoSize = false;
+            lblStatAvg.BackColor = Color.FromArgb(240, 253, 244);
             lblStatAvg.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblStatAvg.ForeColor = Color.FromArgb(16, 185, 129);
-            lblStatAvg.Location = new Point(20, 160);
+            lblStatAvg.Location = new Point(18, 154);
             lblStatAvg.Name = "lblStatAvg";
-            lblStatAvg.Size = new Size(185, 23);
+            lblStatAvg.Padding = new Padding(10, 0, 10, 0);
+            lblStatAvg.Size = new Size(318, 40);
             lblStatAvg.TabIndex = 3;
             lblStatAvg.Text = "Promedio: $0.00";
+            lblStatAvg.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatSum
             // 
-            lblStatSum.AutoSize = true;
-            lblStatSum.Font = new Font("Segoe UI", 10.5F, FontStyle.Bold);
+            lblStatSum.AutoSize = false;
+            lblStatSum.BackColor = Color.FromArgb(239, 246, 255);
+            lblStatSum.Font = new Font("Segoe UI", 10.25F, FontStyle.Bold);
             lblStatSum.ForeColor = Color.FromArgb(30, 58, 138);
-            lblStatSum.Location = new Point(20, 115);
+            lblStatSum.Location = new Point(18, 104);
             lblStatSum.Name = "lblStatSum";
-            lblStatSum.Size = new Size(175, 24);
+            lblStatSum.Padding = new Padding(10, 0, 10, 0);
+            lblStatSum.Size = new Size(318, 40);
             lblStatSum.TabIndex = 2;
             lblStatSum.Text = "Sumatoria total: $0.00";
+            lblStatSum.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatCount
             // 
-            lblStatCount.AutoSize = true;
+            lblStatCount.AutoSize = false;
+            lblStatCount.BackColor = Color.FromArgb(249, 250, 251);
             lblStatCount.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             lblStatCount.ForeColor = Color.FromArgb(55, 65, 81);
-            lblStatCount.Location = new Point(20, 70);
+            lblStatCount.Location = new Point(18, 54);
             lblStatCount.Name = "lblStatCount";
-            lblStatCount.Size = new Size(160, 23);
+            lblStatCount.Padding = new Padding(10, 0, 10, 0);
+            lblStatCount.Size = new Size(318, 40);
             lblStatCount.TabIndex = 1;
             lblStatCount.Text = "Cantidad de registros: 0";
+            lblStatCount.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblDetailHeader
             // 
-            lblDetailHeader.AutoSize = true;
+            lblDetailHeader.AutoSize = false;
             lblDetailHeader.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
-            lblDetailHeader.Location = new Point(15, 15);
+            lblDetailHeader.Location = new Point(16, 14);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(218, 25);
+            lblDetailHeader.Size = new Size(320, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Resumen Estadístico";
+            lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // pnlGrid
             // 
             pnlGrid.Controls.Add(dgvReports);
             pnlGrid.Dock = DockStyle.Fill;
-            pnlGrid.Location = new Point(15, 80);
+            pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
-            pnlGrid.Padding = new Padding(0, 0, 15, 0);
-            pnlGrid.Size = new Size(705, 605);
+            pnlGrid.Padding = new Padding(0, 10, 12, 0);
+            pnlGrid.Size = new Size(645, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvReports
@@ -231,7 +250,7 @@ namespace ManagementSystem.UI.Forms
             dataGridViewCellStyle1.SelectionForeColor = Color.White;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dgvReports.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvReports.ColumnHeadersHeight = 35;
+            dgvReports.ColumnHeadersHeight = 42;
             dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvReports.Columns.AddRange(new DataGridViewColumn[] { colCol1, colCol2, colCol3, colCol4, colCol5 });
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -245,58 +264,63 @@ namespace ManagementSystem.UI.Forms
             dgvReports.Dock = DockStyle.Fill;
             dgvReports.EnableHeadersVisualStyles = false;
             dgvReports.GridColor = Color.FromArgb(229, 231, 235);
-            dgvReports.Location = new Point(0, 0);
+            dgvReports.Location = new Point(0, 10);
             dgvReports.MultiSelect = false;
             dgvReports.Name = "dgvReports";
             dgvReports.ReadOnly = true;
             dgvReports.RowHeadersVisible = false;
             dgvReports.RowHeadersWidth = 51;
-            dgvReports.RowTemplate.Height = 30;
+            dgvReports.RowTemplate.Height = 32;
             dgvReports.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvReports.Size = new Size(690, 605);
+            dgvReports.Size = new Size(633, 586);
             dgvReports.TabIndex = 0;
             // 
             // colCol1
             // 
-            colCol1.FillWeight = 50F;
+            colCol1.FillWeight = 48F;
             colCol1.HeaderText = "ID";
+            colCol1.MinimumWidth = 45;
             colCol1.Name = "colCol1";
             colCol1.ReadOnly = true;
             // 
             // colCol2
             // 
-            colCol2.FillWeight = 160F;
+            colCol2.FillWeight = 165F;
             colCol2.HeaderText = "Descripción";
+            colCol2.MinimumWidth = 120;
             colCol2.Name = "colCol2";
             colCol2.ReadOnly = true;
             // 
             // colCol3
             // 
-            colCol3.FillWeight = 110F;
+            colCol3.FillWeight = 115F;
             colCol3.HeaderText = "Categoría / Detalle";
+            colCol3.MinimumWidth = 95;
             colCol3.Name = "colCol3";
             colCol3.ReadOnly = true;
             // 
             // colCol4
             // 
-            colCol4.FillWeight = 80F;
+            colCol4.FillWeight = 85F;
             colCol4.HeaderText = "Cantidad / Stock";
+            colCol4.MinimumWidth = 80;
             colCol4.Name = "colCol4";
             colCol4.ReadOnly = true;
             // 
             // colCol5
             // 
-            colCol5.FillWeight = 90F;
+            colCol5.FillWeight = 95F;
             colCol5.HeaderText = "Monto / Precio";
+            colCol5.MinimumWidth = 85;
             colCol5.Name = "colCol5";
             colCol5.ReadOnly = true;
             // 
             // ReportesForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(243, 244, 246);
-            ClientSize = new Size(1100, 700);
+            ClientSize = new Size(1020, 680);
             Controls.Add(pnlGrid);
             Controls.Add(pnlDetail);
             Controls.Add(pnlTop);
@@ -304,13 +328,12 @@ namespace ManagementSystem.UI.Forms
             FormBorderStyle = FormBorderStyle.None;
             Margin = new Padding(3, 4, 3, 4);
             Name = "ReportesForm";
-            Padding = new Padding(15);
+            Padding = new Padding(10);
             Text = "Reportes y Consultas";
             Load += ReportesForm_Load;
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
             pnlDetail.ResumeLayout(false);
-            pnlDetail.PerformLayout();
             pnlGrid.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvReports).EndInit();
             ResumeLayout(false);
