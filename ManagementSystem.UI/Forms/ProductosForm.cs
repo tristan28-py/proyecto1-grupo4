@@ -156,6 +156,17 @@ namespace ManagementSystem.UI.Forms
             nudMinimumStock.Value = producto.StockMinimo;
             txtDescription.Text = producto.Descripcion ?? string.Empty;
             chkActive.Checked = producto.Activo;
+
+            if (producto.Activo)
+            {
+                btnDelete.Text = "Eliminar";
+                btnDelete.BackColor = Color.FromArgb(220, 38, 38);
+            }
+            else
+            {
+                btnDelete.Text = "Reactivar";
+                btnDelete.BackColor = Color.FromArgb(16, 185, 129);
+            }
         }
 
         private void btnNew_Click(object? sender, EventArgs e)
@@ -174,6 +185,8 @@ namespace ManagementSystem.UI.Forms
             nudMinimumStock.Value = 1;
             txtDescription.Clear();
             chkActive.Checked = true;
+            btnDelete.Text = "Eliminar";
+            btnDelete.BackColor = Color.FromArgb(220, 38, 38);
             txtProductName.Focus();
         }
 
@@ -270,7 +283,7 @@ namespace ManagementSystem.UI.Forms
                 int id = int.Parse(txtProductId.Text);
                 if (id == 0)
                 {
-                    MessageBox.Show("Seleccione un producto para inactivar o activar.", "Aviso",
+                    MessageBox.Show("Seleccione un producto de la lista para eliminarlo.", "Aviso",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -278,31 +291,82 @@ namespace ManagementSystem.UI.Forms
                 var producto = _productos.FirstOrDefault(p => p.ProductoId == id);
                 if (producto == null) return;
 
-                string accion = producto.Activo ? "Inactivo" : "Activo";
-                var confirmacion = MessageBox.Show(
-                    $"¿Desea cambiar el estado de '{producto.Nombre}' a {accion}?",
-                    "Eliminación Lógica",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (confirmacion == DialogResult.Yes)
+                if (producto.Activo)
                 {
-                    bool nuevoEstado = !producto.Activo;
-                    if (!_modoMemoriaLocal)
+                    var confirmacion = MessageBox.Show(
+                        $"¿Está seguro de que desea eliminar el producto '{producto.Nombre}'?\n\n" +
+                        "El registro se mantendrá como Inactivo para preservar el historial de movimientos y ventas.",
+                        "Confirmar Eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (confirmacion == DialogResult.Yes)
                     {
-                        _servicioProductos.CambiarEstadoProducto(id, nuevoEstado);
-                        CargarProductos();
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioProductos.EliminarProducto(id);
+                            CargarProductos();
+                        }
+                        else
+                        {
+                            producto.Activo = false;
+                        }
+
+                        ActualizarGrid();
+                        LimpiarFormulario();
+                        MessageBox.Show("Producto eliminado (marcado como inactivo) correctamente.", "Eliminación Exitosa",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else
+                }
+                else
+                {
+                    var resultado = MessageBox.Show(
+                        $"El producto '{producto.Nombre}' ya se encuentra inactivo.\n\n" +
+                        "• [Sí] para Reactivar el producto.\n" +
+                        "• [No] para Eliminarlo definitivamente del sistema.\n" +
+                        "• [Cancelar] para salir sin cambios.",
+                        "Gestión de Producto Inactivo",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Question);
+
+                    if (resultado == DialogResult.Yes)
                     {
-                        producto.Activo = nuevoEstado;
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioProductos.CambiarEstadoProducto(id, true);
+                            CargarProductos();
+                        }
+                        else
+                        {
+                            producto.Activo = true;
+                        }
+
+                        ActualizarGrid();
+                        MessageBox.Show("Producto reactivado correctamente.", "Reactivado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    ActualizarGrid();
+                    else if (resultado == DialogResult.No)
+                    {
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioProductos.EliminarProducto(id);
+                            CargarProductos();
+                        }
+                        else
+                        {
+                            _productos.Remove(producto);
+                        }
+
+                        LimpiarFormulario();
+                        ActualizarGrid();
+                        MessageBox.Show("Producto eliminado definitivamente.", "Eliminado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cambiar el estado del producto: {ex.Message}", "Error",
+                MessageBox.Show($"Error al procesar la eliminación del producto: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

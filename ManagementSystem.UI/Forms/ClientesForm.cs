@@ -180,6 +180,17 @@ namespace ManagementSystem.UI.Forms
                 : (persona.Salario ?? 0m);
             nudCreditLimit.Value = monto;
             chkActive.Checked = persona.Activo;
+
+            if (persona.Activo)
+            {
+                btnDelete.Text = "Eliminar";
+                btnDelete.BackColor = Color.FromArgb(220, 38, 38);
+            }
+            else
+            {
+                btnDelete.Text = "Reactivar";
+                btnDelete.BackColor = Color.FromArgb(16, 185, 129);
+            }
         }
 
         private void btnNew_Click(object? sender, EventArgs e)
@@ -197,6 +208,8 @@ namespace ManagementSystem.UI.Forms
             if (cmbPersonType.Items.Count > 0) cmbPersonType.SelectedIndex = 0;
             nudCreditLimit.Value = 0;
             chkActive.Checked = true;
+            btnDelete.Text = "Eliminar";
+            btnDelete.BackColor = Color.FromArgb(220, 38, 38);
             txtFullName.Focus();
         }
 
@@ -289,7 +302,7 @@ namespace ManagementSystem.UI.Forms
                 int id = int.Parse(txtClientId.Text);
                 if (id == 0)
                 {
-                    MessageBox.Show("Seleccione un registro para cambiar su estado.", "Aviso",
+                    MessageBox.Show("Seleccione un registro de la lista para eliminarlo.", "Aviso",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -297,30 +310,79 @@ namespace ManagementSystem.UI.Forms
                 var persona = _personas.FirstOrDefault(p => p.PersonaId == id);
                 if (persona == null) return;
 
-                string accion = persona.Activo ? "inactivar" : "activar";
-                var confirmacion = MessageBox.Show(
-                    $"¿Desea {accion} a '{persona.NombreCompleto}'?",
-                    "Confirmar Estado",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (confirmacion == DialogResult.Yes)
+                if (persona.Activo)
                 {
-                    bool nuevoEstado = !persona.Activo;
-                    if (!_modoMemoriaLocal)
+                    var confirmacion = MessageBox.Show(
+                        $"¿Está seguro de que desea eliminar a '{persona.NombreCompleto}'?\n\n" +
+                        "El registro quedará marcado como Inactivo para conservar el historial de ventas y transacciones.",
+                        "Confirmar Eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (confirmacion == DialogResult.Yes)
                     {
-                        _servicioPersonas.CambiarEstadoPersona(id, nuevoEstado);
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioPersonas.CambiarEstadoPersona(id, false);
+                        }
+                        else
+                        {
+                            persona.Activo = false;
+                        }
+
+                        ActualizarGrid();
+                        LimpiarFormulario();
+                        MessageBox.Show("Registro eliminado (marcado como inactivo) correctamente.", "Eliminación Exitosa",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else
+                }
+                else
+                {
+                    var resultado = MessageBox.Show(
+                        $"El registro de '{persona.NombreCompleto}' ya se encuentra inactivo.\n\n" +
+                        "• [Sí] para Reactivar el registro.\n" +
+                        "• [No] para Eliminarlo definitivamente del sistema.\n" +
+                        "• [Cancelar] para salir sin cambios.",
+                        "Gestión de Registro Inactivo",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Question);
+
+                    if (resultado == DialogResult.Yes)
                     {
-                        persona.Activo = nuevoEstado;
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioPersonas.CambiarEstadoPersona(id, true);
+                        }
+                        else
+                        {
+                            persona.Activo = true;
+                        }
+
+                        ActualizarGrid();
+                        MessageBox.Show("Registro reactivado correctamente.", "Reactivado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    ActualizarGrid();
+                    else if (resultado == DialogResult.No)
+                    {
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioPersonas.CambiarEstadoPersona(id, false);
+                        }
+                        else
+                        {
+                            _personas.Remove(persona);
+                        }
+
+                        LimpiarFormulario();
+                        ActualizarGrid();
+                        MessageBox.Show("Registro eliminado definitivamente.", "Eliminado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cambiar el estado del registro: {ex.Message}", "Error",
+                MessageBox.Show($"Error al procesar la eliminación del registro: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

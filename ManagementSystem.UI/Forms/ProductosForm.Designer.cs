@@ -204,7 +204,7 @@ namespace ManagementSystem.UI.Forms
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(110, 38);
             btnDelete.TabIndex = 20;
-            btnDelete.Text = "Inactivar";
+            btnDelete.Text = "Eliminar";
             btnDelete.UseVisualStyleBackColor = false;
             btnDelete.Click += btnDelete_Click;
             // 

@@ -153,6 +153,17 @@ namespace ManagementSystem.UI.Forms
             txtCategoryName.Text = categoria.Nombre;
             txtDescription.Text = categoria.Descripcion ?? string.Empty;
             chkActive.Checked = categoria.Activo;
+
+            if (categoria.Activo)
+            {
+                btnDelete.Text = "Eliminar";
+                btnDelete.BackColor = Color.FromArgb(220, 38, 38);
+            }
+            else
+            {
+                btnDelete.Text = "Reactivar";
+                btnDelete.BackColor = Color.FromArgb(16, 185, 129);
+            }
         }
 
         private void btnNew_Click(object? sender, EventArgs e)
@@ -166,6 +177,8 @@ namespace ManagementSystem.UI.Forms
             txtCategoryName.Clear();
             txtDescription.Clear();
             chkActive.Checked = true;
+            btnDelete.Text = "Eliminar";
+            btnDelete.BackColor = Color.FromArgb(220, 38, 38);
             txtCategoryName.Focus();
         }
 
@@ -255,7 +268,7 @@ namespace ManagementSystem.UI.Forms
                 int id = int.Parse(txtCategoryId.Text);
                 if (id == 0)
                 {
-                    MessageBox.Show("Seleccione una categoría para cambiar su estado.", "Aviso",
+                    MessageBox.Show("Seleccione una categoría de la lista para eliminarla.", "Aviso",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
@@ -263,30 +276,79 @@ namespace ManagementSystem.UI.Forms
                 var categoria = _categorias.FirstOrDefault(c => c.CategoriaId == id);
                 if (categoria == null) return;
 
-                string accion = categoria.Activo ? "inactivar" : "activar";
-                var confirmacion = MessageBox.Show(
-                    $"¿Desea {accion} la categoría '{categoria.Nombre}'?",
-                    "Estado de Categoría",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
-
-                if (confirmacion == DialogResult.Yes)
+                if (categoria.Activo)
                 {
-                    bool nuevoEstado = !categoria.Activo;
-                    if (!_modoMemoriaLocal)
+                    var confirmacion = MessageBox.Show(
+                        $"¿Está seguro de que desea eliminar la categoría '{categoria.Nombre}'?\n\n" +
+                        "La categoría quedará marcada como Inactiva para preservar la integridad de los productos que pertenecen a ella.",
+                        "Confirmar Eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (confirmacion == DialogResult.Yes)
                     {
-                        _servicioCategorias.CambiarEstadoCategoria(id, nuevoEstado);
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioCategorias.EliminarCategoria(id);
+                        }
+                        else
+                        {
+                            categoria.Activo = false;
+                        }
+
+                        ActualizarGrid();
+                        LimpiarFormulario();
+                        MessageBox.Show("Categoría eliminada (marcada como inactiva) correctamente.", "Eliminación Exitosa",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    else
+                }
+                else
+                {
+                    var resultado = MessageBox.Show(
+                        $"La categoría '{categoria.Nombre}' ya se encuentra inactiva.\n\n" +
+                        "• [Sí] para Reactivar la categoría.\n" +
+                        "• [No] para Eliminarla definitivamente del sistema.\n" +
+                        "• [Cancelar] para salir sin cambios.",
+                        "Gestión de Categoría Inactiva",
+                        MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Question);
+
+                    if (resultado == DialogResult.Yes)
                     {
-                        categoria.Activo = nuevoEstado;
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioCategorias.CambiarEstadoCategoria(id, true);
+                        }
+                        else
+                        {
+                            categoria.Activo = true;
+                        }
+
+                        ActualizarGrid();
+                        MessageBox.Show("Categoría reactivada correctamente.", "Reactivado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-                    ActualizarGrid();
+                    else if (resultado == DialogResult.No)
+                    {
+                        if (!_modoMemoriaLocal)
+                        {
+                            _servicioCategorias.EliminarCategoria(id);
+                        }
+                        else
+                        {
+                            _categorias.Remove(categoria);
+                        }
+
+                        LimpiarFormulario();
+                        ActualizarGrid();
+                        MessageBox.Show("Categoría eliminada definitivamente.", "Eliminado",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al cambiar el estado de la categoría: {ex.Message}", "Error",
+                MessageBox.Show($"Error al procesar la eliminación de la categoría: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
