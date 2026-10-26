@@ -51,10 +51,10 @@ namespace ManagementSystem.UI.Forms
             _personas.Clear();
             _personas.AddRange(new[]
             {
-                new ResumenPersonaDto { PersonaId = 1, Identificacion = "1-1520-0345", NombreCompleto = "Carlos Solís Delgado", Email = "carlos.solis@empresa.com", Telefono = "8888-1111", TiposPersona = "Usuario", Salario = 2500.00m, TieneUsuario = true, EsEmpleado = true, Activo = true },
-                new ResumenPersonaDto { PersonaId = 2, Identificacion = "2-0789-0123", NombreCompleto = "Ana María Morales Mora", Email = "ana.morales@empresa.com", Telefono = "8888-2222", TiposPersona = "Empleado", Salario = 950.00m, EsEmpleado = true, Activo = true },
-                new ResumenPersonaDto { PersonaId = 4, Identificacion = "1-0987-0654", NombreCompleto = "Juan Pérez Gómez", Email = "juan.perez@gmail.com", Telefono = "7777-1111", TiposPersona = "Cliente", LimiteCredito = 500.00m, EsCliente = true, Activo = true },
-                new ResumenPersonaDto { PersonaId = 5, Identificacion = "3-101-998877", NombreCompleto = "Empresa Alfa S.A.", Email = "compras@alfa.com", Telefono = "7777-2222", TiposPersona = "Cliente", LimiteCredito = 5000.00m, EsCliente = true, Activo = true }
+                new ResumenPersonaDto { PersonaId = 1, Identificacion = "1-1520-0345", NombreCompleto = "Carlos Solís Delgado", Email = "carlos.solis@empresa.com", Telefono = "8888-1111", TiposPersona = "Usuario", Salario = 1250000.00m, TieneUsuario = true, EsEmpleado = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 2, Identificacion = "2-0789-0123", NombreCompleto = "Ana María Morales Mora", Email = "ana.morales@empresa.com", Telefono = "8888-2222", TiposPersona = "Empleado", Salario = 550000.00m, EsEmpleado = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 4, Identificacion = "1-0987-0654", NombreCompleto = "Juan Pérez Gómez", Email = "juan.perez@gmail.com", Telefono = "7777-1111", TiposPersona = "Cliente", LimiteCredito = 350000.00m, EsCliente = true, Activo = true },
+                new ResumenPersonaDto { PersonaId = 5, Identificacion = "3-101-998877", NombreCompleto = "Empresa Alfa S.A.", Email = "compras@alfa.com", Telefono = "7777-2222", TiposPersona = "Cliente", LimiteCredito = 2500000.00m, EsCliente = true, Activo = true }
             });
         }
 

@@ -1,4 +1,4 @@
--- ==============================================================================
+﻿-- ==============================================================================
 -- PROYECTO: Sistema de Gestión de Inventario y Ventas
 -- CURSO: Programación III
 -- MOTOR: Microsoft SQL Server 2019 / 2022 / Express
@@ -230,16 +230,16 @@ GO
 
 -- C. PRODUCTOS
 INSERT INTO dbo.Productos (Nombre, Descripcion, PrecioCompra, PrecioVenta, StockActual, StockMinimo, CategoriaId, Activo) VALUES
-('Laptop Dell Inspiron 15', 'Intel Core i5, 16GB RAM, SSD 512GB', 550.00, 750.00, 15, 3, 1, 1),
-('Mouse Inalámbrico Logitech M185', 'Sensor óptico 2.4GHz, 1000 DPI', 8.50, 15.00, 40, 5, 1, 1),
-('Teclado Mecánico RGB', 'Switches Red para oficina y programación', 25.00, 45.00, 20, 4, 1, 1),
-('Monitor Samsung 24 pulg FHD', 'Panel IPS 75Hz HDMI/VGA', 95.00, 140.00, 10, 2, 1, 1),
-('Café Molido Premium 500g', 'Tueste medio artesanal 100% arábica', 4.00, 7.50, 50, 10, 2, 1),
-('Paquete Galletas Surtidas', 'Caja con 12 paquetes individuales', 3.20, 5.00, 60, 10, 2, 1),
-('Resma Papel Bond A4 75g', '500 hojas blancas multiuso', 3.50, 6.00, 100, 20, 3, 1),
-('Pack Bolígrafos Gel Azul x12', 'Tinta continua secado rápido 0.7mm', 2.10, 4.50, 80, 15, 3, 1),
-('Alcohol en Gel 1 Litro', 'Desinfectante antiséptico 70% alcohol', 2.50, 4.75, 30, 5, 4, 1),
-('Detergente Multiusos 2Kg', 'Limpieza profunda biodegradable', 3.00, 5.50, 25, 5, 4, 1);
+('Laptop Dell Inspiron 15', 'Intel Core i5, 16GB RAM, SSD 512GB', 320000.00, 450000.00, 15, 3, 1, 1),
+('Mouse Inalámbrico Logitech M185', 'Sensor óptico 2.4GHz, 1000 DPI', 5500.00, 9500.00, 40, 5, 1, 1),
+('Teclado Mecánico RGB', 'Switches Red para oficina y programación', 18000.00, 28500.00, 20, 4, 1, 1),
+('Monitor Samsung 24 pulg FHD', 'Panel IPS 75Hz HDMI/VGA', 55000.00, 85000.00, 10, 2, 1, 1),
+('Café Molido Premium 500g', 'Tueste medio artesanal 100% arábica', 2400.00, 4200.00, 50, 10, 2, 1),
+('Paquete Galletas Surtidas', 'Caja con 12 paquetes individuales', 1800.00, 2550000.00, 60, 10, 2, 1),
+('Resma Papel Bond A4 75g', '500 hojas blancas multiuso', 2200.00, 3800.00, 100, 20, 3, 1),
+('Pack Bolígrafos Gel Azul x12', 'Tinta continua secado rápido 0.7mm', 1500.00, 2700.00, 80, 15, 3, 1),
+('Alcohol en Gel 1 Litro', 'Desinfectante antiséptico 70% alcohol', 1600.00, 2480000.00, 30, 5, 4, 1),
+('Detergente Multiusos 2Kg', 'Limpieza profunda biodegradable', 2100.00, 3600.00, 25, 5, 4, 1);
 GO
 
 -- D. PERSONAS (Para Empleados y Clientes)
@@ -258,15 +258,15 @@ GO
 
 -- E. EMPLEADOS (Asociados a Persona 1, 2, 3)
 INSERT INTO dbo.Empleado (PersonaId, Puesto, Salario, Activo) VALUES
-(1, 'Gerente General / Administrador', 2500.00, 1),
-(2, 'Ejecutiva de Ventas', 950.00, 1),
-(3, 'Supervisor de Inventario', 850.00, 1);
+(1, 'Gerente General / Administrador', 1250000.00, 1),
+(2, 'Ejecutiva de Ventas', 550000.00, 1),
+(3, 'Supervisor de Inventario', 480000.00, 1);
 GO
 
 -- F. CLIENTES (Asociados a Persona 4, 5)
 INSERT INTO dbo.Cliente (PersonaId, LimiteCredito, Activo) VALUES
-(4, 500.00, 1),
-(5, 5000.00, 1);
+(4, 350000.00, 1),
+(5, 2500000.00, 1);
 GO
 
 -- G. USUARIOS (Credenciales de acceso al sistema)

@@ -156,10 +156,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblClientId);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(655, 74);
+            pnlDetail.Location = new Point(625, 74);
             pnlDetail.Name = "pnlDetail";
             pnlDetail.Padding = new Padding(16);
-            pnlDetail.Size = new Size(355, 596);
+            pnlDetail.Size = new Size(385, 596);
             pnlDetail.TabIndex = 1;
             // 
             // chkActive
@@ -184,9 +184,9 @@ namespace ManagementSystem.UI.Forms
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(236, 396);
+            btnDelete.Location = new Point(256, 396);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 38);
+            btnDelete.Size = new Size(110, 38);
             btnDelete.TabIndex = 18;
             btnDelete.Text = "Inactivar";
             btnDelete.UseVisualStyleBackColor = false;
@@ -200,9 +200,9 @@ namespace ManagementSystem.UI.Forms
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(126, 396);
+            btnSave.Location = new Point(137, 396);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(102, 38);
+            btnSave.Size = new Size(110, 38);
             btnSave.TabIndex = 17;
             btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = false;
@@ -218,7 +218,7 @@ namespace ManagementSystem.UI.Forms
             btnNew.ForeColor = Color.FromArgb(55, 65, 81);
             btnNew.Location = new Point(18, 396);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(100, 38);
+            btnNew.Size = new Size(110, 38);
             btnNew.TabIndex = 16;
             btnNew.Text = "Nuevo";
             btnNew.UseVisualStyleBackColor = false;
@@ -228,11 +228,11 @@ namespace ManagementSystem.UI.Forms
             // 
             nudCreditLimit.DecimalPlaces = 2;
             nudCreditLimit.Font = new Font("Segoe UI", 9F);
-            nudCreditLimit.Increment = new decimal(new int[] { 50, 0, 0, 0 });
+            nudCreditLimit.Increment = new decimal(new int[] { 10000, 0, 0, 0 });
             nudCreditLimit.Location = new Point(18, 348);
-            nudCreditLimit.Maximum = new decimal(new int[] { 10000000, 0, 0, 0 });
+            nudCreditLimit.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             nudCreditLimit.Name = "nudCreditLimit";
-            nudCreditLimit.Size = new Size(318, 27);
+            nudCreditLimit.Size = new Size(348, 27);
             nudCreditLimit.TabIndex = 14;
             // 
             // lblCreditLimit
@@ -242,9 +242,9 @@ namespace ManagementSystem.UI.Forms
             lblCreditLimit.ForeColor = Color.FromArgb(75, 85, 99);
             lblCreditLimit.Location = new Point(18, 324);
             lblCreditLimit.Name = "lblCreditLimit";
-            lblCreditLimit.Size = new Size(318, 22);
+            lblCreditLimit.Size = new Size(348, 22);
             lblCreditLimit.TabIndex = 13;
-            lblCreditLimit.Text = "Límite de Crédito / Salario:";
+            lblCreditLimit.Text = "Límite de Crédito / Salario (₡):";
             lblCreditLimit.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cmbPersonType
@@ -255,7 +255,7 @@ namespace ManagementSystem.UI.Forms
             cmbPersonType.Items.AddRange(new object[] { "Cliente", "Empleado", "Usuario" });
             cmbPersonType.Location = new Point(18, 290);
             cmbPersonType.Name = "cmbPersonType";
-            cmbPersonType.Size = new Size(318, 28);
+            cmbPersonType.Size = new Size(348, 28);
             cmbPersonType.TabIndex = 12;
             // 
             // lblPersonType
@@ -265,7 +265,7 @@ namespace ManagementSystem.UI.Forms
             lblPersonType.ForeColor = Color.FromArgb(75, 85, 99);
             lblPersonType.Location = new Point(18, 266);
             lblPersonType.Name = "lblPersonType";
-            lblPersonType.Size = new Size(318, 22);
+            lblPersonType.Size = new Size(348, 22);
             lblPersonType.TabIndex = 11;
             lblPersonType.Text = "Tipo de Persona (*):";
             lblPersonType.TextAlign = ContentAlignment.MiddleLeft;
@@ -273,10 +273,10 @@ namespace ManagementSystem.UI.Forms
             // txtPhone
             // 
             txtPhone.Font = new Font("Segoe UI", 9F);
-            txtPhone.Location = new Point(184, 176);
+            txtPhone.Location = new Point(198, 176);
             txtPhone.Name = "txtPhone";
             txtPhone.PlaceholderText = "8888-8888";
-            txtPhone.Size = new Size(152, 27);
+            txtPhone.Size = new Size(168, 27);
             txtPhone.TabIndex = 10;
             // 
             // lblPhone
@@ -284,9 +284,9 @@ namespace ManagementSystem.UI.Forms
             lblPhone.AutoSize = false;
             lblPhone.Font = new Font("Segoe UI", 8.75F);
             lblPhone.ForeColor = Color.FromArgb(75, 85, 99);
-            lblPhone.Location = new Point(184, 152);
+            lblPhone.Location = new Point(198, 152);
             lblPhone.Name = "lblPhone";
-            lblPhone.Size = new Size(152, 22);
+            lblPhone.Size = new Size(168, 22);
             lblPhone.TabIndex = 9;
             lblPhone.Text = "Teléfono:";
             lblPhone.TextAlign = ContentAlignment.MiddleLeft;
@@ -297,7 +297,7 @@ namespace ManagementSystem.UI.Forms
             txtEmail.Location = new Point(18, 234);
             txtEmail.Name = "txtEmail";
             txtEmail.PlaceholderText = "correo@ejemplo.com";
-            txtEmail.Size = new Size(318, 27);
+            txtEmail.Size = new Size(348, 27);
             txtEmail.TabIndex = 8;
             // 
             // lblEmail
@@ -307,7 +307,7 @@ namespace ManagementSystem.UI.Forms
             lblEmail.ForeColor = Color.FromArgb(75, 85, 99);
             lblEmail.Location = new Point(18, 210);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(318, 22);
+            lblEmail.Size = new Size(348, 22);
             lblEmail.TabIndex = 7;
             lblEmail.Text = "Correo Electrónico:";
             lblEmail.TextAlign = ContentAlignment.MiddleLeft;
@@ -318,7 +318,7 @@ namespace ManagementSystem.UI.Forms
             txtIdentification.Location = new Point(18, 176);
             txtIdentification.Name = "txtIdentification";
             txtIdentification.PlaceholderText = "Ej. 1-1234-5678";
-            txtIdentification.Size = new Size(152, 27);
+            txtIdentification.Size = new Size(168, 27);
             txtIdentification.TabIndex = 6;
             // 
             // lblIdentification
@@ -328,7 +328,7 @@ namespace ManagementSystem.UI.Forms
             lblIdentification.ForeColor = Color.FromArgb(75, 85, 99);
             lblIdentification.Location = new Point(18, 152);
             lblIdentification.Name = "lblIdentification";
-            lblIdentification.Size = new Size(152, 22);
+            lblIdentification.Size = new Size(168, 22);
             lblIdentification.TabIndex = 5;
             lblIdentification.Text = "Identificación (*):";
             lblIdentification.TextAlign = ContentAlignment.MiddleLeft;
@@ -339,7 +339,7 @@ namespace ManagementSystem.UI.Forms
             txtFullName.Location = new Point(18, 120);
             txtFullName.Name = "txtFullName";
             txtFullName.PlaceholderText = "Nombre y apellidos";
-            txtFullName.Size = new Size(318, 27);
+            txtFullName.Size = new Size(348, 27);
             txtFullName.TabIndex = 4;
             // 
             // lblFullName
@@ -349,7 +349,7 @@ namespace ManagementSystem.UI.Forms
             lblFullName.ForeColor = Color.FromArgb(75, 85, 99);
             lblFullName.Location = new Point(18, 96);
             lblFullName.Name = "lblFullName";
-            lblFullName.Size = new Size(318, 22);
+            lblFullName.Size = new Size(348, 22);
             lblFullName.TabIndex = 3;
             lblFullName.Text = "Nombre Completo (*):";
             lblFullName.TextAlign = ContentAlignment.MiddleLeft;
@@ -384,7 +384,7 @@ namespace ManagementSystem.UI.Forms
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
             lblDetailHeader.Location = new Point(16, 10);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(320, 26);
+            lblDetailHeader.Size = new Size(348, 26);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Datos de Cliente / Persona";
             lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
@@ -396,7 +396,7 @@ namespace ManagementSystem.UI.Forms
             pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
             pnlGrid.Padding = new Padding(0, 10, 12, 0);
-            pnlGrid.Size = new Size(645, 596);
+            pnlGrid.Size = new Size(615, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvClients
@@ -486,9 +486,9 @@ namespace ManagementSystem.UI.Forms
             // 
             // colCredito
             // 
-            colCredito.FillWeight = 90F;
-            colCredito.HeaderText = "Crédito / Salario";
-            colCredito.MinimumWidth = 80;
+            colCredito.FillWeight = 95F;
+            colCredito.HeaderText = "Crédito / Salario (₡)";
+            colCredito.MinimumWidth = 90;
             colCredito.Name = "colCredito";
             colCredito.ReadOnly = true;
             // 

@@ -74,10 +74,10 @@ namespace ManagementSystem.UI.Forms
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtSearch.Font = new Font("Segoe UI", 9.5F);
-            txtSearch.Location = new Point(580, 18);
+            txtSearch.Location = new Point(590, 18);
             txtSearch.Name = "txtSearch";
             txtSearch.PlaceholderText = "Filtrar por coincidencia...";
-            txtSearch.Size = new Size(400, 29);
+            txtSearch.Size = new Size(390, 29);
             txtSearch.TabIndex = 3;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
@@ -86,9 +86,9 @@ namespace ManagementSystem.UI.Forms
             lblSearch.AutoSize = false;
             lblSearch.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblSearch.ForeColor = Color.FromArgb(75, 85, 99);
-            lblSearch.Location = new Point(468, 18);
+            lblSearch.Location = new Point(475, 18);
             lblSearch.Name = "lblSearch";
-            lblSearch.Size = new Size(108, 28);
+            lblSearch.Size = new Size(110, 28);
             lblSearch.TabIndex = 2;
             lblSearch.Text = "Buscar Texto:";
             lblSearch.TextAlign = ContentAlignment.MiddleLeft;
@@ -104,7 +104,7 @@ namespace ManagementSystem.UI.Forms
                 "Productos con Stock Bajo",
                 "Total de Ventas por Cliente"
             });
-            cmbReportType.Location = new Point(150, 18);
+            cmbReportType.Location = new Point(160, 18);
             cmbReportType.Name = "cmbReportType";
             cmbReportType.Size = new Size(300, 28);
             cmbReportType.TabIndex = 1;
@@ -117,7 +117,7 @@ namespace ManagementSystem.UI.Forms
             lblReportType.ForeColor = Color.FromArgb(30, 58, 138);
             lblReportType.Location = new Point(15, 18);
             lblReportType.Name = "lblReportType";
-            lblReportType.Size = new Size(132, 28);
+            lblReportType.Size = new Size(140, 28);
             lblReportType.TabIndex = 0;
             lblReportType.Text = "Tipo de Reporte:";
             lblReportType.TextAlign = ContentAlignment.MiddleLeft;
@@ -133,10 +133,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblStatCount);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(655, 74);
+            pnlDetail.Location = new Point(625, 74);
             pnlDetail.Name = "pnlDetail";
             pnlDetail.Padding = new Padding(16);
-            pnlDetail.Size = new Size(355, 596);
+            pnlDetail.Size = new Size(385, 596);
             pnlDetail.TabIndex = 1;
             // 
             // lblStatMin
@@ -148,9 +148,9 @@ namespace ManagementSystem.UI.Forms
             lblStatMin.Location = new Point(18, 254);
             lblStatMin.Name = "lblStatMin";
             lblStatMin.Padding = new Padding(10, 0, 10, 0);
-            lblStatMin.Size = new Size(318, 40);
+            lblStatMin.Size = new Size(348, 40);
             lblStatMin.TabIndex = 5;
-            lblStatMin.Text = "Valor mínimo: $0.00";
+            lblStatMin.Text = "Valor mínimo: ₡0,00";
             lblStatMin.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatMax
@@ -162,9 +162,9 @@ namespace ManagementSystem.UI.Forms
             lblStatMax.Location = new Point(18, 204);
             lblStatMax.Name = "lblStatMax";
             lblStatMax.Padding = new Padding(10, 0, 10, 0);
-            lblStatMax.Size = new Size(318, 40);
+            lblStatMax.Size = new Size(348, 40);
             lblStatMax.TabIndex = 4;
-            lblStatMax.Text = "Valor máximo: $0.00";
+            lblStatMax.Text = "Valor máximo: ₡0,00";
             lblStatMax.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatAvg
@@ -176,9 +176,9 @@ namespace ManagementSystem.UI.Forms
             lblStatAvg.Location = new Point(18, 154);
             lblStatAvg.Name = "lblStatAvg";
             lblStatAvg.Padding = new Padding(10, 0, 10, 0);
-            lblStatAvg.Size = new Size(318, 40);
+            lblStatAvg.Size = new Size(348, 40);
             lblStatAvg.TabIndex = 3;
-            lblStatAvg.Text = "Promedio: $0.00";
+            lblStatAvg.Text = "Promedio: ₡0,00";
             lblStatAvg.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatSum
@@ -190,9 +190,9 @@ namespace ManagementSystem.UI.Forms
             lblStatSum.Location = new Point(18, 104);
             lblStatSum.Name = "lblStatSum";
             lblStatSum.Padding = new Padding(10, 0, 10, 0);
-            lblStatSum.Size = new Size(318, 40);
+            lblStatSum.Size = new Size(348, 40);
             lblStatSum.TabIndex = 2;
-            lblStatSum.Text = "Sumatoria total: $0.00";
+            lblStatSum.Text = "Sumatoria total: ₡0,00";
             lblStatSum.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStatCount
@@ -204,7 +204,7 @@ namespace ManagementSystem.UI.Forms
             lblStatCount.Location = new Point(18, 54);
             lblStatCount.Name = "lblStatCount";
             lblStatCount.Padding = new Padding(10, 0, 10, 0);
-            lblStatCount.Size = new Size(318, 40);
+            lblStatCount.Size = new Size(348, 40);
             lblStatCount.TabIndex = 1;
             lblStatCount.Text = "Cantidad de registros: 0";
             lblStatCount.TextAlign = ContentAlignment.MiddleLeft;
@@ -216,7 +216,7 @@ namespace ManagementSystem.UI.Forms
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
             lblDetailHeader.Location = new Point(16, 14);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(320, 28);
+            lblDetailHeader.Size = new Size(348, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Resumen Estadístico";
             lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
@@ -228,7 +228,7 @@ namespace ManagementSystem.UI.Forms
             pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
             pnlGrid.Padding = new Padding(0, 10, 12, 0);
-            pnlGrid.Size = new Size(645, 596);
+            pnlGrid.Size = new Size(615, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvReports

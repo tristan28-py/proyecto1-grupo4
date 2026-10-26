@@ -91,7 +91,7 @@ namespace ManagementSystem.UI.Forms
             lblTotalSale.Name = "lblTotalSale";
             lblTotalSale.Size = new Size(388, 36);
             lblTotalSale.TabIndex = 4;
-            lblTotalSale.Text = "Total Venta: $0.00";
+            lblTotalSale.Text = "Total Venta: ₡0,00";
             lblTotalSale.TextAlign = ContentAlignment.MiddleRight;
             // 
             // dtpSaleDate
@@ -155,10 +155,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblProduct);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(655, 74);
+            pnlDetail.Location = new Point(625, 74);
             pnlDetail.Name = "pnlDetail";
             pnlDetail.Padding = new Padding(16);
-            pnlDetail.Size = new Size(355, 596);
+            pnlDetail.Size = new Size(385, 596);
             pnlDetail.TabIndex = 1;
             // 
             // btnNewSale
@@ -171,7 +171,7 @@ namespace ManagementSystem.UI.Forms
             btnNewSale.ForeColor = Color.FromArgb(55, 65, 81);
             btnNewSale.Location = new Point(18, 376);
             btnNewSale.Name = "btnNewSale";
-            btnNewSale.Size = new Size(318, 38);
+            btnNewSale.Size = new Size(348, 38);
             btnNewSale.TabIndex = 12;
             btnNewSale.Text = "Limpiar / Nueva Venta";
             btnNewSale.UseVisualStyleBackColor = false;
@@ -187,7 +187,7 @@ namespace ManagementSystem.UI.Forms
             btnConfirmSale.ForeColor = Color.White;
             btnConfirmSale.Location = new Point(18, 324);
             btnConfirmSale.Name = "btnConfirmSale";
-            btnConfirmSale.Size = new Size(318, 42);
+            btnConfirmSale.Size = new Size(348, 42);
             btnConfirmSale.TabIndex = 11;
             btnConfirmSale.Text = "Confirmar Venta";
             btnConfirmSale.UseVisualStyleBackColor = false;
@@ -201,9 +201,9 @@ namespace ManagementSystem.UI.Forms
             btnRemoveDetail.FlatStyle = FlatStyle.Flat;
             btnRemoveDetail.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnRemoveDetail.ForeColor = Color.White;
-            btnRemoveDetail.Location = new Point(184, 266);
+            btnRemoveDetail.Location = new Point(198, 266);
             btnRemoveDetail.Name = "btnRemoveDetail";
-            btnRemoveDetail.Size = new Size(152, 38);
+            btnRemoveDetail.Size = new Size(168, 38);
             btnRemoveDetail.TabIndex = 10;
             btnRemoveDetail.Text = "Quitar Línea";
             btnRemoveDetail.UseVisualStyleBackColor = false;
@@ -219,7 +219,7 @@ namespace ManagementSystem.UI.Forms
             btnAddDetail.ForeColor = Color.White;
             btnAddDetail.Location = new Point(18, 266);
             btnAddDetail.Name = "btnAddDetail";
-            btnAddDetail.Size = new Size(152, 38);
+            btnAddDetail.Size = new Size(168, 38);
             btnAddDetail.TabIndex = 9;
             btnAddDetail.Text = "Agregar Línea";
             btnAddDetail.UseVisualStyleBackColor = false;
@@ -232,19 +232,19 @@ namespace ManagementSystem.UI.Forms
             lblLineSubTotal.ForeColor = Color.FromArgb(30, 58, 138);
             lblLineSubTotal.Location = new Point(18, 222);
             lblLineSubTotal.Name = "lblLineSubTotal";
-            lblLineSubTotal.Size = new Size(318, 28);
+            lblLineSubTotal.Size = new Size(348, 28);
             lblLineSubTotal.TabIndex = 8;
-            lblLineSubTotal.Text = "Subtotal línea: $0.00";
+            lblLineSubTotal.Text = "Subtotal línea: ₡0,00";
             lblLineSubTotal.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // nudQuantity
             // 
             nudQuantity.Font = new Font("Segoe UI", 9F);
-            nudQuantity.Location = new Point(184, 182);
+            nudQuantity.Location = new Point(198, 182);
             nudQuantity.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
             nudQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQuantity.Name = "nudQuantity";
-            nudQuantity.Size = new Size(152, 27);
+            nudQuantity.Size = new Size(168, 27);
             nudQuantity.TabIndex = 7;
             nudQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
             nudQuantity.ValueChanged += nudQuantity_ValueChanged;
@@ -254,9 +254,9 @@ namespace ManagementSystem.UI.Forms
             lblQuantity.AutoSize = false;
             lblQuantity.Font = new Font("Segoe UI", 8.75F);
             lblQuantity.ForeColor = Color.FromArgb(75, 85, 99);
-            lblQuantity.Location = new Point(184, 158);
+            lblQuantity.Location = new Point(198, 158);
             lblQuantity.Name = "lblQuantity";
-            lblQuantity.Size = new Size(152, 22);
+            lblQuantity.Size = new Size(168, 22);
             lblQuantity.TabIndex = 6;
             lblQuantity.Text = "Cantidad (*):";
             lblQuantity.TextAlign = ContentAlignment.MiddleLeft;
@@ -267,9 +267,9 @@ namespace ManagementSystem.UI.Forms
             nudUnitPrice.Enabled = false;
             nudUnitPrice.Font = new Font("Segoe UI", 9F);
             nudUnitPrice.Location = new Point(18, 182);
-            nudUnitPrice.Maximum = new decimal(new int[] { 1000000, 0, 0, 0 });
+            nudUnitPrice.Maximum = new decimal(new int[] { 100000000, 0, 0, 0 });
             nudUnitPrice.Name = "nudUnitPrice";
-            nudUnitPrice.Size = new Size(152, 27);
+            nudUnitPrice.Size = new Size(168, 27);
             nudUnitPrice.TabIndex = 5;
             // 
             // lblUnitPrice
@@ -279,9 +279,9 @@ namespace ManagementSystem.UI.Forms
             lblUnitPrice.ForeColor = Color.FromArgb(75, 85, 99);
             lblUnitPrice.Location = new Point(18, 158);
             lblUnitPrice.Name = "lblUnitPrice";
-            lblUnitPrice.Size = new Size(152, 22);
+            lblUnitPrice.Size = new Size(168, 22);
             lblUnitPrice.TabIndex = 4;
-            lblUnitPrice.Text = "Precio Unitario:";
+            lblUnitPrice.Text = "Precio Unitario (₡):";
             lblUnitPrice.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblStockInfo
@@ -291,7 +291,7 @@ namespace ManagementSystem.UI.Forms
             lblStockInfo.ForeColor = Color.FromArgb(16, 185, 129);
             lblStockInfo.Location = new Point(18, 118);
             lblStockInfo.Name = "lblStockInfo";
-            lblStockInfo.Size = new Size(318, 26);
+            lblStockInfo.Size = new Size(348, 26);
             lblStockInfo.TabIndex = 3;
             lblStockInfo.Text = "Stock disponible: 0";
             lblStockInfo.TextAlign = ContentAlignment.MiddleLeft;
@@ -303,7 +303,7 @@ namespace ManagementSystem.UI.Forms
             cmbProduct.FormattingEnabled = true;
             cmbProduct.Location = new Point(18, 80);
             cmbProduct.Name = "cmbProduct";
-            cmbProduct.Size = new Size(318, 28);
+            cmbProduct.Size = new Size(348, 28);
             cmbProduct.TabIndex = 2;
             cmbProduct.SelectedIndexChanged += cmbProduct_SelectedIndexChanged;
             // 
@@ -314,7 +314,7 @@ namespace ManagementSystem.UI.Forms
             lblProduct.ForeColor = Color.FromArgb(75, 85, 99);
             lblProduct.Location = new Point(18, 56);
             lblProduct.Name = "lblProduct";
-            lblProduct.Size = new Size(318, 22);
+            lblProduct.Size = new Size(348, 22);
             lblProduct.TabIndex = 1;
             lblProduct.Text = "Producto (*):";
             lblProduct.TextAlign = ContentAlignment.MiddleLeft;
@@ -326,7 +326,7 @@ namespace ManagementSystem.UI.Forms
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
             lblDetailHeader.Location = new Point(16, 14);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(320, 28);
+            lblDetailHeader.Size = new Size(348, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Agregar al Detalle";
             lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
@@ -338,7 +338,7 @@ namespace ManagementSystem.UI.Forms
             pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
             pnlGrid.Padding = new Padding(0, 10, 12, 0);
-            pnlGrid.Size = new Size(645, 596);
+            pnlGrid.Size = new Size(615, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvSaleDetails
@@ -411,17 +411,17 @@ namespace ManagementSystem.UI.Forms
             // 
             // colPrecioUnitario
             // 
-            colPrecioUnitario.FillWeight = 90F;
-            colPrecioUnitario.HeaderText = "Precio Unit.";
-            colPrecioUnitario.MinimumWidth = 80;
+            colPrecioUnitario.FillWeight = 95F;
+            colPrecioUnitario.HeaderText = "Precio Unit. (₡)";
+            colPrecioUnitario.MinimumWidth = 85;
             colPrecioUnitario.Name = "colPrecioUnitario";
             colPrecioUnitario.ReadOnly = true;
             // 
             // colSubTotal
             // 
-            colSubTotal.FillWeight = 95F;
-            colSubTotal.HeaderText = "Subtotal";
-            colSubTotal.MinimumWidth = 80;
+            colSubTotal.FillWeight = 100F;
+            colSubTotal.HeaderText = "Subtotal (₡)";
+            colSubTotal.MinimumWidth = 85;
             colSubTotal.Name = "colSubTotal";
             colSubTotal.ReadOnly = true;
             // 

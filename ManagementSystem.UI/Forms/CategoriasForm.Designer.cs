@@ -92,9 +92,9 @@ namespace ManagementSystem.UI.Forms
             lblStatusFilter.AutoSize = false;
             lblStatusFilter.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             lblStatusFilter.ForeColor = Color.FromArgb(75, 85, 99);
-            lblStatusFilter.Location = new Point(440, 18);
+            lblStatusFilter.Location = new Point(435, 18);
             lblStatusFilter.Name = "lblStatusFilter";
-            lblStatusFilter.Size = new Size(135, 28);
+            lblStatusFilter.Size = new Size(140, 28);
             lblStatusFilter.TabIndex = 2;
             lblStatusFilter.Text = "Filtrar por Estado:";
             lblStatusFilter.TextAlign = ContentAlignment.MiddleLeft;
@@ -137,10 +137,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblCategoryId);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(655, 74);
+            pnlDetail.Location = new Point(625, 74);
             pnlDetail.Name = "pnlDetail";
             pnlDetail.Padding = new Padding(16);
-            pnlDetail.Size = new Size(355, 596);
+            pnlDetail.Size = new Size(385, 596);
             pnlDetail.TabIndex = 1;
             // 
             // chkActive
@@ -165,9 +165,9 @@ namespace ManagementSystem.UI.Forms
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(236, 364);
+            btnDelete.Location = new Point(256, 364);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(100, 38);
+            btnDelete.Size = new Size(110, 38);
             btnDelete.TabIndex = 10;
             btnDelete.Text = "Inactivar";
             btnDelete.UseVisualStyleBackColor = false;
@@ -181,9 +181,9 @@ namespace ManagementSystem.UI.Forms
             btnSave.FlatStyle = FlatStyle.Flat;
             btnSave.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnSave.ForeColor = Color.White;
-            btnSave.Location = new Point(126, 364);
+            btnSave.Location = new Point(137, 364);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(102, 38);
+            btnSave.Size = new Size(110, 38);
             btnSave.TabIndex = 9;
             btnSave.Text = "Guardar";
             btnSave.UseVisualStyleBackColor = false;
@@ -199,7 +199,7 @@ namespace ManagementSystem.UI.Forms
             btnNew.ForeColor = Color.FromArgb(55, 65, 81);
             btnNew.Location = new Point(18, 364);
             btnNew.Name = "btnNew";
-            btnNew.Size = new Size(100, 38);
+            btnNew.Size = new Size(110, 38);
             btnNew.TabIndex = 8;
             btnNew.Text = "Nuevo";
             btnNew.UseVisualStyleBackColor = false;
@@ -212,7 +212,7 @@ namespace ManagementSystem.UI.Forms
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.ScrollBars = ScrollBars.Vertical;
-            txtDescription.Size = new Size(318, 92);
+            txtDescription.Size = new Size(348, 92);
             txtDescription.TabIndex = 6;
             // 
             // lblDescription
@@ -222,7 +222,7 @@ namespace ManagementSystem.UI.Forms
             lblDescription.ForeColor = Color.FromArgb(75, 85, 99);
             lblDescription.Location = new Point(18, 186);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(318, 22);
+            lblDescription.Size = new Size(348, 22);
             lblDescription.TabIndex = 5;
             lblDescription.Text = "Descripción:";
             lblDescription.TextAlign = ContentAlignment.MiddleLeft;
@@ -233,7 +233,7 @@ namespace ManagementSystem.UI.Forms
             txtCategoryName.Location = new Point(18, 144);
             txtCategoryName.Name = "txtCategoryName";
             txtCategoryName.PlaceholderText = "Ej. Bebidas y Alimentos";
-            txtCategoryName.Size = new Size(318, 27);
+            txtCategoryName.Size = new Size(348, 27);
             txtCategoryName.TabIndex = 4;
             // 
             // lblCategoryName
@@ -243,7 +243,7 @@ namespace ManagementSystem.UI.Forms
             lblCategoryName.ForeColor = Color.FromArgb(75, 85, 99);
             lblCategoryName.Location = new Point(18, 120);
             lblCategoryName.Name = "lblCategoryName";
-            lblCategoryName.Size = new Size(318, 22);
+            lblCategoryName.Size = new Size(348, 22);
             lblCategoryName.TabIndex = 3;
             lblCategoryName.Text = "Nombre de Categoría (*):";
             lblCategoryName.TextAlign = ContentAlignment.MiddleLeft;
@@ -266,7 +266,7 @@ namespace ManagementSystem.UI.Forms
             lblCategoryId.ForeColor = Color.FromArgb(75, 85, 99);
             lblCategoryId.Location = new Point(18, 54);
             lblCategoryId.Name = "lblCategoryId";
-            lblCategoryId.Size = new Size(318, 22);
+            lblCategoryId.Size = new Size(348, 22);
             lblCategoryId.TabIndex = 1;
             lblCategoryId.Text = "ID de Categoría:";
             lblCategoryId.TextAlign = ContentAlignment.MiddleLeft;
@@ -278,7 +278,7 @@ namespace ManagementSystem.UI.Forms
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
             lblDetailHeader.Location = new Point(16, 14);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(320, 28);
+            lblDetailHeader.Size = new Size(348, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Datos de Categoría";
             lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
@@ -290,7 +290,7 @@ namespace ManagementSystem.UI.Forms
             pnlGrid.Location = new Point(10, 74);
             pnlGrid.Name = "pnlGrid";
             pnlGrid.Padding = new Padding(0, 10, 12, 0);
-            pnlGrid.Size = new Size(645, 596);
+            pnlGrid.Size = new Size(615, 596);
             pnlGrid.TabIndex = 2;
             // 
             // dgvCategories

@@ -107,10 +107,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblModule);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(655, 78);
+            pnlDetail.Location = new Point(625, 78);
             pnlDetail.Name = "pnlDetail";
             pnlDetail.Padding = new Padding(16);
-            pnlDetail.Size = new Size(355, 592);
+            pnlDetail.Size = new Size(385, 592);
             pnlDetail.TabIndex = 1;
             // 
             // btnClear
@@ -123,7 +123,7 @@ namespace ManagementSystem.UI.Forms
             btnClear.ForeColor = Color.FromArgb(55, 65, 81);
             btnClear.Location = new Point(18, 350);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(318, 36);
+            btnClear.Size = new Size(348, 36);
             btnClear.TabIndex = 7;
             btnClear.Text = "Limpiar";
             btnClear.UseVisualStyleBackColor = false;
@@ -139,7 +139,7 @@ namespace ManagementSystem.UI.Forms
             btnPop.ForeColor = Color.White;
             btnPop.Location = new Point(18, 300);
             btnPop.Name = "btnPop";
-            btnPop.Size = new Size(318, 40);
+            btnPop.Size = new Size(348, 40);
             btnPop.TabIndex = 6;
             btnPop.Text = "Deshacer Última Acción";
             btnPop.UseVisualStyleBackColor = false;
@@ -155,7 +155,7 @@ namespace ManagementSystem.UI.Forms
             btnPush.ForeColor = Color.White;
             btnPush.Location = new Point(18, 250);
             btnPush.Name = "btnPush";
-            btnPush.Size = new Size(318, 40);
+            btnPush.Size = new Size(348, 40);
             btnPush.TabIndex = 5;
             btnPush.Text = "Registrar Acción";
             btnPush.UseVisualStyleBackColor = false;
@@ -168,7 +168,7 @@ namespace ManagementSystem.UI.Forms
             txtDescription.Multiline = true;
             txtDescription.Name = "txtDescription";
             txtDescription.PlaceholderText = "Ej. Se actualizó el precio del producto #1";
-            txtDescription.Size = new Size(318, 86);
+            txtDescription.Size = new Size(348, 86);
             txtDescription.TabIndex = 4;
             // 
             // lblDescription
@@ -178,7 +178,7 @@ namespace ManagementSystem.UI.Forms
             lblDescription.ForeColor = Color.FromArgb(75, 85, 99);
             lblDescription.Location = new Point(18, 120);
             lblDescription.Name = "lblDescription";
-            lblDescription.Size = new Size(318, 22);
+            lblDescription.Size = new Size(348, 22);
             lblDescription.TabIndex = 3;
             lblDescription.Text = "Descripción de la Acción (*):";
             lblDescription.TextAlign = ContentAlignment.MiddleLeft;
@@ -191,7 +191,7 @@ namespace ManagementSystem.UI.Forms
             cmbModule.Items.AddRange(new object[] { "Productos", "Categorías", "Clientes", "Ventas", "Pedidos" });
             cmbModule.Location = new Point(18, 72);
             cmbModule.Name = "cmbModule";
-            cmbModule.Size = new Size(318, 28);
+            cmbModule.Size = new Size(348, 28);
             cmbModule.TabIndex = 2;
             // 
             // lblModule
@@ -201,7 +201,7 @@ namespace ManagementSystem.UI.Forms
             lblModule.ForeColor = Color.FromArgb(75, 85, 99);
             lblModule.Location = new Point(18, 48);
             lblModule.Name = "lblModule";
-            lblModule.Size = new Size(318, 22);
+            lblModule.Size = new Size(348, 22);
             lblModule.TabIndex = 1;
             lblModule.Text = "Módulo:";
             lblModule.TextAlign = ContentAlignment.MiddleLeft;
@@ -213,7 +213,7 @@ namespace ManagementSystem.UI.Forms
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
             lblDetailHeader.Location = new Point(16, 12);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(320, 28);
+            lblDetailHeader.Size = new Size(348, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Registro de Actividades";
             lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
@@ -225,7 +225,7 @@ namespace ManagementSystem.UI.Forms
             pnlGrid.Location = new Point(10, 78);
             pnlGrid.Name = "pnlGrid";
             pnlGrid.Padding = new Padding(0, 10, 12, 0);
-            pnlGrid.Size = new Size(645, 592);
+            pnlGrid.Size = new Size(615, 592);
             pnlGrid.TabIndex = 2;
             // 
             // dgvHistory

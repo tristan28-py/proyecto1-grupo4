@@ -118,10 +118,10 @@ namespace ManagementSystem.UI.Forms
             pnlDetail.Controls.Add(lblClientName);
             pnlDetail.Controls.Add(lblDetailHeader);
             pnlDetail.Dock = DockStyle.Right;
-            pnlDetail.Location = new Point(655, 78);
+            pnlDetail.Location = new Point(625, 78);
             pnlDetail.Name = "pnlDetail";
             pnlDetail.Padding = new Padding(16);
-            pnlDetail.Size = new Size(355, 592);
+            pnlDetail.Size = new Size(385, 592);
             pnlDetail.TabIndex = 1;
             // 
             // btnClear
@@ -134,7 +134,7 @@ namespace ManagementSystem.UI.Forms
             btnClear.ForeColor = Color.FromArgb(55, 65, 81);
             btnClear.Location = new Point(18, 456);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(318, 36);
+            btnClear.Size = new Size(348, 36);
             btnClear.TabIndex = 11;
             btnClear.Text = "Limpiar Campos";
             btnClear.UseVisualStyleBackColor = false;
@@ -150,7 +150,7 @@ namespace ManagementSystem.UI.Forms
             btnDequeue.ForeColor = Color.White;
             btnDequeue.Location = new Point(18, 406);
             btnDequeue.Name = "btnDequeue";
-            btnDequeue.Size = new Size(318, 40);
+            btnDequeue.Size = new Size(348, 40);
             btnDequeue.TabIndex = 10;
             btnDequeue.Text = "Atender Siguiente";
             btnDequeue.UseVisualStyleBackColor = false;
@@ -166,7 +166,7 @@ namespace ManagementSystem.UI.Forms
             btnEnqueue.ForeColor = Color.White;
             btnEnqueue.Location = new Point(18, 356);
             btnEnqueue.Name = "btnEnqueue";
-            btnEnqueue.Size = new Size(318, 40);
+            btnEnqueue.Size = new Size(348, 40);
             btnEnqueue.TabIndex = 9;
             btnEnqueue.Text = "Agregar a Cola";
             btnEnqueue.UseVisualStyleBackColor = false;
@@ -178,7 +178,7 @@ namespace ManagementSystem.UI.Forms
             txtNotes.Location = new Point(18, 262);
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(318, 76);
+            txtNotes.Size = new Size(348, 76);
             txtNotes.TabIndex = 8;
             // 
             // lblNotes
@@ -188,7 +188,7 @@ namespace ManagementSystem.UI.Forms
             lblNotes.ForeColor = Color.FromArgb(75, 85, 99);
             lblNotes.Location = new Point(18, 238);
             lblNotes.Name = "lblNotes";
-            lblNotes.Size = new Size(318, 22);
+            lblNotes.Size = new Size(348, 22);
             lblNotes.TabIndex = 7;
             lblNotes.Text = "Observaciones:";
             lblNotes.TextAlign = ContentAlignment.MiddleLeft;
@@ -200,7 +200,7 @@ namespace ManagementSystem.UI.Forms
             nudQuantity.Maximum = new decimal(new int[] { 5000, 0, 0, 0 });
             nudQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             nudQuantity.Name = "nudQuantity";
-            nudQuantity.Size = new Size(152, 27);
+            nudQuantity.Size = new Size(168, 27);
             nudQuantity.TabIndex = 6;
             nudQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
@@ -211,7 +211,7 @@ namespace ManagementSystem.UI.Forms
             lblQuantity.ForeColor = Color.FromArgb(75, 85, 99);
             lblQuantity.Location = new Point(18, 174);
             lblQuantity.Name = "lblQuantity";
-            lblQuantity.Size = new Size(318, 22);
+            lblQuantity.Size = new Size(348, 22);
             lblQuantity.TabIndex = 5;
             lblQuantity.Text = "Cantidad (*):";
             lblQuantity.TextAlign = ContentAlignment.MiddleLeft;
@@ -223,7 +223,7 @@ namespace ManagementSystem.UI.Forms
             cmbProduct.FormattingEnabled = true;
             cmbProduct.Location = new Point(18, 134);
             cmbProduct.Name = "cmbProduct";
-            cmbProduct.Size = new Size(318, 28);
+            cmbProduct.Size = new Size(348, 28);
             cmbProduct.TabIndex = 4;
             // 
             // lblProduct
@@ -233,7 +233,7 @@ namespace ManagementSystem.UI.Forms
             lblProduct.ForeColor = Color.FromArgb(75, 85, 99);
             lblProduct.Location = new Point(18, 110);
             lblProduct.Name = "lblProduct";
-            lblProduct.Size = new Size(318, 22);
+            lblProduct.Size = new Size(348, 22);
             lblProduct.TabIndex = 3;
             lblProduct.Text = "Producto (*):";
             lblProduct.TextAlign = ContentAlignment.MiddleLeft;
@@ -244,7 +244,7 @@ namespace ManagementSystem.UI.Forms
             txtClientName.Location = new Point(18, 70);
             txtClientName.Name = "txtClientName";
             txtClientName.PlaceholderText = "Nombre del cliente";
-            txtClientName.Size = new Size(318, 27);
+            txtClientName.Size = new Size(348, 27);
             txtClientName.TabIndex = 2;
             // 
             // lblClientName
@@ -254,7 +254,7 @@ namespace ManagementSystem.UI.Forms
             lblClientName.ForeColor = Color.FromArgb(75, 85, 99);
             lblClientName.Location = new Point(18, 46);
             lblClientName.Name = "lblClientName";
-            lblClientName.Size = new Size(318, 22);
+            lblClientName.Size = new Size(348, 22);
             lblClientName.TabIndex = 1;
             lblClientName.Text = "Cliente (*):";
             lblClientName.TextAlign = ContentAlignment.MiddleLeft;
@@ -266,7 +266,7 @@ namespace ManagementSystem.UI.Forms
             lblDetailHeader.ForeColor = Color.FromArgb(30, 58, 138);
             lblDetailHeader.Location = new Point(16, 12);
             lblDetailHeader.Name = "lblDetailHeader";
-            lblDetailHeader.Size = new Size(320, 28);
+            lblDetailHeader.Size = new Size(348, 28);
             lblDetailHeader.TabIndex = 0;
             lblDetailHeader.Text = "Registrar Nuevo Pedido";
             lblDetailHeader.TextAlign = ContentAlignment.MiddleLeft;
@@ -278,7 +278,7 @@ namespace ManagementSystem.UI.Forms
             pnlGrid.Location = new Point(10, 78);
             pnlGrid.Name = "pnlGrid";
             pnlGrid.Padding = new Padding(0, 10, 12, 0);
-            pnlGrid.Size = new Size(645, 592);
+            pnlGrid.Size = new Size(615, 592);
             pnlGrid.TabIndex = 2;
             // 
             // dgvOrders

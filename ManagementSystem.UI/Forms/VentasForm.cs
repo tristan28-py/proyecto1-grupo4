@@ -78,11 +78,11 @@ namespace ManagementSystem.UI.Forms
             {
                 _inventario = new List<Producto>
                 {
-                    new Producto { ProductoId = 1, Nombre = "Laptop Dell Inspiron 15", PrecioVenta = 750.00m, StockActual = 15 },
-                    new Producto { ProductoId = 2, Nombre = "Mouse Inalámbrico Logitech M185", PrecioVenta = 15.00m, StockActual = 40 },
-                    new Producto { ProductoId = 3, Nombre = "Teclado Mecánico RGB", PrecioVenta = 45.00m, StockActual = 20 },
-                    new Producto { ProductoId = 4, Nombre = "Monitor Samsung 24 pulg FHD", PrecioVenta = 140.00m, StockActual = 10 },
-                    new Producto { ProductoId = 5, Nombre = "Café Molido Premium 500g", PrecioVenta = 7.50m, StockActual = 50 }
+                    new Producto { ProductoId = 1, Nombre = "Laptop Dell Inspiron 15", PrecioVenta = 450000.00m, StockActual = 15 },
+                    new Producto { ProductoId = 2, Nombre = "Mouse Inalámbrico Logitech M185", PrecioVenta = 9500.00m, StockActual = 40 },
+                    new Producto { ProductoId = 3, Nombre = "Teclado Mecánico RGB", PrecioVenta = 28500.00m, StockActual = 20 },
+                    new Producto { ProductoId = 4, Nombre = "Monitor Samsung 24 pulg FHD", PrecioVenta = 85000.00m, StockActual = 10 },
+                    new Producto { ProductoId = 5, Nombre = "Café Molido Premium 500g", PrecioVenta = 4200.00m, StockActual = 50 }
                 };
             }
 
