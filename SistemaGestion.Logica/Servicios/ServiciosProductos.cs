@@ -5,7 +5,7 @@ using SistemaGestion.AccesoDatos.ADONET;
 using SistemaGestion.AccesoDatos.Interfaces;
 using SistemaGestion.Entidades.Entidades;
 using SistemaGestion.Logica.Interfaces;
-
+// me cago en Eddy 
 namespace SistemaGestion.Logica.Servicios
 {
     /// <summary>
